@@ -1,0 +1,22 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - run: test -z "$(gofmt -l .)"
+      - run: go vet ./...
+      - run: go test ./...
+      - name: Self-extract
+        run: go run ./cmd/srclog extract -o srclog-templates.json .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: srclog-templates-${{ github.sha }}
+          path: srclog-templates.json

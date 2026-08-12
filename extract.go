@@ -1,0 +1,309 @@
+package srclog
+
+import (
+	"go/ast"
+	"go/parser"
+	"go/token"
+	"io/fs"
+	"os"
+	"path/filepath"
+	"sort"
+	"strconv"
+	"strings"
+)
+
+// callKind describes how a recognized call carries its message.
+type callKind int
+
+const (
+	kindPrintf callKind = iota // format string with verbs (Printf, Errorf, Msgf)
+	kindPrint                  // variadic args joined into the message (Print, Println, logrus.Info)
+	kindMsg                    // constant message; extra args are structured fields
+)
+
+// levelByBase maps a method base name (suffixes stripped) to a log level.
+var levelByBase = map[string]string{
+	"Trace":   "trace",
+	"Debug":   "debug",
+	"Info":    "info",
+	"Warn":    "warn",
+	"Warning": "warn",
+	"Error":   "error",
+	"Fatal":   "fatal",
+	"Panic":   "panic",
+	"DPanic":  "panic",
+	"Print":   "info",
+}
+
+// skipRecv lists package idents whose Error/Print-family functions are not
+// logging (fmt.Errorf builds errors, http.Error writes responses, zap.Error
+// constructs a field — zap logs only through logger values, never the package).
+var skipRecv = map[string]bool{"fmt": true, "http": true, "errors": true, "testing": true, "zap": true}
+
+// Extract walks dir for Go files (skipping _test.go, vendor/, testdata/ and
+// dot-dirs), parses them syntax-only, and returns the deduplicated template
+// manifest. Commit is left empty for the caller to fill.
+func Extract(dir string) (*Manifest, error) {
+	fset := token.NewFileSet()
+	byID := map[string]*Template{}
+	var stats Stats
+
+	err := filepath.WalkDir(dir, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if d.IsDir() {
+			if path == dir {
+				return nil
+			}
+			name := d.Name()
+			if name == "vendor" || name == "testdata" || strings.HasPrefix(name, ".") {
+				return filepath.SkipDir
+			}
+			return nil
+		}
+		if !strings.HasSuffix(path, ".go") || strings.HasSuffix(path, "_test.go") {
+			return nil
+		}
+		f, perr := parser.ParseFile(fset, path, nil, parser.SkipObjectResolution)
+		if perr != nil {
+			stats.ParseErrors++
+			return nil
+		}
+		stats.Files++
+		rel, rerr := filepath.Rel(dir, path)
+		if rerr != nil {
+			rel = path
+		}
+		ast.Inspect(f, func(n ast.Node) bool {
+			call, ok := n.(*ast.CallExpr)
+			if !ok {
+				return true
+			}
+			visitCall(fset, rel, call, byID, &stats)
+			return true
+		})
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	templates := make([]*Template, 0, len(byID))
+	for _, t := range byID {
+		sort.Slice(t.Locations, func(i, j int) bool {
+			if t.Locations[i].File != t.Locations[j].File {
+				return t.Locations[i].File < t.Locations[j].File
+			}
+			return t.Locations[i].Line < t.Locations[j].Line
+		})
+		templates = append(templates, t)
+	}
+	sort.Slice(templates, func(i, j int) bool {
+		if templates[i].Template != templates[j].Template {
+			return templates[i].Template < templates[j].Template
+		}
+		return templates[i].Level < templates[j].Level
+	})
+
+	return &Manifest{
+		Version:   1,
+		Module:    moduleName(dir),
+		Stats:     stats,
+		Templates: templates,
+	}, nil
+}
+
+// visitCall recognizes one call expression as a log call site and records its
+// template. Recognition is by method name only — no type checking — so any
+// receiver with an Errorf/Info/Msg-shaped method is treated as a logger.
+// Over-approximation is harmless here: extra templates just sit unmatched.
+func visitCall(fset *token.FileSet, file string, call *ast.CallExpr, byID map[string]*Template, stats *Stats) {
+	sel, ok := call.Fun.(*ast.SelectorExpr)
+	if !ok {
+		return
+	}
+	if id, ok := sel.X.(*ast.Ident); ok && skipRecv[id.Name] {
+		return
+	}
+
+	name := sel.Sel.Name
+	var (
+		base string
+		kind callKind
+	)
+	msgIdx := 0
+	if strings.HasSuffix(name, "Context") {
+		name = strings.TrimSuffix(name, "Context")
+		msgIdx = 1 // ctx comes first (slog.InfoContext, ...)
+	}
+	switch {
+	case strings.HasSuffix(name, "f"):
+		base, kind = name[:len(name)-1], kindPrintf
+	case strings.HasSuffix(name, "ln"):
+		base, kind = name[:len(name)-2], kindPrint
+	case strings.HasSuffix(name, "w"):
+		base, kind = name[:len(name)-1], kindMsg // zap sugared Infow etc.
+	default:
+		base, kind = name, kindPrint
+	}
+
+	level, isLevel := levelByBase[base]
+	isZerologMsg := base == "Msg"
+	if !isLevel && !isZerologMsg {
+		return
+	}
+	if isZerologMsg {
+		level = chainLevel(sel.X)
+		if kind == kindPrint {
+			kind = kindMsg
+		}
+	}
+	if len(call.Args) <= msgIdx {
+		return // e.g. zerolog's Error() chain root — the Msg call carries the message
+	}
+
+	lib := libGuess(sel, base, kind, call.Args[msgIdx+1:])
+	if kind == kindPrint && (lib == "slog" || lib == "zap") {
+		kind = kindMsg // slog.Info / zap.Logger.Error: extra args are fields
+	}
+
+	stats.Calls++
+	tmpl, hasLit := stringTemplate(call.Args[msgIdx])
+	if !hasLit {
+		stats.Dynamic++
+		return
+	}
+	switch kind {
+	case kindPrintf:
+		tmpl = normalizeFormat(tmpl)
+	case kindPrint:
+		// Print/Println-style: extra operands land in the message.
+		for range call.Args[msgIdx+1:] {
+			tmpl += " " + Placeholder
+		}
+	}
+
+	pos := fset.Position(call.Pos())
+	id := templateID(level, tmpl)
+	if t, ok := byID[id]; ok {
+		t.Locations = append(t.Locations, Location{File: file, Line: pos.Line})
+		return
+	}
+	byID[id] = &Template{
+		ID:        id,
+		Template:  tmpl,
+		Regex:     regexFor(tmpl),
+		Level:     level,
+		Lib:       lib,
+		Locations: []Location{{File: file, Line: pos.Line}},
+	}
+}
+
+// stringTemplate folds an expression into a template string. String literals
+// keep their value, non-constant parts of a concatenation become Placeholder.
+// ok is false when no part of the expression is a string literal.
+func stringTemplate(e ast.Expr) (string, bool) {
+	switch v := e.(type) {
+	case *ast.BasicLit:
+		if v.Kind == token.STRING {
+			if s, err := strconv.Unquote(v.Value); err == nil {
+				return s, true
+			}
+		}
+	case *ast.BinaryExpr:
+		if v.Op == token.ADD {
+			l, lok := stringTemplate(v.X)
+			r, rok := stringTemplate(v.Y)
+			if lok || rok {
+				if !lok {
+					l = Placeholder
+				}
+				if !rok {
+					r = Placeholder
+				}
+				return l + r, true
+			}
+		}
+	case *ast.ParenExpr:
+		return stringTemplate(v.X)
+	}
+	return "", false
+}
+
+// chainLevel walks a zerolog-style call chain (log.Error().Str(...).Msg(...))
+// back to the zero-arg level method that started it.
+func chainLevel(e ast.Expr) string {
+	for {
+		call, ok := e.(*ast.CallExpr)
+		if !ok {
+			return "unknown"
+		}
+		sel, ok := call.Fun.(*ast.SelectorExpr)
+		if !ok {
+			return "unknown"
+		}
+		if lvl, ok := levelByBase[sel.Sel.Name]; ok && len(call.Args) == 0 {
+			return lvl
+		}
+		e = sel.X
+	}
+}
+
+// libGuess best-effort identifies the logging library. Metadata only — it
+// never affects matching, so a wrong guess is cosmetic.
+func libGuess(sel *ast.SelectorExpr, base string, kind callKind, extra []ast.Expr) string {
+	if base == "Msg" {
+		return "zerolog"
+	}
+	if id, ok := sel.X.(*ast.Ident); ok {
+		switch id.Name {
+		case "slog":
+			return "slog"
+		case "log":
+			return "log"
+		case "logrus":
+			return "logrus"
+		}
+	}
+	if kind == kindMsg {
+		return "zap"
+	}
+	if len(extra) > 0 && allZapFields(extra) {
+		return "zap"
+	}
+	return ""
+}
+
+// allZapFields reports whether every expression is a zap field constructor
+// call like zap.String(...) or zap.Error(...).
+func allZapFields(args []ast.Expr) bool {
+	for _, a := range args {
+		call, ok := a.(*ast.CallExpr)
+		if !ok {
+			return false
+		}
+		sel, ok := call.Fun.(*ast.SelectorExpr)
+		if !ok {
+			return false
+		}
+		if id, ok := sel.X.(*ast.Ident); !ok || id.Name != "zap" {
+			return false
+		}
+	}
+	return true
+}
+
+// moduleName reads the module path from dir/go.mod, or "".
+func moduleName(dir string) string {
+	data, err := os.ReadFile(filepath.Join(dir, "go.mod"))
+	if err != nil {
+		return ""
+	}
+	for _, line := range strings.Split(string(data), "\n") {
+		if rest, ok := strings.CutPrefix(strings.TrimSpace(line), "module "); ok {
+			return strings.TrimSpace(rest)
+		}
+	}
+	return ""
+}

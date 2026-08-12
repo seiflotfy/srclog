@@ -1,0 +1,20 @@
+name: srclog extract
+description: Extract log templates from Go source and upload the manifest as a workflow artifact
+inputs:
+  path:
+    description: Directory to scan
+    default: "."
+  artifact-name:
+    description: Name of the uploaded artifact (suffixed with the commit sha)
+    default: srclog-templates
+runs:
+  using: composite
+  steps:
+    - name: Extract templates
+      shell: bash
+      run: go run github.com/seiflotfy/srclog/cmd/srclog@latest extract -o srclog-templates.json "${{ inputs.path }}"
+    - name: Upload manifest
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.artifact-name }}-${{ github.sha }}
+        path: srclog-templates.json
