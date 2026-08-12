@@ -66,7 +66,11 @@ func runExtract(args []string) error {
 	if *out == "-" {
 		_, err = os.Stdout.Write(data)
 	} else {
-		err = os.WriteFile(*out, data, 0o644)
+		// Write-then-rename so a failed write can't destroy the previous manifest.
+		tmp := *out + ".tmp"
+		if err = os.WriteFile(tmp, data, 0o644); err == nil {
+			err = os.Rename(tmp, *out)
+		}
 	}
 	if err != nil {
 		return err
@@ -126,24 +130,58 @@ func runMatch(args []string) error {
 	}
 	enc := json.NewEncoder(os.Stdout)
 	matched, total := 0, 0
-	sc := bufio.NewScanner(in)
-	sc.Buffer(make([]byte, 0, 64*1024), 1024*1024)
-	for sc.Scan() {
-		line := sc.Text()
-		if line == "" {
-			continue
+	r := bufio.NewReaderSize(in, 64*1024)
+	for {
+		line, truncated, rerr := readLine(r, maxLineBytes)
+		if rerr != nil && rerr != io.EOF {
+			return rerr
 		}
-		total++
-		if m, ok := matcher.Match(line); ok {
-			matched++
-			enc.Encode(result{ID: m.Template.ID, Level: m.Template.Level, Template: m.Template.Template, Params: m.Params})
-		} else {
-			enc.Encode(result{Line: line})
+		if line != "" {
+			total++
+			// Never match a truncated line: anchored patterns could pair the
+			// visible prefix with the wrong template.
+			res := result{Line: line}
+			if !truncated {
+				if m, ok := matcher.Match(line); ok {
+					matched++
+					res = result{ID: m.Template.ID, Level: m.Template.Level, Template: m.Template.Template, Params: m.Params}
+				}
+			}
+			if err := enc.Encode(res); err != nil {
+				return err
+			}
 		}
-	}
-	if err := sc.Err(); err != nil {
-		return err
+		if rerr == io.EOF {
+			break
+		}
 	}
 	fmt.Fprintf(os.Stderr, "srclog: matched %d/%d lines\n", matched, total)
 	return nil
+}
+
+// maxLineBytes caps how much of a single log line is kept; log streams are
+// dirty and one pathological line must not abort or balloon the run.
+const maxLineBytes = 1 << 20
+
+// readLine returns the next line (without trailing \r\n), truncated to max
+// bytes. The remainder of an overlong line is consumed and discarded. err is
+// io.EOF on the final line.
+func readLine(r *bufio.Reader, max int) (line string, truncated bool, err error) {
+	var b []byte
+	for {
+		chunk, cerr := r.ReadSlice('\n')
+		keep := chunk
+		if len(b)+len(keep) > max {
+			keep = keep[:max-len(b)]
+			truncated = true
+		}
+		b = append(b, keep...)
+		if cerr == bufio.ErrBufferFull {
+			continue
+		}
+		if cerr != nil && cerr != io.EOF {
+			return "", false, cerr
+		}
+		return strings.TrimRight(string(b), "\r\n"), truncated, cerr
+	}
 }

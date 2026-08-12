@@ -1,6 +1,8 @@
 package srclog
 
 import (
+	"os"
+	"path/filepath"
 	"reflect"
 	"testing"
 )
@@ -49,8 +51,8 @@ func TestExtractThenMatch(t *testing.T) {
 // More literal text wins over more placeholders.
 func TestMatchSpecificity(t *testing.T) {
 	manifest := &Manifest{Templates: []*Template{
-		{ID: "a", Template: "dial <*>: <*>", Regex: regexFor("dial <*>: <*>")},
-		{ID: "b", Template: "dial <*>: timeout", Regex: regexFor("dial <*>: timeout")},
+		{ID: "a", Template: "dial <*>: <*>"},
+		{ID: "b", Template: "dial <*>: timeout"},
 	}}
 	matcher, err := NewMatcher(manifest)
 	if err != nil {
@@ -63,5 +65,34 @@ func TestMatchSpecificity(t *testing.T) {
 	got, ok = matcher.Match("dial db:5432: connection refused")
 	if !ok || got.Template.ID != "a" {
 		t.Fatalf("got %+v ok=%v, want template a", got, ok)
+	}
+}
+
+func TestNewMatcherRejectsNullTemplate(t *testing.T) {
+	if _, err := NewMatcher(&Manifest{Templates: []*Template{nil}}); err == nil {
+		t.Fatal("NewMatcher accepted a null template entry")
+	}
+}
+
+func TestLoadManifestVersion(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "m.json")
+
+	os.WriteFile(path, []byte(`{"version":2,"templates":[]}`), 0o644)
+	if _, err := LoadManifest(path); err == nil {
+		t.Fatal("LoadManifest accepted an unsupported version")
+	}
+
+	os.WriteFile(path, []byte(`{"version":1,"templates":[]}`), 0o644)
+	if _, err := LoadManifest(path); err != nil {
+		t.Fatalf("LoadManifest rejected a v1 manifest: %v", err)
+	}
+
+	os.WriteFile(path, []byte(`{"version":1,"templates":[null]}`), 0o644)
+	m, err := LoadManifest(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := NewMatcher(m); err == nil {
+		t.Fatal("NewMatcher accepted a manifest with a null template")
 	}
 }

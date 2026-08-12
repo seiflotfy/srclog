@@ -77,6 +77,8 @@ releases you actually run when versions overlap in prod.
   heuristically (`zap.X(...)` field args); zap fields built elsewhere may add trailing
   `<*>` placeholders.
 - Matches the *message* portion of a line, not structured-handler output framing.
+- Multiline templates are extracted verbatim but the line-oriented `match` command
+  never matches them; lines over 1MiB are truncated and reported unmatched.
 - Go only. Other languages are separate extractors emitting the same manifest.
 
 See `decisions.md` for the reasoning behind each of these.

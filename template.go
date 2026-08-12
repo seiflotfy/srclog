@@ -22,8 +22,10 @@ type Location struct {
 type Template struct {
 	ID       string `json:"id"`
 	Template string `json:"template"`
-	// Regex is an anchored pattern with one capture group per placeholder.
-	// Empty when the template has no placeholders (match by exact string).
+	// Regex is an anchored pattern with one capture group per placeholder,
+	// empty when the template has none (match by exact string). It exists for
+	// non-Go consumers of the manifest; the Go Matcher derives its own
+	// patterns from Template and ignores this field.
 	Regex     string     `json:"regex,omitempty"`
 	Level     string     `json:"level"`
 	Lib       string     `json:"lib,omitempty"`

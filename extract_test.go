@@ -24,7 +24,7 @@ func TestExtract(t *testing.T) {
 		"db unreachable":                  "error",
 		"read failed":                     "error",
 		"retrying in <*>s":                "debug",
-		"slow request <*>":                "warn",
+		"slow request<*>":                 "warn", // fmt.Sprint: no space guaranteed after a string operand
 		"boot <*>":                        "info",
 	}
 	for tmpl, level := range want {
@@ -35,8 +35,9 @@ func TestExtract(t *testing.T) {
 	if len(got) != len(want) {
 		t.Errorf("got %d templates, want %d: %v", len(got), len(want), got)
 	}
-	if m.Stats.Dynamic != 1 {
-		t.Errorf("Dynamic = %d, want 1", m.Stats.Dynamic)
+	// l.Error(err.Error()) + the zero-literal sugar.Errorf("%v", err)
+	if m.Stats.Dynamic != 2 {
+		t.Errorf("Dynamic = %d, want 2", m.Stats.Dynamic)
 	}
 	if m.Stats.ParseErrors != 0 {
 		t.Errorf("ParseErrors = %d, want 0", m.Stats.ParseErrors)

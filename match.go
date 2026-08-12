@@ -27,19 +27,22 @@ type fuzzyTemplate struct {
 	t  *Template
 }
 
-// NewMatcher compiles a manifest into a matcher.
+// NewMatcher compiles a manifest into a matcher. Patterns are derived from
+// each Template string — the manifest's stored regex is for non-Go consumers
+// and is never trusted or read here.
 func NewMatcher(m *Manifest) (*Matcher, error) {
 	mt := &Matcher{exact: make(map[string]*Template)}
-	for _, t := range m.Templates {
-		if t.Regex == "" {
+	for i, t := range m.Templates {
+		if t == nil {
+			return nil, fmt.Errorf("manifest: null template at index %d", i)
+		}
+		pattern := regexFor(t.Template)
+		if pattern == "" {
 			mt.exact[t.Template] = t
 			continue
 		}
-		re, err := regexp.Compile(t.Regex)
-		if err != nil {
-			return nil, fmt.Errorf("template %s: %w", t.ID, err)
-		}
-		mt.fuzzy = append(mt.fuzzy, fuzzyTemplate{re: re, t: t})
+		// regexFor output is QuoteMeta literals joined by (.*?): always compiles.
+		mt.fuzzy = append(mt.fuzzy, fuzzyTemplate{re: regexp.MustCompile(pattern), t: t})
 	}
 	// Most literal text first, so "dial <*>: timeout" beats "dial <*>: <*>".
 	sort.SliceStable(mt.fuzzy, func(i, j int) bool {
@@ -77,6 +80,9 @@ func LoadManifest(path string) (*Manifest, error) {
 	var m Manifest
 	if err := json.Unmarshal(data, &m); err != nil {
 		return nil, fmt.Errorf("%s: %w", path, err)
+	}
+	if m.Version != 1 {
+		return nil, fmt.Errorf("%s: unsupported manifest version %d", path, m.Version)
 	}
 	return &m, nil
 }

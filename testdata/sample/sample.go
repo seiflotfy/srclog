@@ -32,6 +32,9 @@ func demo() {
 	// fully dynamic message: counted, no template
 	l.Error(err.Error())
 
+	// no literal text: a "<*>" catch-all template would match every line
+	sugar.Errorf("%v", err)
+
 	// not logging: excluded receivers
 	fmt.Errorf("not a log %s", x)
 	http.Error(w, "also not a log", 500)

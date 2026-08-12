@@ -56,3 +56,45 @@ Running log of design/implementation decisions. Newest at the bottom.
 
 12. **Module path `github.com/seiflotfy/srclog`** — personal experiment repo; move to an
     org later is a rename, not a redesign.
+
+## 2026-08-12/13 — field test + review round
+
+Field test: the Axiom monorepo (5,762 files) extracts in ~1.5s → 3,923 templates,
+9,910 log calls, 0 parse errors. ~44% of calls are dynamic (err.Error(), pre-built
+strings) — that's the honest ceiling of static extraction there.
+
+Review: goreview robpike judge scored 9/10, bradfitz judge 4/10. All deductions fixed:
+
+13. **Zero-literal templates are dynamic.** `Errorf("%v", err)` produced template `<*>`
+    whose regex matched *every* line — a catch-all that faked 100% match rates (found
+    via the monorepo test, confirmed by review). Templates with no non-whitespace
+    literal text now count as `stats.dynamic` and are not emitted.
+
+14. **The Go matcher derives regexes from templates** and ignores the manifest's stored
+    `regex` field (Pike: stored derived data with a silent sync invariant). The JSON
+    field stays for non-Go consumers. Hand-built manifests no longer need it.
+
+15. **`libGuess` is now genuinely metadata-only** (Pike: the "cosmetic" lib guess
+    secretly flipped print→structured handling). The structured-fields decision is a
+    direct predicate (`slog` receiver or all-`zap.X` args) at the one site that uses it.
+
+16. **Manifest is validated at the boundary** (Fitzpatrick): `version != 1` and null
+    template entries are bounded errors, not panics or silent mis-parses.
+
+17. **`match` survives dirty streams** (Fitzpatrick): NDJSON encode errors abort with
+    exit 1 (no more silent truncation on full disk), and a bounded reader truncates
+    lines over 1MiB, emits them as unmatched, and keeps going — one pathological line
+    no longer kills the stream. Truncated lines are never matched (anchored patterns
+    against a prefix would lie).
+
+18. **Extract writes tmp+rename** so a failed write can't destroy the previous manifest.
+
+19. **`fmt.Sprint` vs `fmt.Sprintln` spacing** (Fitzpatrick): bare Print/logrus calls
+    append `<*>` with *no* space (Sprint only spaces non-string operand pairs —
+    statically unknowable, and `(.*?)` absorbs a leading space either way); `ln`
+    variants keep the space. Dedup is also keyed by the raw level+template string now,
+    not the truncated hash.
+
+20. **Multiline templates (17 in the monorepo) are kept verbatim** even though the
+    line-oriented matcher can never match them — they're true, and a record-oriented
+    consumer could still use them.

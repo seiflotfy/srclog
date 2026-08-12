@@ -16,9 +16,10 @@ import (
 type callKind int
 
 const (
-	kindPrintf callKind = iota // format string with verbs (Printf, Errorf, Msgf)
-	kindPrint                  // variadic args joined into the message (Print, Println, logrus.Info)
-	kindMsg                    // constant message; extra args are structured fields
+	kindPrintf  callKind = iota // format string with verbs (Printf, Errorf, Msgf)
+	kindPrint                   // fmt.Sprint semantics: extra operands appended, no separator (Print, logrus.Info)
+	kindPrintln                 // fmt.Sprintln semantics: extra operands appended, space-separated
+	kindMsg                     // constant message; extra args are structured fields
 )
 
 // levelByBase maps a method base name (suffixes stripped) to a log level.
@@ -45,7 +46,7 @@ var skipRecv = map[string]bool{"fmt": true, "http": true, "errors": true, "testi
 // manifest. Commit is left empty for the caller to fill.
 func Extract(dir string) (*Manifest, error) {
 	fset := token.NewFileSet()
-	byID := map[string]*Template{}
+	byKey := map[string]*Template{} // level + NUL + template
 	var stats Stats
 
 	err := filepath.WalkDir(dir, func(path string, d fs.DirEntry, err error) error {
@@ -80,7 +81,7 @@ func Extract(dir string) (*Manifest, error) {
 			if !ok {
 				return true
 			}
-			visitCall(fset, rel, call, byID, &stats)
+			visitCall(fset, rel, call, byKey, &stats)
 			return true
 		})
 		return nil
@@ -89,8 +90,8 @@ func Extract(dir string) (*Manifest, error) {
 		return nil, err
 	}
 
-	templates := make([]*Template, 0, len(byID))
-	for _, t := range byID {
+	templates := make([]*Template, 0, len(byKey))
+	for _, t := range byKey {
 		sort.Slice(t.Locations, func(i, j int) bool {
 			if t.Locations[i].File != t.Locations[j].File {
 				return t.Locations[i].File < t.Locations[j].File
@@ -118,7 +119,7 @@ func Extract(dir string) (*Manifest, error) {
 // template. Recognition is by method name only — no type checking — so any
 // receiver with an Errorf/Info/Msg-shaped method is treated as a logger.
 // Over-approximation is harmless here: extra templates just sit unmatched.
-func visitCall(fset *token.FileSet, file string, call *ast.CallExpr, byID map[string]*Template, stats *Stats) {
+func visitCall(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[string]*Template, stats *Stats) {
 	sel, ok := call.Fun.(*ast.SelectorExpr)
 	if !ok {
 		return
@@ -141,7 +142,7 @@ func visitCall(fset *token.FileSet, file string, call *ast.CallExpr, byID map[st
 	case strings.HasSuffix(name, "f"):
 		base, kind = name[:len(name)-1], kindPrintf
 	case strings.HasSuffix(name, "ln"):
-		base, kind = name[:len(name)-2], kindPrint
+		base, kind = name[:len(name)-2], kindPrintln
 	case strings.HasSuffix(name, "w"):
 		base, kind = name[:len(name)-1], kindMsg // zap sugared Infow etc.
 	default:
@@ -163,9 +164,9 @@ func visitCall(fset *token.FileSet, file string, call *ast.CallExpr, byID map[st
 		return // e.g. zerolog's Error() chain root — the Msg call carries the message
 	}
 
-	lib := libGuess(sel, base, kind, call.Args[msgIdx+1:])
-	if kind == kindPrint && (lib == "slog" || lib == "zap") {
-		kind = kindMsg // slog.Info / zap.Logger.Error: extra args are fields
+	extra := call.Args[msgIdx+1:]
+	if kind == kindPrint && (identIs(sel.X, "slog") || (len(extra) > 0 && allZapFields(extra))) {
+		kind = kindMsg // slog.Info / zap.Logger.Error: extra args are fields, not message
 	}
 
 	stats.Calls++
@@ -178,26 +179,44 @@ func visitCall(fset *token.FileSet, file string, call *ast.CallExpr, byID map[st
 	case kindPrintf:
 		tmpl = normalizeFormat(tmpl)
 	case kindPrint:
-		// Print/Println-style: extra operands land in the message.
-		for range call.Args[msgIdx+1:] {
+		// fmt.Sprint inserts a space only between two non-string operands,
+		// which is unknowable statically; the bare placeholder's (.*?) also
+		// absorbs a leading space, so unspaced is correct for both cases.
+		for range extra {
+			tmpl += Placeholder
+		}
+	case kindPrintln:
+		for range extra {
 			tmpl += " " + Placeholder
 		}
 	}
 
+	// A template with no literal text ("%v", "%s %d", ...) is dynamic in all
+	// but name — and its regex would match every line as a catch-all.
+	if strings.TrimSpace(strings.ReplaceAll(tmpl, Placeholder, "")) == "" {
+		stats.Dynamic++
+		return
+	}
+
 	pos := fset.Position(call.Pos())
-	id := templateID(level, tmpl)
-	if t, ok := byID[id]; ok {
+	key := level + "\x00" + tmpl
+	if t, ok := byKey[key]; ok {
 		t.Locations = append(t.Locations, Location{File: file, Line: pos.Line})
 		return
 	}
-	byID[id] = &Template{
-		ID:        id,
+	byKey[key] = &Template{
+		ID:        templateID(level, tmpl),
 		Template:  tmpl,
 		Regex:     regexFor(tmpl),
 		Level:     level,
-		Lib:       lib,
+		Lib:       libGuess(sel, base, kind),
 		Locations: []Location{{File: file, Line: pos.Line}},
 	}
+}
+
+func identIs(e ast.Expr, name string) bool {
+	id, ok := e.(*ast.Ident)
+	return ok && id.Name == name
 }
 
 // stringTemplate folds an expression into a template string. String literals
@@ -250,9 +269,9 @@ func chainLevel(e ast.Expr) string {
 	}
 }
 
-// libGuess best-effort identifies the logging library. Metadata only — it
-// never affects matching, so a wrong guess is cosmetic.
-func libGuess(sel *ast.SelectorExpr, base string, kind callKind, extra []ast.Expr) string {
+// libGuess best-effort identifies the logging library. Genuinely metadata
+// only: the result is stored on the template and never consulted again.
+func libGuess(sel *ast.SelectorExpr, base string, kind callKind) string {
 	if base == "Msg" {
 		return "zerolog"
 	}
@@ -267,9 +286,6 @@ func libGuess(sel *ast.SelectorExpr, base string, kind callKind, extra []ast.Exp
 		}
 	}
 	if kind == kindMsg {
-		return "zap"
-	}
-	if len(extra) > 0 && allZapFields(extra) {
 		return "zap"
 	}
 	return ""
