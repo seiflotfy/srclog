@@ -98,3 +98,16 @@ Review: goreview robpike judge scored 9/10, bradfitz judge 4/10. All deductions 
 20. **Multiline templates (17 in the monorepo) are kept verbatim** even though the
     line-oriented matcher can never match them — they're true, and a record-oriented
     consumer could still use them.
+
+## 2026-08-13 — review round 2 (final)
+
+21. **`regexp.Compile` with a wrapped error, not `MustCompile`** in NewMatcher.
+    regexFor output is always syntactically valid, but regexp's program-size budget
+    (~128MB) can still reject a pathological manifest template — that must be a bounded
+    error on the match path, not a panic (bradfitz re-review, round 2).
+
+Final scores: robpike 9.5/10, bradfitz 9.5/10 — no open deductions. Accepted residual
+ceilings, on record and deliberate: Extract aborts on unreadable directories (clean,
+signaled), ParseFile reads are unbounded (conventional for Go tooling), no fsync before
+the manifest rename (CI artifact, not a database), serialized `regex` JSON field has no
+in-repo consumer (kept for non-Go matchers; delete in v2 if none materializes).
