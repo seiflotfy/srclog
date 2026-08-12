@@ -41,8 +41,14 @@ func NewMatcher(m *Manifest) (*Matcher, error) {
 			mt.exact[t.Template] = t
 			continue
 		}
-		// regexFor output is QuoteMeta literals joined by (.*?): always compiles.
-		mt.fuzzy = append(mt.fuzzy, fuzzyTemplate{re: regexp.MustCompile(pattern), t: t})
+		// regexFor output is always syntactically valid, but regexp still
+		// rejects oversized programs — a pathological manifest must be a
+		// bounded error, not a panic.
+		re, err := regexp.Compile(pattern)
+		if err != nil {
+			return nil, fmt.Errorf("template %s: %w", t.ID, err)
+		}
+		mt.fuzzy = append(mt.fuzzy, fuzzyTemplate{re: re, t: t})
 	}
 	// Most literal text first, so "dial <*>: timeout" beats "dial <*>: <*>".
 	sort.SliceStable(mt.fuzzy, func(i, j int) bool {
