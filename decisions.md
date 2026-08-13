@@ -268,3 +268,19 @@ open deductions.
 44. **`recommended_dicts` shipped**: manifest lists dictionaries implied by the
     scanned code's import graph (stdlib always; lib/pq and pgx → postgres, grpc →
     grpc, sarama/kafka-go → kafka, ...). Evidence is imports — no build required.
+
+45. **Field measurement — staging (k8s-logs-staging, axiom-obs namespace, 50k
+    messages, 6h window, 2026-08-13).** Volume-weighted match rate against the
+    monorepo manifest + curated dicts: **67.9% overall — but the split is the
+    story**: services whose code is in the scanned monorepo match at or near 100%
+    (stitch 100%, ingest 100%, compactor 100%, eventdb-query-worker 100%, api 100%,
+    edge-checks 100%, compactor-worker 94%, operator 94%), while axiom-metrics-*
+    pods sit at 0–16% because they are a different (Rust) codebase — their top
+    unmatched messages are *constants* ("Processing index data", "Indexing block")
+    that a Rust extractor would match trivially. Unmatched volume is a coverage
+    gap, not a method failure. `srclog mine -min 20` over the 16k-line residual
+    proposed 34 clean candidates; all admitted by the gate. Two operational
+    lessons: (a) message extraction from collector framing (zap `msg` vs tracing
+    `message`) is the consumer's first job — raw framing looks like 0%; (b) don't
+    merge all generated dicts blindly — 3.7k suffix regexes on the unmatched path
+    took the 50k-line run from 0.75s to 24s+ (suffix entries scan unanchored).
