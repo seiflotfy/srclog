@@ -284,3 +284,22 @@ open deductions.
     `message`) is the consumer's first job — raw framing looks like 0%; (b) don't
     merge all generated dicts blindly — 3.7k suffix regexes on the unmatched path
     took the 50k-line run from 0.75s to 24s+ (suffix entries scan unanchored).
+
+## 2026-08-13 — Rust support + re-measurement
+
+46. **Rust extractor is a macro scanner, not a parser.** tracing/log macros
+    (trace!..error!) are regular enough at the call site: mask string/comment
+    contents (Rust doc comments are full of macro-shaped examples), regex the macro
+    heads, take the first depth-0 string literal that isn't a named-arg value
+    (target:/name:), normalize {}-specs to <*>. Zero dependencies — no tree-sitter
+    until more languages demand it. event!(Level::X, ...) and Rust error
+    construction (anyhow!/bail!) are known gaps, on the list.
+
+47. **Staging re-measurement with Rust coverage: 67.9% → 94.7%** (50k-message
+    sample, Go manifest + metrics@HEAD manifest + curated dicts). Metrics pods went
+    from 0–16% to ~90%. Two lessons measured, not argued: (a) version skew is real —
+    a 14-month-stale metrics checkout scored 81% vs HEAD's 94.7%, so manifests must
+    be commit-keyed and extracted from what actually deploys; (b) the residual is
+    Rust *dependency* crates (tower-http "finished processing request", session
+    crates) — the same dependency-scan answer as Go, or the miner catches them
+    (it already did: all 34 candidates from the earlier round).
