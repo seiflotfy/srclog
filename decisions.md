@@ -203,3 +203,36 @@ standing legacy ceilings already on record above.
 
 36. **`srclog mine` enforces match-first residual mining in the tool itself** — it
     takes the same -t/-d flags as match and clusters only what they miss.
+
+## 2026-08-13 — v3 review round (robpike 8/10, bradfitz 6.5/10)
+
+37. **Superseded catalog entries no longer compete for matches** (Pike): NewMatcher
+    skips any template whose ID is an alias key. Before this, the older mined entry
+    won fuzzy ties by insertion order and the matcher emitted deprecated IDs forever —
+    the alias map existed in data but participated in no call path. runExtract's
+    inline manifest writer was also folded into the shared writeJSON.
+
+38. **Miner buckets are capped at 64 clusters** (Fitzpatrick): high-cardinality
+    residual (unique-ID lines, hex noise) previously grew memory and O(n²) scan cost
+    without bound — drain caps children per node, the port had dropped it. Overflow
+    folds into the closest cluster (or drops when nothing is remotely similar);
+    retained tokens are cloned so clusters don't pin large input lines.
+
+39. **Promote rejects a non-line-anchored catalog** (Fitzpatrick): a suffix manifest
+    in the catalog seat ran subsumption mid-string and mass-aliased candidates into
+    unrelated dictionary IDs, then persisted the damage in the one artifact that is
+    permanent by contract. Also: runPromote no longer treats stat failures as
+    "catalog missing", and validates the catalog up front so errors carry its path.
+
+40. **Pike's dead-code claim on shortModule's `.go` trim was rejected with evidence**:
+    `github.com/nats-io/nats.go` is a scanned library; the trim is why its dictionary
+    says `nats`. Review feedback gets verified, not blindly applied.
+
+41. **Known tensions, accepted and documented**: (a) Promote's subsumption gate stops
+    a more-specific scanned candidate from entering a catalog holding the generic
+    shape — while NewMatcher's specificity sort exists to prefer specific entries;
+    revisit if real catalogs hit it. (b) Curated dicts (slug IDs) and generated dicts
+    (hash IDs) can cover the same error with two IDs; provenance differs, load what
+    you need. (c) The stricter zero-literal bar means some manifests older binaries
+    emitted now bounce under the same version: 1 — accepted pre-1.0, the catalog is
+    the only long-lived artifact and it postdates the change.

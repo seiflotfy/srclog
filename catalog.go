@@ -1,6 +1,9 @@
 package srclog
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 // Promotion gate: candidates (mined or scanned) are admitted into a catalog
 // manifest under four invariants:
@@ -25,6 +28,12 @@ type PromoteResult struct {
 // valid line-anchored manifest; it gains entries and aliases, never loses any.
 func Promote(catalog, candidates *Manifest) (PromoteResult, error) {
 	var res PromoteResult
+	// A suffix manifest in the catalog seat would run subsumption mid-string,
+	// mass-aliasing candidates into unrelated IDs — and the catalog is the
+	// one artifact whose damage is permanent by contract.
+	if catalog.Anchor != "" {
+		return res, fmt.Errorf("catalog: anchor %q, promotion requires a line-anchored manifest", catalog.Anchor)
+	}
 	byID := make(map[string]*Template, len(catalog.Templates))
 	for _, t := range catalog.Templates {
 		if t != nil {

@@ -26,6 +26,13 @@ type cluster struct {
 // to join a cluster. 0.5 is drain's conventional default.
 const simThreshold = 0.5
 
+// maxClustersPerBucket bounds memory against high-cardinality residual
+// streams (unique-ID lines, hex noise) — drain caps children per node for the
+// same reason. ponytail: on overflow, lines fold into the closest cluster
+// even below simThreshold (or drop when nothing is remotely close) — bounded
+// memory beats cluster purity out there.
+const maxClustersPerBucket = 64
+
 func NewMiner() *Miner {
 	return &Miner{clusters: make(map[string][]*cluster)}
 }
@@ -51,8 +58,13 @@ func (mn *Miner) Add(line string) {
 		}
 	}
 	if best == nil || bestSim < simThreshold {
-		mn.clusters[key] = append(mn.clusters[key], &cluster{tokens: tokens, seen: 1})
-		return
+		if len(mn.clusters[key]) < maxClustersPerBucket {
+			mn.clusters[key] = append(mn.clusters[key], &cluster{tokens: cloneTokens(tokens), seen: 1})
+			return
+		}
+		if best == nil {
+			return // full bucket, nothing remotely similar: drop
+		}
 	}
 	for i, t := range best.tokens {
 		if t != tokens[i] {
@@ -60,6 +72,16 @@ func (mn *Miner) Add(line string) {
 		}
 	}
 	best.seen++
+}
+
+// cloneTokens copies retained tokens so a cluster doesn't pin the backing
+// array of the (possibly much larger) input line.
+func cloneTokens(tokens []string) []string {
+	out := make([]string, len(tokens))
+	for i, t := range tokens {
+		out[i] = strings.Clone(t)
+	}
+	return out
 }
 
 // similarity is the fraction of positions with equal tokens; existing

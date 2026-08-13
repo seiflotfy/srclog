@@ -1,6 +1,9 @@
 package srclog
 
-import "testing"
+import (
+	"strconv"
+	"testing"
+)
 
 func TestMiner(t *testing.T) {
 	mn := NewMiner()
@@ -37,6 +40,19 @@ func TestMiner(t *testing.T) {
 	}
 	if m.Stats.Calls != 7 {
 		t.Errorf("Stats.Calls = %d, want 7", m.Stats.Calls)
+	}
+}
+
+// A high-cardinality residual stream must not grow clusters without bound.
+func TestMinerBucketCap(t *testing.T) {
+	mn := NewMiner()
+	for i := 0; i < 500; i++ {
+		// Same token count and first token, mutually dissimilar tails.
+		mn.Add("req " + string(rune('a'+i%26)) + strconv.Itoa(i) + " " + strconv.Itoa(i*7) + " " + strconv.Itoa(i*13))
+	}
+	m := mn.Candidates(1)
+	if len(m.Templates) > maxClustersPerBucket {
+		t.Fatalf("got %d candidates, want <= %d", len(m.Templates), maxClustersPerBucket)
 	}
 }
 

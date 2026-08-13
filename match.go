@@ -45,6 +45,11 @@ func NewMatcher(m *Manifest) (*Matcher, error) {
 		if t == nil {
 			return nil, fmt.Errorf("manifest: null template at index %d", i)
 		}
+		// Superseded entries stay in the manifest (append-only catalogs) but
+		// must not compete for matches — their alias target does the work.
+		if _, superseded := m.Aliases[t.ID]; superseded {
+			continue
+		}
 		// A template with no literal text compiles to a match-everything
 		// pattern — a silent catch-all classifier. The extractors never emit
 		// one, but manifests are external input.

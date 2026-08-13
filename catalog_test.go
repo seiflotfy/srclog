@@ -2,6 +2,15 @@ package srclog
 
 import "testing"
 
+// A suffix manifest must never sit in the catalog seat — subsumption would
+// run mid-string and mass-alias candidates into unrelated IDs.
+func TestPromoteRejectsSuffixCatalog(t *testing.T) {
+	_, err := Promote(&Manifest{Version: 1, Anchor: "suffix"}, &Manifest{})
+	if err == nil {
+		t.Fatal("Promote accepted a suffix-anchored catalog")
+	}
+}
+
 func TestPromote(t *testing.T) {
 	catalog := &Manifest{Version: 1, Templates: []*Template{
 		{ID: "src-1", Template: "dial <*>: <*>", Level: "info", Lib: "log"},
@@ -44,6 +53,16 @@ func TestPromote(t *testing.T) {
 	// Append-only: nothing was removed, src-1 untouched.
 	if len(catalog.Templates) != 3 || catalog.Templates[0].ID != "src-1" {
 		t.Fatalf("catalog mutated: %+v", catalog.Templates)
+	}
+
+	// A matcher built from the catalog emits the canonical ID, not the
+	// superseded mined one.
+	matcher, err := NewMatcher(catalog)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got, ok := matcher.Match("worker 9 crashed"); !ok || got.Template.ID != "src-2" {
+		t.Fatalf("post-supersession match = %+v ok=%v, want src-2", got, ok)
 	}
 
 	// Re-promoting an aliased candidate is a no-op skip.

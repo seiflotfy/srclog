@@ -68,21 +68,7 @@ func runExtract(args []string, extract func(string) (*srclog.Manifest, error)) e
 	}
 	m.Commit = resolveCommit(*commit, dir)
 
-	data, err := json.MarshalIndent(m, "", "  ")
-	if err != nil {
-		return err
-	}
-	data = append(data, '\n')
-	if *out == "-" {
-		_, err = os.Stdout.Write(data)
-	} else {
-		// Write-then-rename so a failed write can't destroy the previous manifest.
-		tmp := *out + ".tmp"
-		if err = os.WriteFile(tmp, data, 0o644); err == nil {
-			err = os.Rename(tmp, *out)
-		}
-	}
-	if err != nil {
+	if err := writeJSON(*out, m); err != nil {
 		return err
 	}
 	fmt.Fprintf(os.Stderr, "srclog: %d templates from %d files (%d calls, %d dynamic, %d parse errors)\n",
@@ -258,6 +244,13 @@ func runPromote(args []string) error {
 		if catalog, err = srclog.LoadManifest(*catalogPath); err != nil {
 			return err
 		}
+		// Validate the catalog up front so its errors carry its path, not a
+		// candidates file's.
+		if _, err := srclog.NewMatcher(catalog); err != nil {
+			return fmt.Errorf("%s: %w", *catalogPath, err)
+		}
+	} else if !os.IsNotExist(err) {
+		return err
 	}
 
 	var total srclog.PromoteResult
