@@ -371,3 +371,36 @@ open deductions.
     keeping stable IDs, nesting, and provenance. Remaining levers on record:
     typed numeric buckets, signature dedup, cross-block zstd dictionary, row
     clustering; and build speed (still ~50-240k rows/s vs drain3's 5M).
+
+## 2026-08-13 — matching speed (open thread #1)
+
+55. **The regex was the bottleneck, not the algorithm.** Three zero-dependency
+    changes, each pinned to the old semantics by differential tests
+    (`litmatch_test.go` — lit-vs-regex fuzz, index-vs-flat-scan, memo-vs-stateless):
+    (a) literal-segment matching — a template is literals split by `<*>`, so
+    matching is one prefix check, one end check, and one `strings.Index` per
+    middle literal, with lazy-capture semantics reproduced exactly (earliest
+    choices are forced by the `$` anchor; compiled regex kept only for the
+    newline corner); (b) the suffix dictionaries got the boundary-token index —
+    a suffix match must end the string, so entries index by trailing literal
+    token, killing the flat unanchored scan from decision #45's 24s incident;
+    (c) `Resolver`, a memoizing wrapper over Resolve (bounded line + top-level
+    param caches, wholesale drop on overflow) — BuildColumn uses it, and enum
+    traffic makes the hit rate enormous. Same box, same corpus (synthetic
+    zipf, 300 templates, 20% cascading params, 0.1% residual):
+    Match 3.04µs → 189ns (16x), Resolve 13.1µs → 1.14µs (11x), worst-case
+    miss 54.3µs → 318ns (170x), dict param hit 112µs → 2.7µs (41x),
+    BuildColumn 13.7µs/row → 0.78µs/row (17.6x, ~1.3M rows/s/core — the
+    "100x off drain3" gap is now ~2-8x with bytes still winning).
+
+56. **drain3 as a match router: measured, and rejected as the default.**
+    `contrib/fastmatch` (separate module; root stays zero-dep) routes lines
+    through axiomhq/drain3 shapes seeded via NewMatcherFromTemplates, verifies
+    with the new `MatchByID`, falls back to the full scan — coverage identical
+    by construction, 0 template divergence on 20k lines. But after decision
+    #55 the core matcher wins the realistic regime (162ns vs 408ns/line —
+    drain3's tokenize pass costs more than a small first-token bucket of
+    ~15ns literal failures); the router only wins pathological token skew
+    (500 templates sharing a first token: 2.35µs vs 438ns). Real manifests
+    look like the first regime (prod: 129 templates). Kept as a measured
+    escape hatch, not wired in.

@@ -24,19 +24,55 @@ type Match struct {
 // Matcher matches log lines against a manifest's templates.
 type Matcher struct {
 	exact map[string]*Template
-	// Line-anchored fuzzy templates are indexed by their first literal token
-	// (the word before any placeholder); a line can only match a template
-	// whose first token equals its own. rest holds templates with no fully
-	// literal first token. Both lists stay in specificity order.
+	// Fuzzy templates are indexed by a boundary token. Line-anchored: the
+	// first literal token (the word before any placeholder) — a line can only
+	// match a template whose first token equals its own. Suffix-anchored: the
+	// trailing literal token — a suffix match ends the string, so the line's
+	// last token must equal the template's. rest holds templates with no
+	// indexable token. Both lists stay in specificity order.
 	byTok  map[string][]fuzzyTemplate
 	rest   []fuzzyTemplate
-	suffix bool // dictionary (suffix-anchored) semantics: flat scan, no index
+	suffix bool // dictionary (suffix-anchored) semantics
+	// byID/exactByID support MatchByID — single-template verification for
+	// external routers (e.g. a drain-style prefilter).
+	byID      map[string]*fuzzyTemplate
+	exactByID map[string]*Template
 }
 
 type fuzzyTemplate struct {
 	re  *regexp.Regexp
+	lp  litParts
 	t   *Template
 	lit int // cached literalLen for merge ordering
+}
+
+// tryMatch runs one template against line: the literal-segment matcher when
+// possible, the compiled regex when the template's literals contain '\n'. A
+// line containing '\n' can only match the latter kind — the regex's '.'
+// never matches newline, so a newline must be covered by a literal.
+func (f *fuzzyTemplate) tryMatch(line string, hasNL, suffix bool) (*Match, bool) {
+	if f.lp.ok {
+		if hasNL {
+			return nil, false
+		}
+		if suffix {
+			if pre, params, ok := f.lp.matchSuffix(line); ok {
+				return &Match{Template: f.t, Params: params, Prefix: pre, Suffix: true}, true
+			}
+			return nil, false
+		}
+		if params, ok := f.lp.matchLine(line); ok {
+			return &Match{Template: f.t, Params: params}, true
+		}
+		return nil, false
+	}
+	if sub := f.re.FindStringSubmatch(line); sub != nil {
+		if suffix {
+			return &Match{Template: f.t, Params: sub[2:], Prefix: sub[1], Suffix: true}, true
+		}
+		return &Match{Template: f.t, Params: sub[1:]}, true
+	}
+	return nil, false
 }
 
 // NewMatcher compiles a manifest into a matcher. Patterns are derived from
@@ -51,7 +87,10 @@ func NewMatcher(m *Manifest) (*Matcher, error) {
 	default:
 		return nil, fmt.Errorf("manifest: unknown anchor %q", m.Anchor)
 	}
-	mt := &Matcher{exact: make(map[string]*Template), byTok: map[string][]fuzzyTemplate{}, suffix: suffix}
+	mt := &Matcher{
+		exact: make(map[string]*Template), byTok: map[string][]fuzzyTemplate{},
+		suffix: suffix, byID: map[string]*fuzzyTemplate{}, exactByID: map[string]*Template{},
+	}
 	var fuzzy []fuzzyTemplate
 	for i, t := range m.Templates {
 		if t == nil {
@@ -78,6 +117,7 @@ func NewMatcher(m *Manifest) (*Matcher, error) {
 		}
 		if pattern == "" {
 			mt.exact[t.Template] = t
+			mt.exactByID[t.ID] = t
 			continue
 		}
 		// regexFor output is always syntactically valid, but regexp still
@@ -87,15 +127,29 @@ func NewMatcher(m *Manifest) (*Matcher, error) {
 		if err != nil {
 			return nil, fmt.Errorf("template %s: %w", t.ID, err)
 		}
-		fuzzy = append(fuzzy, fuzzyTemplate{re: re, t: t, lit: literalLen(t.Template)})
+		fuzzy = append(fuzzy, fuzzyTemplate{re: re, lp: litFor(t.Template), t: t, lit: literalLen(t.Template)})
 	}
 	// Most literal text first, so "dial <*>: timeout" beats "dial <*>: <*>".
 	sort.SliceStable(fuzzy, func(i, j int) bool { return fuzzy[i].lit > fuzzy[j].lit })
 	for _, f := range fuzzy {
-		if tok, ok := firstLiteralToken(f.t.Template); ok && !suffix {
+		tok, ok := "", false
+		if suffix {
+			tok, ok = lastLiteralToken(f.t.Template)
+		} else {
+			tok, ok = firstLiteralToken(f.t.Template)
+		}
+		if ok {
 			mt.byTok[tok] = append(mt.byTok[tok], f)
 		} else {
 			mt.rest = append(mt.rest, f)
+		}
+	}
+	for i := range mt.rest {
+		mt.byID[mt.rest[i].t.ID] = &mt.rest[i]
+	}
+	for _, fs := range mt.byTok {
+		for i := range fs {
+			mt.byID[fs[i].t.ID] = &fs[i]
 		}
 	}
 	return mt, nil
@@ -126,26 +180,38 @@ func (m *Matcher) Match(line string) (*Match, bool) {
 		return &Match{Template: t}, true
 	}
 	var cand []fuzzyTemplate
-	if !m.suffix {
-		if fields := strings.Fields(line); len(fields) > 0 {
-			cand = m.byTok[fields[0]]
-		}
+	if m.suffix {
+		cand = m.byTok[lastTokenOf(line)]
+	} else if tok, ok := firstTokenOf(line); ok {
+		cand = m.byTok[tok]
 	}
+	hasNL := strings.IndexByte(line, '\n') >= 0
 	i, j := 0, 0
 	for i < len(cand) || j < len(m.rest) {
-		var f fuzzyTemplate
+		var f *fuzzyTemplate
 		if j >= len(m.rest) || (i < len(cand) && cand[i].lit >= m.rest[j].lit) {
-			f, i = cand[i], i+1
+			f, i = &cand[i], i+1
 		} else {
-			f, j = m.rest[j], j+1
+			f, j = &m.rest[j], j+1
 		}
-		if sub := f.re.FindStringSubmatch(line); sub != nil {
-			if m.suffix {
-				// group 1 is the lossless prefix; params follow
-				return &Match{Template: f.t, Params: sub[2:], Prefix: sub[1], Suffix: true}, true
-			}
-			return &Match{Template: f.t, Params: sub[1:]}, true
+		if mt, ok := f.tryMatch(line, hasNL, m.suffix); ok {
+			return mt, true
 		}
+	}
+	return nil, false
+}
+
+// MatchByID runs a single template — named by catalog ID — against line,
+// with exactly Match's semantics for that template. It is the verification
+// half of an external router (a prefilter proposes an ID, MatchByID checks
+// it and extracts params). ok=false when the template doesn't match or the
+// ID is unknown.
+func (m *Matcher) MatchByID(id, line string) (*Match, bool) {
+	if f, ok := m.byID[id]; ok {
+		return f.tryMatch(line, strings.IndexByte(line, '\n') >= 0, m.suffix)
+	}
+	if t, ok := m.exactByID[id]; ok && line == t.Template {
+		return &Match{Template: t}, true
 	}
 	return nil, false
 }

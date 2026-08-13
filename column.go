@@ -96,8 +96,9 @@ func BuildColumn(lines []string, primary, dict *Matcher) *Column {
 			}
 		}
 	}
+	res := NewResolver(primary, dict)
 	for i, line := range lines {
-		if n, ok := Resolve(primary, dict, line); ok {
+		if n, ok := res.Resolve(line); ok {
 			nodes[i] = n
 			profile(n)
 		}

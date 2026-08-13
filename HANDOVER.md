@@ -61,9 +61,17 @@ in `~/.axiom.toml`):
 | shapes (catalog→drain3 bridge, folded) | 29.7 KB — 2.19x | 164.6 KB — 1.89x |
 | **tc02 + folding (this repo)** | **31.0 KB — 2.10x** | **153.6 KB — 2.02x (best measured)** |
 
-**Speed**: match 4.6µs/line (~220k lines/s/core); tc02 build 0.4–2.1s/100k
-(matching dominates); decode 5–17ms/100k; drain3 column builds in ~20ms —
-that gap is the known speed work.
+**Speed** (rewritten 2026-08-13, decisions #55-56): literal-segment matching
+replaced regexp on the hot path, suffix dicts got a trailing-token index, and
+BuildColumn resolves through a memoizing `Resolver`. Same-box benchmarks
+(synthetic zipf corpus, `bench_test.go`): Match 16x faster, Resolve 11x,
+worst-case miss 170x, dict param hit 41x, BuildColumn 17.6x (~1.3M rows/s/core
+— the old "100x off drain3" build gap is now ~2-8x). All pinned to the old
+regex semantics by differential tests (`litmatch_test.go`). A drain3-routed
+matcher was built and measured (`contrib/fastmatch`, separate module, root
+stays zero-dep): coverage-identical, but it loses to the new core on
+realistic manifests (162ns vs 408ns/line) and only wins pathological
+first-token skew — kept as a measured escape hatch, not wired in.
 
 **Size attribution** (`column_breakdown_test.go`): ~half the healthy-traffic
 column is the rowID sequence (the log itself, ~1.3 bits/row — irreducible
@@ -97,8 +105,10 @@ go run ./contrib/colbench merged.json corpus.txt dicts/*.json   # sizes + round-
 
 ## Open threads, ranked
 
-1. **tc02 speed**: param memoization + boundary-token index for suffix dicts
-   (build is 100x off drain3; bytes already win).
+1. ~~**tc02 speed**: param memoization + boundary-token index for suffix dicts~~
+   — DONE (decisions #55-56: 17.6x on BuildColumn; drain3 router measured and
+   rejected as default, see `contrib/fastmatch`). Remaining speed lever if
+   ever needed: re-measure on the real corpora via colbench.
 2. **Typed leaf buckets**: ip:port/durations/timestamps as binary+delta — the
    incident corpus's single biggest bucket (53.7 KB of 153.6) is ip:port text.
 3. **Signature dedup**: hoist repeated cascade subID chains into the table

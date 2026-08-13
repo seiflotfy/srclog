@@ -30,20 +30,24 @@ func Resolve(primary, dict *Matcher, line string) (*Node, bool) {
 	if dict != nil && !dict.suffix {
 		dict = nil
 	}
+	return resolve(nil, primary, dict, line)
+}
+
+func resolve(r *Resolver, primary, dict *Matcher, line string) (*Node, bool) {
 	if m, ok := primary.Match(line); ok {
-		return node(dict, m, maxCascadeDepth), true
+		return node(r, dict, m, maxCascadeDepth), true
 	}
 	// Bare-printed errors (log.Error(err)) have no source template but often
 	// end in a well-known service error.
 	if dict != nil {
 		if m, ok := dict.Match(line); ok {
-			return node(dict, m, maxCascadeDepth), true
+			return node(r, dict, m, maxCascadeDepth), true
 		}
 	}
 	return nil, false
 }
 
-func node(dict *Matcher, m *Match, depth int) *Node {
+func node(r *Resolver, dict *Matcher, m *Match, depth int) *Node {
 	n := &Node{
 		ID:       m.Template.ID,
 		Level:    m.Template.Level,
@@ -59,9 +63,13 @@ func node(dict *Matcher, m *Match, depth int) *Node {
 			// start-or-": " boundary. Trim left for matching, but keep the
 			// trimmed whitespace in the child's prefix — nodes stay lossless.
 			trimmed := strings.TrimLeft(p, " \t")
-			if dm, ok := dict.Match(trimmed); ok {
-				child := node(dict, dm, depth-1)
-				child.Prefix = p[:len(p)-len(trimmed)] + child.Prefix
+			if child, ok := resolveParam(r, dict, trimmed, depth); ok {
+				if ws := p[:len(p)-len(trimmed)]; ws != "" {
+					// Cached children are shared; clone before touching Prefix.
+					c2 := *child
+					c2.Prefix = ws + c2.Prefix
+					child = &c2
+				}
 				n.Params = append(n.Params, child)
 				continue
 			}
@@ -69,4 +77,73 @@ func node(dict *Matcher, m *Match, depth int) *Node {
 		n.Params = append(n.Params, p)
 	}
 	return n
+}
+
+// resolveParam matches one left-trimmed param against the dictionary,
+// memoizing top-level results (hits and misses — the miss is the expensive
+// scan) in the Resolver when one is present. Cached nodes are shared;
+// callers clone before mutating.
+func resolveParam(r *Resolver, dict *Matcher, trimmed string, depth int) (*Node, bool) {
+	memo := r != nil && depth == maxCascadeDepth
+	if memo {
+		if child, ok := r.params[trimmed]; ok {
+			return child, child != nil
+		}
+	}
+	var child *Node
+	if dm, ok := dict.Match(trimmed); ok {
+		child = node(r, dict, dm, depth-1)
+	}
+	if memo {
+		if len(r.params) >= resolverCacheMax {
+			r.params = map[string]*Node{}
+		}
+		r.params[trimmed] = child
+	}
+	return child, child != nil
+}
+
+// resolverCacheMax bounds each memo map. On overflow the map is dropped
+// wholesale — the hot set rebuilds immediately and the behavior stays
+// deterministic.
+const resolverCacheMax = 1 << 16
+
+// Resolver is Resolve with memoization: full lines and top-level params
+// each get a bounded cache, which pays off exactly where real traffic
+// repeats — duplicate lines inside a block, and params (enum values, IPs,
+// error strings) that recur across rows.
+//
+// Returned nodes are shared between calls and must be treated as immutable.
+// A Resolver is not safe for concurrent use; give each goroutine its own.
+type Resolver struct {
+	primary, dict *Matcher
+	lines         map[string]*Node // nil value = cached miss
+	params        map[string]*Node // nil value = cached miss
+}
+
+// NewResolver wraps primary and dict (same contract as Resolve: dict must be
+// suffix-anchored or nil) with fresh caches.
+func NewResolver(primary, dict *Matcher) *Resolver {
+	if dict != nil && !dict.suffix {
+		dict = nil
+	}
+	return &Resolver{
+		primary: primary, dict: dict,
+		lines: map[string]*Node{}, params: map[string]*Node{},
+	}
+}
+
+// Resolve is equivalent to the package-level Resolve over the wrapped
+// matchers. The returned node is shared with other calls that saw the same
+// line — treat it as immutable.
+func (r *Resolver) Resolve(line string) (*Node, bool) {
+	if n, ok := r.lines[line]; ok {
+		return n, n != nil
+	}
+	n, _ := resolve(r, r.primary, r.dict, line)
+	if len(r.lines) >= resolverCacheMax {
+		r.lines = map[string]*Node{}
+	}
+	r.lines[line] = n
+	return n, n != nil
 }
