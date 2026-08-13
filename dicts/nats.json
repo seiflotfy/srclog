@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "module": "dict/nats",
+  "anchor": "suffix",
+  "stats": {},
+  "templates": [
+    {"id": "nats-timeout", "lib": "nats", "template": "nats: timeout"},
+    {"id": "nats-no-responders", "lib": "nats", "template": "nats: no responders available for request"},
+    {"id": "nats-closed", "lib": "nats", "template": "nats: connection closed"},
+    {"id": "nats-any", "lib": "nats", "template": "nats: <*>"}
+  ]
+}

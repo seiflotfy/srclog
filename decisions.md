@@ -111,3 +111,36 @@ ceilings, on record and deliberate: Extract aborts on unreadable directories (cl
 signaled), ParseFile reads are unbounded (conventional for Go tooling), no fsync before
 the manifest rename (CI artifact, not a database), serialized `regex` JSON field has no
 in-repo consumer (kept for non-Go matchers; delete in v2 if none materializes).
+
+## 2026-08-13 — v2: service dictionaries + cascade matching
+
+22. **A service dictionary is just a manifest** with `"anchor": "suffix"`. Same format,
+    same Matcher, same NewMatcher — no second engine. Merged dictionaries (`-d` flags)
+    become one suffix matcher.
+
+23. **Suffix semantics: `(?:^|: )template$`.** Go's wrapping convention ("prefix: cause")
+    means service errors are suffixes of params; the start-or-`": "` boundary lets
+    `pq: <*>` fire mid-chain while keeping `EOF` from matching `fooEOF`. In suffix mode
+    everything is a regex (exact-map shortcuts don't apply mid-string; dictionaries are
+    small).
+
+24. **Cascade via `Resolve(primary, dict, line)`**: params of a match — and whole lines
+    that match no source template (the bare `log.Error(err)` case) — recurse through
+    the dictionary, depth-capped at 4. Params trim leading space first (Sprint-style
+    `msg<*>` templates capture the joining space — found in field test, would silently
+    break the boundary). Output is a nested Node; a param is a string or a sub-Node.
+
+25. **`go.mod` is the service list, not a curated registry.** New `srclog errors` mode
+    harvests error-construction sites (fmt.Errorf, errors.New/Wrap/Wrapf/Errorf,
+    status.Error/Errorf) into a suffix dictionary — point it at vendor/ or a module
+    checkout (lib/pq@v1.10.9 → 77 real templates). Curation is only for messages born
+    outside Go: `dicts/` ships ~60 stable entries (stdlib net/os/context/io/sql/json/
+    tls/http + postgres, mysql, redis, grpc, kafka, nats, aws). Framing entries
+    (`pq: <*>`, `ERR <*>`, `rpc error: … desc = <*>`) sort last by literal length, so
+    specific entries always win; readable hand-assigned IDs (pg-deadlock) for curated
+    entries, hashes for extracted ones.
+
+26. **Deferred, deliberately:** the mining feedback loop (drain3 over accumulated
+    unmatched params, promoted with `mined` provenance) and full error-chain
+    decomposition via own-repo `fmt.Errorf` wrap prefixes — `srclog errors` on your own
+    source already produces that dictionary if wanted.

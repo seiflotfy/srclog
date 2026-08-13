@@ -29,14 +29,30 @@ type fuzzyTemplate struct {
 
 // NewMatcher compiles a manifest into a matcher. Patterns are derived from
 // each Template string — the manifest's stored regex is for non-Go consumers
-// and is never trusted or read here.
+// and is never trusted or read here. The manifest's Anchor field selects
+// whole-line or suffix (dictionary) semantics.
 func NewMatcher(m *Manifest) (*Matcher, error) {
+	suffix := false
+	switch m.Anchor {
+	case "", "line":
+	case "suffix":
+		suffix = true
+	default:
+		return nil, fmt.Errorf("manifest: unknown anchor %q", m.Anchor)
+	}
 	mt := &Matcher{exact: make(map[string]*Template)}
 	for i, t := range m.Templates {
 		if t == nil {
 			return nil, fmt.Errorf("manifest: null template at index %d", i)
 		}
-		pattern := regexFor(t.Template)
+		var pattern string
+		if suffix {
+			// Exact-map shortcuts don't apply mid-string; every dictionary
+			// entry is a regex. Dictionaries are small, so this is fine.
+			pattern = regexForSuffix(t.Template)
+		} else {
+			pattern = regexFor(t.Template)
+		}
 		if pattern == "" {
 			mt.exact[t.Template] = t
 			continue

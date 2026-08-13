@@ -27,9 +27,9 @@ type Template struct {
 	// non-Go consumers of the manifest; the Go Matcher derives its own
 	// patterns from Template and ignores this field.
 	Regex     string     `json:"regex,omitempty"`
-	Level     string     `json:"level"`
+	Level     string     `json:"level,omitempty"`
 	Lib       string     `json:"lib,omitempty"`
-	Locations []Location `json:"locations"`
+	Locations []Location `json:"locations,omitempty"`
 }
 
 // Stats summarizes an extraction run.
@@ -41,10 +41,16 @@ type Stats struct {
 }
 
 // Manifest is the artifact produced by extraction and consumed by matchers.
+//
+// Anchor selects the matching semantics: "" or "line" matches whole lines
+// (^...$); "suffix" matches error dictionaries — the template must end the
+// string and start either at its beginning or after ": ", Go's error-wrapping
+// boundary, so "pq: <*>" fires inside "handler: load user 42: pq: ...".
 type Manifest struct {
 	Version   int         `json:"version"`
 	Module    string      `json:"module,omitempty"`
 	Commit    string      `json:"commit,omitempty"`
+	Anchor    string      `json:"anchor,omitempty"`
 	Stats     Stats       `json:"stats"`
 	Templates []*Template `json:"templates"`
 }
@@ -70,15 +76,25 @@ func normalizeFormat(format string) string {
 	})
 }
 
-// regexFor builds the anchored matching pattern for a template, or "" if the
-// template has no placeholders.
+// regexFor builds the whole-line matching pattern for a template, or "" if
+// the template has no placeholders (match by exact string instead).
 func regexFor(template string) string {
 	if !strings.Contains(template, Placeholder) {
 		return ""
 	}
+	return "^" + regexBody(template) + "$"
+}
+
+// regexForSuffix builds the dictionary-entry pattern: anchored at the end,
+// starting at the string start or after ": " (the error-wrapping boundary).
+func regexForSuffix(template string) string {
+	return `(?:^|: )` + regexBody(template) + "$"
+}
+
+func regexBody(template string) string {
 	parts := strings.Split(template, Placeholder)
 	for i := range parts {
 		parts[i] = regexp.QuoteMeta(parts[i])
 	}
-	return "^" + strings.Join(parts, "(.*?)") + "$"
+	return strings.Join(parts, "(.*?)")
 }

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "module": "dict/postgres",
+  "anchor": "suffix",
+  "stats": {},
+  "templates": [
+    {"id": "pg-duplicate-key", "lib": "pq", "template": "pq: duplicate key value violates unique constraint \"<*>\""},
+    {"id": "pg-relation-missing", "lib": "pq", "template": "pq: relation \"<*>\" does not exist"},
+    {"id": "pg-column-missing", "lib": "pq", "template": "pq: column \"<*>\" does not exist"},
+    {"id": "pg-syntax", "lib": "pq", "template": "pq: syntax error at or near \"<*>\""},
+    {"id": "pg-deadlock", "lib": "pq", "template": "pq: deadlock detected"},
+    {"id": "pg-stmt-timeout", "lib": "pq", "template": "pq: canceling statement due to statement timeout"},
+    {"id": "pg-too-many-clients", "lib": "pq", "template": "pq: sorry, too many clients already"},
+    {"id": "pg-auth-failed", "lib": "pq", "template": "pq: password authentication failed for user \"<*>\""},
+    {"id": "pg-db-missing", "lib": "pq", "template": "pq: database \"<*>\" does not exist"},
+    {"id": "pg-tx-aborted", "lib": "pq", "template": "pq: current transaction is aborted, commands ignored until end of transaction block"},
+    {"id": "pgx-sqlstate", "lib": "pgx", "template": "ERROR: <*> (SQLSTATE <*>)"},
+    {"id": "pg-any", "lib": "pq", "template": "pq: <*>"}
+  ]
+}

@@ -22,7 +22,9 @@ func main() {
 	var err error
 	switch os.Args[1] {
 	case "extract":
-		err = runExtract(os.Args[2:])
+		err = runExtract(os.Args[2:], srclog.Extract)
+	case "errors":
+		err = runExtract(os.Args[2:], srclog.ExtractErrors)
 	case "match":
 		err = runMatch(os.Args[2:])
 	default:
@@ -36,13 +38,14 @@ func main() {
 
 func usage() {
 	fmt.Fprint(os.Stderr, `usage:
-  srclog extract [-o manifest.json] [-commit sha] [dir]
-  srclog match -t manifest.json [file]   (reads stdin without a file)
+  srclog extract [-o manifest.json] [-commit sha] [dir]     log templates from source
+  srclog errors  [-o manifest.json] [-commit sha] [dir]     error-string dictionary from source (point at vendor/)
+  srclog match -t manifest.json [-d dict.json ...] [file]   reads stdin without a file
 `)
 	os.Exit(2)
 }
 
-func runExtract(args []string) error {
+func runExtract(args []string, extract func(string) (*srclog.Manifest, error)) error {
 	fs := flag.NewFlagSet("extract", flag.ExitOnError)
 	out := fs.String("o", "srclog-templates.json", `output path ("-" for stdout)`)
 	commit := fs.String("commit", "", "commit sha to stamp (default: $GITHUB_SHA or git HEAD)")
@@ -52,7 +55,7 @@ func runExtract(args []string) error {
 		dir = fs.Arg(0)
 	}
 
-	m, err := srclog.Extract(dir)
+	m, err := extract(dir)
 	if err != nil {
 		return err
 	}
@@ -97,6 +100,11 @@ func resolveCommit(flagVal, dir string) string {
 func runMatch(args []string) error {
 	fs := flag.NewFlagSet("match", flag.ExitOnError)
 	manifestPath := fs.String("t", "", "template manifest (required)")
+	var dictPaths []string
+	fs.Func("d", "suffix dictionary manifest (repeatable)", func(p string) error {
+		dictPaths = append(dictPaths, p)
+		return nil
+	})
 	fs.Parse(args)
 	if *manifestPath == "" {
 		usage()
@@ -107,6 +115,10 @@ func runMatch(args []string) error {
 		return err
 	}
 	matcher, err := srclog.NewMatcher(manifest)
+	if err != nil {
+		return err
+	}
+	dict, err := loadDicts(dictPaths)
 	if err != nil {
 		return err
 	}
@@ -121,13 +133,6 @@ func runMatch(args []string) error {
 		in = f
 	}
 
-	type result struct {
-		ID       string   `json:"id,omitempty"`
-		Level    string   `json:"level,omitempty"`
-		Template string   `json:"template,omitempty"`
-		Params   []string `json:"params,omitempty"`
-		Line     string   `json:"line,omitempty"`
-	}
 	enc := json.NewEncoder(os.Stdout)
 	matched, total := 0, 0
 	r := bufio.NewReaderSize(in, 64*1024)
@@ -140,11 +145,13 @@ func runMatch(args []string) error {
 			total++
 			// Never match a truncated line: anchored patterns could pair the
 			// visible prefix with the wrong template.
-			res := result{Line: line}
+			var res any = struct {
+				Line string `json:"line"`
+			}{line}
 			if !truncated {
-				if m, ok := matcher.Match(line); ok {
+				if n, ok := srclog.Resolve(matcher, dict, line); ok {
 					matched++
-					res = result{ID: m.Template.ID, Level: m.Template.Level, Template: m.Template.Template, Params: m.Params}
+					res = n
 				}
 			}
 			if err := enc.Encode(res); err != nil {
@@ -157,6 +164,25 @@ func runMatch(args []string) error {
 	}
 	fmt.Fprintf(os.Stderr, "srclog: matched %d/%d lines\n", matched, total)
 	return nil
+}
+
+// loadDicts merges suffix-dictionary manifests into one matcher, nil if none.
+func loadDicts(paths []string) (*srclog.Matcher, error) {
+	if len(paths) == 0 {
+		return nil, nil
+	}
+	merged := &srclog.Manifest{Version: 1, Anchor: "suffix"}
+	for _, p := range paths {
+		m, err := srclog.LoadManifest(p)
+		if err != nil {
+			return nil, err
+		}
+		if m.Anchor != "suffix" {
+			return nil, fmt.Errorf("%s: -d requires a suffix-anchored dictionary manifest", p)
+		}
+		merged.Templates = append(merged.Templates, m.Templates...)
+	}
+	return srclog.NewMatcher(merged)
 }
 
 // maxLineBytes caps how much of a single log line is kept; log streams are

@@ -22,7 +22,28 @@ tail -f app.log | srclog match -t srclog-templates.json
 {"id":"7256352f80eb","level":"info","template":"dial <*>: <*>","params":["10.0.0.1:5432","connection refused"]}
 ```
 
-Or as a library: `srclog.Extract(dir)` / `srclog.NewMatcher(manifest)`.
+Or as a library: `srclog.Extract(dir)` / `srclog.NewMatcher(manifest)` /
+`srclog.Resolve(primary, dict, line)`.
+
+### Cascade matching (service error dictionaries)
+
+Params often *end in* a well-known service error (`handler: load user 42: pq: …`).
+Suffix-anchored dictionaries decompose them — and catch bare-printed errors that have
+no source template at all:
+
+```sh
+tail -f app.log | srclog match -t srclog-templates.json -d dicts/stdlib.json -d dicts/postgres.json
+{"id":"a8ace617d749","level":"error","template":"failed to acquire lock<*>",
+ "params":[{"id":"pg-deadlock","lib":"pq","template":"pq: deadlock detected"}]}
+```
+
+`dicts/` ships curated starters (stdlib, postgres, mysql, redis, grpc, kafka, nats,
+aws). For everything else, your `go.mod` is the service list — harvest a dictionary
+from the dependencies you actually use:
+
+```sh
+go mod vendor && srclog errors -o deps-dict.json vendor/
+```
 
 ### GitHub Action
 

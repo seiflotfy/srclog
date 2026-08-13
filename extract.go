@@ -42,9 +42,29 @@ var levelByBase = map[string]string{
 var skipRecv = map[string]bool{"fmt": true, "http": true, "errors": true, "testing": true, "zap": true}
 
 // Extract walks dir for Go files (skipping _test.go, vendor/, testdata/ and
-// dot-dirs), parses them syntax-only, and returns the deduplicated template
-// manifest. Commit is left empty for the caller to fill.
+// dot-dirs), parses them syntax-only, and returns the deduplicated log
+// template manifest. Commit is left empty for the caller to fill.
 func Extract(dir string) (*Manifest, error) {
+	return extractManifest(dir, visitCall)
+}
+
+// ExtractErrors walks dir like Extract but harvests error-construction sites
+// (fmt.Errorf, errors.New/Wrap/Wrapf/Errorf, grpc status.Error/Errorf)
+// instead of log calls, producing a suffix-anchored dictionary manifest.
+// Point it at vendor/ or a module checkout to build a dictionary for the
+// services a repo actually depends on.
+func ExtractErrors(dir string) (*Manifest, error) {
+	m, err := extractManifest(dir, visitErrCall)
+	if err != nil {
+		return nil, err
+	}
+	m.Anchor = "suffix"
+	return m, nil
+}
+
+type visitFunc func(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[string]*Template, stats *Stats)
+
+func extractManifest(dir string, visit visitFunc) (*Manifest, error) {
 	fset := token.NewFileSet()
 	byKey := map[string]*Template{} // level + NUL + template
 	var stats Stats
@@ -81,7 +101,7 @@ func Extract(dir string) (*Manifest, error) {
 			if !ok {
 				return true
 			}
-			visitCall(fset, rel, call, byKey, &stats)
+			visit(fset, rel, call, byKey, &stats)
 			return true
 		})
 		return nil
@@ -193,11 +213,16 @@ func visitCall(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[s
 
 	// A template with no literal text ("%v", "%s %d", ...) is dynamic in all
 	// but name — and its regex would match every line as a catch-all.
-	if strings.TrimSpace(strings.ReplaceAll(tmpl, Placeholder, "")) == "" {
+	if isZeroLiteral(tmpl) {
 		stats.Dynamic++
 		return
 	}
 
+	record(fset, file, call, byKey, level, libGuess(sel, base, kind), tmpl)
+}
+
+// record deduplicates by level+template and stores the call site.
+func record(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[string]*Template, level, lib, tmpl string) {
 	pos := fset.Position(call.Pos())
 	key := level + "\x00" + tmpl
 	if t, ok := byKey[key]; ok {
@@ -209,7 +234,7 @@ func visitCall(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[s
 		Template:  tmpl,
 		Regex:     regexFor(tmpl),
 		Level:     level,
-		Lib:       libGuess(sel, base, kind),
+		Lib:       lib,
 		Locations: []Location{{File: file, Line: pos.Line}},
 	}
 }
@@ -217,6 +242,12 @@ func visitCall(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[s
 func identIs(e ast.Expr, name string) bool {
 	id, ok := e.(*ast.Ident)
 	return ok && id.Name == name
+}
+
+// isZeroLiteral reports whether a template has no literal text left once
+// placeholders are removed.
+func isZeroLiteral(tmpl string) bool {
+	return strings.TrimSpace(strings.ReplaceAll(tmpl, Placeholder, "")) == ""
 }
 
 // stringTemplate folds an expression into a template string. String literals

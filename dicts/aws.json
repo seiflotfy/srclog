@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "module": "dict/aws",
+  "anchor": "suffix",
+  "stats": {},
+  "templates": [
+    {"id": "aws-op-error", "lib": "aws", "template": "operation error <*>: <*>"},
+    {"id": "aws-http-status", "lib": "aws", "template": "https response error StatusCode: <*>, RequestID: <*>, <*>"},
+    {"id": "aws-api-error", "lib": "aws", "template": "api error <*>: <*>"}
+  ]
+}

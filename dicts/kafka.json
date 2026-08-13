@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "module": "dict/kafka",
+  "anchor": "suffix",
+  "stats": {},
+  "templates": [
+    {"id": "kafka-no-brokers", "lib": "kafka", "template": "kafka: client has run out of available brokers to talk to <*>"},
+    {"id": "kafka-not-connected", "lib": "kafka", "template": "kafka: broker not connected"},
+    {"id": "kafka-server", "lib": "kafka", "template": "kafka server: <*>"},
+    {"id": "kafka-any", "lib": "kafka", "template": "kafka: <*>"}
+  ]
+}

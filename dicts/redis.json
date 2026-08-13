@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "module": "dict/redis",
+  "anchor": "suffix",
+  "stats": {},
+  "templates": [
+    {"id": "redis-nil", "lib": "redis", "template": "redis: nil"},
+    {"id": "redis-pool-timeout", "lib": "redis", "template": "redis: connection pool timeout"},
+    {"id": "redis-closed", "lib": "redis", "template": "redis: client is closed"},
+    {"id": "redis-loading", "lib": "redis", "template": "LOADING Redis is loading the dataset in memory"},
+    {"id": "redis-wrongtype", "lib": "redis", "template": "WRONGTYPE Operation against a key holding the wrong kind of value"},
+    {"id": "redis-readonly", "lib": "redis", "template": "READONLY <*>"},
+    {"id": "redis-moved", "lib": "redis", "template": "MOVED <*>"},
+    {"id": "redis-clusterdown", "lib": "redis", "template": "CLUSTERDOWN <*>"},
+    {"id": "redis-oom", "lib": "redis", "template": "OOM <*>"},
+    {"id": "redis-err", "lib": "redis", "template": "ERR <*>"}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "module": "dict/mysql",
+  "anchor": "suffix",
+  "stats": {},
+  "templates": [
+    {"id": "mysql-err-state", "lib": "mysql", "template": "Error <*> (<*>): <*>"},
+    {"id": "mysql-err", "lib": "mysql", "template": "Error <*>: <*>"},
+    {"id": "mysql-invalid-conn", "lib": "mysql", "template": "invalid connection"}
+  ]
+}

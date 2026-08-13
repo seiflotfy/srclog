@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "module": "dict/grpc",
+  "anchor": "suffix",
+  "stats": {},
+  "templates": [
+    {"id": "grpc-status", "lib": "grpc", "template": "rpc error: code = <*> desc = <*>"},
+    {"id": "grpc-conn-error", "lib": "grpc", "template": "connection error: desc = <*>"},
+    {"id": "grpc-transport-closing", "lib": "grpc", "template": "transport is closing"},
+    {"id": "grpc-client-closing", "lib": "grpc", "template": "grpc: the client connection is closing"}
+  ]
+}
