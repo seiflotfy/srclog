@@ -46,7 +46,7 @@ var skipRecv = map[string]bool{"fmt": true, "http": true, "errors": true, "testi
 // dot-dirs), parses them syntax-only, and returns the deduplicated log
 // template manifest. Commit is left empty for the caller to fill.
 func Extract(dir string) (*Manifest, error) {
-	return extractManifest(dir, visitCall)
+	return extractManifest(dir, visitCall, true)
 }
 
 // ExtractErrors walks dir like Extract but harvests error-construction sites
@@ -55,7 +55,7 @@ func Extract(dir string) (*Manifest, error) {
 // Point it at vendor/ or a module checkout to build a dictionary for the
 // services a repo actually depends on.
 func ExtractErrors(dir string) (*Manifest, error) {
-	m, err := extractManifest(dir, visitErrCall)
+	m, err := extractManifest(dir, visitErrCall, false)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,10 @@ func shortModule(module string) string {
 
 type visitFunc func(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[string]*Template, stats *Stats)
 
-func extractManifest(dir string, visit visitFunc) (*Manifest, error) {
+// extractManifest walks dir; Go files go through visit, and when rust is set
+// .rs files go through the tracing-macro scanner (log extraction only —
+// Rust error construction is a future mode).
+func extractManifest(dir string, visit visitFunc, rust bool) (*Manifest, error) {
 	fset := token.NewFileSet()
 	byKey := map[string]*Template{} // level + NUL + template
 	imports := map[string]bool{}
@@ -105,9 +108,23 @@ func extractManifest(dir string, visit visitFunc) (*Manifest, error) {
 				return nil
 			}
 			name := d.Name()
-			if name == "vendor" || name == "testdata" || strings.HasPrefix(name, ".") {
+			if name == "vendor" || name == "testdata" || name == "target" || strings.HasPrefix(name, ".") {
 				return filepath.SkipDir
 			}
+			return nil
+		}
+		if rust && strings.HasSuffix(path, ".rs") {
+			data, rerr := os.ReadFile(path)
+			if rerr != nil {
+				stats.ParseErrors++
+				return nil
+			}
+			stats.Files++
+			rel, rerr := filepath.Rel(dir, path)
+			if rerr != nil {
+				rel = path
+			}
+			scanRust(string(data), rel, byKey, &stats)
 			return nil
 		}
 		if !strings.HasSuffix(path, ".go") || strings.HasSuffix(path, "_test.go") {
@@ -292,10 +309,13 @@ func visitCall(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[s
 
 // record deduplicates by level+template and stores the call site.
 func record(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[string]*Template, level, lib, tmpl string) {
-	pos := fset.Position(call.Pos())
+	recordAt(byKey, level, lib, tmpl, file, fset.Position(call.Pos()).Line)
+}
+
+func recordAt(byKey map[string]*Template, level, lib, tmpl, file string, line int) {
 	key := level + "\x00" + tmpl
 	if t, ok := byKey[key]; ok {
-		t.Locations = append(t.Locations, Location{File: file, Line: pos.Line})
+		t.Locations = append(t.Locations, Location{File: file, Line: line})
 		return
 	}
 	byKey[key] = &Template{
@@ -303,7 +323,7 @@ func record(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[stri
 		Template:  tmpl,
 		Level:     level,
 		Lib:       lib,
-		Locations: []Location{{File: file, Line: pos.Line}},
+		Locations: []Location{{File: file, Line: line}},
 	}
 }
 
