@@ -1,6 +1,9 @@
 package srclog
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestExtract(t *testing.T) {
 	m, err := Extract("testdata/sample")
@@ -41,6 +44,11 @@ func TestExtract(t *testing.T) {
 	}
 	if m.Stats.ParseErrors != 0 {
 		t.Errorf("ParseErrors = %d, want 0", m.Stats.ParseErrors)
+	}
+	// From the fixture's imports: lib/pq → postgres, grpc/status → grpc.
+	wantDicts := []string{"grpc", "postgres", "stdlib"}
+	if !reflect.DeepEqual(m.RecommendedDicts, wantDicts) {
+		t.Errorf("RecommendedDicts = %v, want %v", m.RecommendedDicts, wantDicts)
 	}
 }
 

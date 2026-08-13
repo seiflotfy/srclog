@@ -2,6 +2,11 @@
 // tests, never compiled — imports and identifiers don't need to resolve.
 package sample
 
+import (
+	"github.com/lib/pq"
+	"google.golang.org/grpc/status"
+)
+
 func demo() {
 	// stdlib log
 	log.Printf("dial %s: %v", host, err)

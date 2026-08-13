@@ -52,6 +52,10 @@ type Manifest struct {
 	Anchor    string      `json:"anchor,omitempty"`
 	Stats     Stats       `json:"stats"`
 	Templates []*Template `json:"templates"`
+	// RecommendedDicts names the dictionaries (dicts/<name>.json) implied by
+	// the scanned code's imports — the evidence is the import graph, no build
+	// required. Consumers can auto-load these instead of guessing.
+	RecommendedDicts []string `json:"recommended_dicts,omitempty"`
 	// Aliases maps superseded template IDs to their canonical ID. Used when a
 	// manifest serves as a catalog: entries are append-only, so supersession
 	// is an alias, never an edit — old references keep resolving.

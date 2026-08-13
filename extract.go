@@ -93,6 +93,7 @@ type visitFunc func(fset *token.FileSet, file string, call *ast.CallExpr, byKey 
 func extractManifest(dir string, visit visitFunc) (*Manifest, error) {
 	fset := token.NewFileSet()
 	byKey := map[string]*Template{} // level + NUL + template
+	imports := map[string]bool{}
 	var stats Stats
 
 	err := filepath.WalkDir(dir, func(path string, d fs.DirEntry, err error) error {
@@ -118,6 +119,11 @@ func extractManifest(dir string, visit visitFunc) (*Manifest, error) {
 			return nil
 		}
 		stats.Files++
+		for _, imp := range f.Imports {
+			if p, err := strconv.Unquote(imp.Path.Value); err == nil {
+				imports[p] = true
+			}
+		}
 		rel, rerr := filepath.Rel(dir, path)
 		if rerr != nil {
 			rel = path
@@ -154,11 +160,48 @@ func extractManifest(dir string, visit visitFunc) (*Manifest, error) {
 	})
 
 	return &Manifest{
-		Version:   1,
-		Module:    moduleName(dir),
-		Stats:     stats,
-		Templates: templates,
+		Version:          1,
+		Module:           moduleName(dir),
+		Stats:            stats,
+		Templates:        templates,
+		RecommendedDicts: recommendDicts(imports),
 	}, nil
+}
+
+// dictByImportPrefix maps client-library import prefixes to the shipped
+// dictionary (dicts/<name>.json) that covers their service's errors.
+var dictByImportPrefix = map[string]string{
+	"github.com/lib/pq":              "postgres",
+	"github.com/jackc/pgx":           "postgres",
+	"github.com/redis/go-redis":      "redis",
+	"github.com/go-redis/redis":      "redis",
+	"github.com/go-sql-driver/mysql": "mysql",
+	"google.golang.org/grpc":         "grpc",
+	"github.com/IBM/sarama":          "kafka",
+	"github.com/Shopify/sarama":      "kafka",
+	"github.com/segmentio/kafka-go":  "kafka",
+	"github.com/nats-io/nats.go":     "nats",
+	"github.com/aws/aws-sdk-go":      "aws",
+	"github.com/aws/aws-sdk-go-v2":   "aws",
+}
+
+// recommendDicts derives dictionary names from the import graph the walk
+// already saw. stdlib is always included — every Go program wraps its errors.
+func recommendDicts(imports map[string]bool) []string {
+	set := map[string]bool{"stdlib": true}
+	for imp := range imports {
+		for prefix, dict := range dictByImportPrefix {
+			if imp == prefix || strings.HasPrefix(imp, prefix+"/") {
+				set[dict] = true
+			}
+		}
+	}
+	out := make([]string, 0, len(set))
+	for d := range set {
+		out = append(out, d)
+	}
+	sort.Strings(out)
+	return out
 }
 
 // visitCall recognizes one call expression as a log call site and records its
