@@ -14,6 +14,11 @@ type Match struct {
 	Template *Template
 	// Params holds the text captured by each placeholder, in order.
 	Params []string
+	// Suffix-matcher results only: the unmatched prefix (including its ": "
+	// separator) before the point where the template took over. Keeping it
+	// makes suffix matches lossless.
+	Prefix string
+	Suffix bool
 }
 
 // Matcher matches log lines against a manifest's templates.
@@ -135,6 +140,10 @@ func (m *Matcher) Match(line string) (*Match, bool) {
 			f, j = m.rest[j], j+1
 		}
 		if sub := f.re.FindStringSubmatch(line); sub != nil {
+			if m.suffix {
+				// group 1 is the lossless prefix; params follow
+				return &Match{Template: f.t, Params: sub[2:], Prefix: sub[1], Suffix: true}, true
+			}
 			return &Match{Template: f.t, Params: sub[1:]}, true
 		}
 	}

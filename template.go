@@ -94,8 +94,10 @@ func regexFor(template string) string {
 
 // regexForSuffix builds the dictionary-entry pattern: anchored at the end,
 // starting at the string start or after ": " (the error-wrapping boundary).
+// Group 1 captures the unmatched prefix including its ": " separator, so a
+// suffix match is lossless — reconstruction is prefix + rendered template.
 func regexForSuffix(template string) string {
-	return `(?:^|: )` + regexBody(template) + "$"
+	return `^((?:.*?: )??)` + regexBody(template) + "$"
 }
 
 func regexBody(template string) string {

@@ -13,7 +13,13 @@ type Node struct {
 	Level    string `json:"level,omitempty"`
 	Lib      string `json:"lib,omitempty"`
 	Template string `json:"template"`
-	Params   []any  `json:"params,omitempty"`
+	// Prefix is the unmatched text (with its ": " separator) before a
+	// suffix-dictionary match took over; Suffix marks dictionary nodes.
+	// Together they make every node lossless: original = Prefix + rendered
+	// template.
+	Prefix string `json:"prefix,omitempty"`
+	Suffix bool   `json:"suffix,omitempty"`
+	Params []any  `json:"params,omitempty"`
 }
 
 // Resolve matches line against primary (whole-line templates) and cascades
@@ -43,14 +49,20 @@ func node(dict *Matcher, m *Match, depth int) *Node {
 		Level:    m.Template.Level,
 		Lib:      m.Template.Lib,
 		Template: m.Template.Template,
+		Prefix:   m.Prefix,
+		Suffix:   m.Suffix,
 	}
 	for _, p := range m.Params {
 		if dict != nil && depth > 0 {
 			// Sprint-style templates capture the joining space into the param
 			// ("failed<*>" → " pq: ..."), which would break the dictionary's
-			// start-or-": " boundary. Trim before matching.
-			if dm, ok := dict.Match(strings.TrimSpace(p)); ok {
-				n.Params = append(n.Params, node(dict, dm, depth-1))
+			// start-or-": " boundary. Trim left for matching, but keep the
+			// trimmed whitespace in the child's prefix — nodes stay lossless.
+			trimmed := strings.TrimLeft(p, " \t")
+			if dm, ok := dict.Match(trimmed); ok {
+				child := node(dict, dm, depth-1)
+				child.Prefix = p[:len(p)-len(trimmed)] + child.Prefix
+				n.Params = append(n.Params, child)
 				continue
 			}
 		}
