@@ -353,3 +353,11 @@ open deductions.
     promotion ladder: cascade promotes known errors, mining promotes recurring
     lines, folding promotes block constants, enums promote repeating values —
     params enter embedding space through promotion, never raw.
+
+53. **tc02: slot-bucketed leaves + per-bucket dictionaries.** Leaves group per
+    (template, slot) so similar values sit together; low-cardinality buckets
+    dictionary-encode (the enum work made the win predictable: grpc codes over 18k
+    rows become 1-byte indices). Empty suffix prefixes collapse into a one-entry
+    dict. zstd-9 verified: prod 1.99x vs stringv1 (was 1.91x), incident 1.77x
+    (was 1.37x). Remaining ~6% gap to shapes-best is block-constant folding,
+    the known next lever.
