@@ -322,3 +322,22 @@ open deductions.
     levels — 1.35x at zstd-3, 1.06x at zstd-19 — and the ID column alone is
     17–23KB where messages are 2.5MB. Prod's greater diversity favors the
     encoding vs the staging sample (1.13x/1.00x).
+
+## 2026-08-13 — tc01 templated column
+
+50. **tc01 column codec (column.go), inspired by dense-ID template codecs but
+    srclog-native**: per-row dense template codes, recursive sub-template codes for
+    cascaded params, leaf-only strings, in-block template table (blocks self-decode;
+    catalog IDs carry cross-block identity), pre-order streams with positions derived
+    at read time, uvarint wire. Measured on real corpora at zstd-9, byte-exact
+    round-trip verified on all 200k rows: prod 1.46x smaller than raw+zstd9
+    (34.0KB vs 49.6KB), incident corpus 1.13x; build ~240k rows/s/core with
+    matching, decode 100k rows in 12ms.
+
+51. **Suffix matches are now lossless — the accepted ceiling became a bug.** The
+    column's round-trip verification caught what match-as-metadata tolerated: a
+    suffix dictionary match at top level (or mid-cascade) silently dropped the
+    unmatched prefix (Pike's unscored v2 note, decision #29's accepted note —
+    superseded). Suffix patterns capture the prefix as group 1, Node carries
+    Prefix/Suffix, the param cascade left-trims reversibly, and suffix table
+    entries store a prefix leaf. Codecs make honesty mandatory.
