@@ -18,8 +18,12 @@ type Node struct {
 
 // Resolve matches line against primary (whole-line templates) and cascades
 // every captured param — and, when the line itself is unmatched, the whole
-// line — through dict (a suffix-anchored dictionary matcher). dict may be nil.
+// line — through dict, which must be suffix-anchored. A nil or non-suffix
+// dict disables the cascade rather than misclassifying with line semantics.
 func Resolve(primary, dict *Matcher, line string) (*Node, bool) {
+	if dict != nil && !dict.suffix {
+		dict = nil
+	}
 	if m, ok := primary.Match(line); ok {
 		return node(dict, m, maxCascadeDepth), true
 	}

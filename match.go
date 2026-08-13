@@ -18,8 +18,9 @@ type Match struct {
 
 // Matcher matches log lines against a manifest's templates.
 type Matcher struct {
-	exact map[string]*Template
-	fuzzy []fuzzyTemplate
+	exact  map[string]*Template
+	fuzzy  []fuzzyTemplate
+	suffix bool // dictionary (suffix-anchored) semantics
 }
 
 type fuzzyTemplate struct {
@@ -34,16 +35,22 @@ type fuzzyTemplate struct {
 func NewMatcher(m *Manifest) (*Matcher, error) {
 	suffix := false
 	switch m.Anchor {
-	case "", "line":
+	case "":
 	case "suffix":
 		suffix = true
 	default:
 		return nil, fmt.Errorf("manifest: unknown anchor %q", m.Anchor)
 	}
-	mt := &Matcher{exact: make(map[string]*Template)}
+	mt := &Matcher{exact: make(map[string]*Template), suffix: suffix}
 	for i, t := range m.Templates {
 		if t == nil {
 			return nil, fmt.Errorf("manifest: null template at index %d", i)
+		}
+		// A template with no literal text compiles to a match-everything
+		// pattern — a silent catch-all classifier. The extractors never emit
+		// one, but manifests are external input.
+		if isZeroLiteral(t.Template) {
+			return nil, fmt.Errorf("template %s: no literal text (would match everything)", t.ID)
 		}
 		var pattern string
 		if suffix {

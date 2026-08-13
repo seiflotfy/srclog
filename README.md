@@ -78,13 +78,16 @@ Printf verbs normalize to `<*>`; string concatenation folds (`"boot "+version` �
   "templates": [{
     "id": "7256352f80eb",
     "template": "dial <*>: <*>",
-    "regex": "^dial (.*?): (.*?)$",
     "level": "info",
     "lib": "log",
     "locations": [{"file": "server/conn.go", "line": 42}]
   }]
 }
 ```
+
+No regex is stored — matchers in any language derive it: QuoteMeta the literal parts,
+join with one capture group per `<*>`, anchor `^...$` (or `(?:^|: )...$` when the
+manifest says `"anchor": "suffix"`).
 
 `id` is stable across commits (hash of level + template), so counts aggregated by ID
 survive redeploys. Manifests are stamped with the commit — merge the manifests of the

@@ -232,7 +232,6 @@ func record(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[stri
 	byKey[key] = &Template{
 		ID:        templateID(level, tmpl),
 		Template:  tmpl,
-		Regex:     regexFor(tmpl),
 		Level:     level,
 		Lib:       lib,
 		Locations: []Location{{File: file, Line: pos.Line}},

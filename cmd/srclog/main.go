@@ -78,7 +78,7 @@ func runExtract(args []string, extract func(string) (*srclog.Manifest, error)) e
 	if err != nil {
 		return err
 	}
-	fmt.Fprintf(os.Stderr, "srclog: %d templates from %d files (%d log calls, %d dynamic, %d parse errors)\n",
+	fmt.Fprintf(os.Stderr, "srclog: %d templates from %d files (%d calls, %d dynamic, %d parse errors)\n",
 		len(m.Templates), m.Stats.Files, m.Stats.Calls, m.Stats.Dynamic, m.Stats.ParseErrors)
 	return nil
 }
@@ -179,6 +179,11 @@ func loadDicts(paths []string) (*srclog.Matcher, error) {
 		}
 		if m.Anchor != "suffix" {
 			return nil, fmt.Errorf("%s: -d requires a suffix-anchored dictionary manifest", p)
+		}
+		// Validate per file so an error names the bad dictionary, not an
+		// index into the merged slice.
+		if _, err := srclog.NewMatcher(m); err != nil {
+			return nil, fmt.Errorf("%s: %w", p, err)
 		}
 		merged.Templates = append(merged.Templates, m.Templates...)
 	}

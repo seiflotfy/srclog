@@ -18,15 +18,14 @@ type Location struct {
 	Line int    `json:"line"`
 }
 
-// Template is one log message template extracted from source.
+// Template is one log message template extracted from source. No regex is
+// stored: matchers (in any language) derive the pattern from Template and the
+// manifest's Anchor — QuoteMeta the literal parts, join with one capture
+// group per placeholder, anchor per the manifest. Storing it was tried and
+// produced manifests whose regex contradicted their anchor.
 type Template struct {
-	ID       string `json:"id"`
-	Template string `json:"template"`
-	// Regex is an anchored pattern with one capture group per placeholder,
-	// empty when the template has none (match by exact string). It exists for
-	// non-Go consumers of the manifest; the Go Matcher derives its own
-	// patterns from Template and ignores this field.
-	Regex     string     `json:"regex,omitempty"`
+	ID        string     `json:"id"`
+	Template  string     `json:"template"`
 	Level     string     `json:"level,omitempty"`
 	Lib       string     `json:"lib,omitempty"`
 	Locations []Location `json:"locations,omitempty"`

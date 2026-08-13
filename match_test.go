@@ -74,6 +74,17 @@ func TestNewMatcherRejectsNullTemplate(t *testing.T) {
 	}
 }
 
+// A template with no literal text would compile to a match-everything
+// pattern; the boundary must reject it in both anchor modes.
+func TestNewMatcherRejectsZeroLiteral(t *testing.T) {
+	for _, anchor := range []string{"", "suffix"} {
+		m := &Manifest{Anchor: anchor, Templates: []*Template{{ID: "x", Template: "<*>"}}}
+		if _, err := NewMatcher(m); err == nil {
+			t.Errorf("anchor %q: NewMatcher accepted a zero-literal template", anchor)
+		}
+	}
+}
+
 func TestLoadManifestVersion(t *testing.T) {
 	path := filepath.Join(t.TempDir(), "m.json")
 

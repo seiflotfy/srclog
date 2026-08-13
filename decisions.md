@@ -144,3 +144,25 @@ in-repo consumer (kept for non-Go matchers; delete in v2 if none materializes).
     unmatched params, promoted with `mined` provenance) and full error-chain
     decomposition via own-repo `fmt.Errorf` wrap prefixes — `srclog errors` on your own
     source already produces that dictionary if wanted.
+
+## 2026-08-13 — v2 review round (robpike 8/10, bradfitz 7/10)
+
+27. **The stored `regex` field is gone.** Both judges caught the same bug from opposite
+    lenses: `srclog errors` stamped `anchor: suffix` on manifests whose per-template
+    regexes were still `^...$` — the field documented "for non-Go consumers" lied to
+    exactly them. Non-Go consumers derive patterns from template + anchor (documented
+    in README); the duplicate representation class of bug is deleted, not patched.
+
+28. **NewMatcher rejects zero-literal templates** (bradfitz): a hand-written
+    `{"template": "<*>"}` dictionary entry compiled to a match-everything pattern and
+    silently classified every unmatched line. The extractor-side guards are now
+    defense-in-depth; the boundary every manifest crosses enforces it.
+
+29. **Matcher knows its own anchor mode** (robpike): `Resolve` disables the cascade for
+    a non-suffix dict instead of misclassifying with line semantics; loadDicts
+    validates per file so errors name the bad dictionary. The unwritten `"line"`
+    anchor alias was dropped.
+
+Accepted note (unscored): the bare-line dictionary fallback drops the unmatched prefix
+before the suffix match from its output — reconstruction needs the input line, which
+the consumer still has. Add a prefix field if a consumer materializes that needs it.
