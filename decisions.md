@@ -303,3 +303,12 @@ open deductions.
     Rust *dependency* crates (tower-http "finished processing request", session
     crates) — the same dependency-scan answer as Go, or the miner catches them
     (it already did: all 34 candidates from the earlier round).
+
+48. **Cascade the misses back to code** (Seif's call): every residual class was
+    traced to its origin instead of shrugged at. Findings: tracing field syntax
+    (name = "value") hid real messages — scanner bug, fixed; tower-http emits via a
+    custom event_dynamic_lvl! macro no static list can enumerate — miner's job;
+    deployed builds are release tags, not HEAD (extract at the image tag's version:
+    k8s container_image → v1.0.53-rc.1 → git archive). Standard event!(Level::X)
+    now supported. Grand total on the staging sample: 99.95% (Go + Rust deployed-tag
+    manifests + dependency scans + 34 mined + curated dicts).
