@@ -228,6 +228,14 @@ standing legacy ceilings already on record above.
     `github.com/nats-io/nats.go` is a scanned library; the trim is why its dictionary
     says `nats`. Review feedback gets verified, not blindly applied.
 
+40b. **Miner bucket cardinality is also capped** (Fitzpatrick's final note): past 4096
+    total clusters, new lines' first tokens fold to Placeholder so crafted unique-
+    first-token streams reuse existing-shape buckets instead of minting fresh ones.
+    Memory is O(4096 clusters), full stop.
+
+Final v3 scores: robpike 9.5/10 (nats.go pushback accepted), bradfitz 8.5/10 — no
+open deductions.
+
 41. **Known tensions, accepted and documented**: (a) Promote's subsumption gate stops
     a more-specific scanned candidate from entering a catalog holding the generic
     shape — while NewMatcher's specificity sort exists to prefer specific entries;

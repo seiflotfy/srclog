@@ -15,6 +15,7 @@ import (
 type Miner struct {
 	clusters map[string][]*cluster // key: tokenCount \x00 firstToken
 	count    int
+	total    int // clusters across all buckets
 }
 
 type cluster struct {
@@ -33,6 +34,11 @@ const simThreshold = 0.5
 // memory beats cluster purity out there.
 const maxClustersPerBucket = 64
 
+// maxTotalClusters bounds bucket cardinality itself: past this, new lines'
+// first tokens fold to Placeholder so they land in existing-shape buckets
+// instead of minting fresh ones. Total memory is O(this), not O(distinct shapes).
+const maxTotalClusters = 4096
+
 func NewMiner() *Miner {
 	return &Miner{clusters: make(map[string][]*cluster)}
 }
@@ -47,7 +53,7 @@ func (mn *Miner) Add(line string) {
 	// First token joins the key only if it looks constant; a leading variable
 	// (an IP, a hash) would otherwise shatter clusters.
 	first := tokens[0]
-	if looksVariable(first) {
+	if looksVariable(first) || mn.total >= maxTotalClusters {
 		first = Placeholder
 	}
 	key := strconv.Itoa(len(tokens)) + "\x00" + first
@@ -60,6 +66,7 @@ func (mn *Miner) Add(line string) {
 	if best == nil || bestSim < simThreshold {
 		if len(mn.clusters[key]) < maxClustersPerBucket {
 			mn.clusters[key] = append(mn.clusters[key], &cluster{tokens: cloneTokens(tokens), seen: 1})
+			mn.total++
 			return
 		}
 		if best == nil {

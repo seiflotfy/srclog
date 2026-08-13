@@ -80,7 +80,7 @@ func shortModule(module string) string {
 			parts = parts[:len(parts)-1]
 			continue
 		}
-		return strings.TrimSuffix(last, ".go")
+		return strings.TrimSuffix(last, ".go") // nats.go-style module names
 	}
 	if len(parts) == 1 {
 		return parts[0]

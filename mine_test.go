@@ -56,6 +56,17 @@ func TestMinerBucketCap(t *testing.T) {
 	}
 }
 
+// Unique constant first tokens must not mint buckets without bound either.
+func TestMinerTotalCap(t *testing.T) {
+	mn := NewMiner()
+	for i := 0; i < maxTotalClusters+2000; i++ {
+		mn.Add("uniq" + strconv.Itoa(i) + "word request failed hard")
+	}
+	if got := len(mn.Candidates(1).Templates); got > maxTotalClusters+maxClustersPerBucket {
+		t.Fatalf("got %d candidates, want <= %d", got, maxTotalClusters+maxClustersPerBucket)
+	}
+}
+
 // A variable first token must not shatter the cluster.
 func TestMinerVariableFirstToken(t *testing.T) {
 	mn := NewMiner()
