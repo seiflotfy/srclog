@@ -361,3 +361,13 @@ open deductions.
     dict. zstd-9 verified: prod 1.99x vs stringv1 (was 1.91x), incident 1.77x
     (was 1.37x). Remaining ~6% gap to shapes-best is block-constant folding,
     the known next lever.
+
+54. **Block-constant folding lands in tc02 — best measured codec on incident
+    traffic.** Two-pass BuildColumn: profile slots, fold single-valued leaf slots
+    into block-specialized template text aliased to the unchanged catalog ID, erase
+    folded slots from every stream. zstd-9 verified: prod 2.10x vs stringv1
+    (30,972), incident 2.02x (153,572 — beats drain3's best knobs and the shapes
+    bridge). The catalog codec now matches or beats pure mining on bytes while
+    keeping stable IDs, nesting, and provenance. Remaining levers on record:
+    typed numeric buckets, signature dedup, cross-block zstd dictionary, row
+    clustering; and build speed (still ~50-240k rows/s vs drain3's 5M).
