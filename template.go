@@ -41,10 +41,10 @@ type Stats struct {
 
 // Manifest is the artifact produced by extraction and consumed by matchers.
 //
-// Anchor selects the matching semantics: "" or "line" matches whole lines
-// (^...$); "suffix" matches error dictionaries — the template must end the
-// string and start either at its beginning or after ": ", Go's error-wrapping
-// boundary, so "pq: <*>" fires inside "handler: load user 42: pq: ...".
+// Anchor selects the matching semantics: "" matches whole lines (^...$);
+// "suffix" matches error dictionaries — the template must end the string and
+// start either at its beginning or after ": ", Go's error-wrapping boundary,
+// so "pq: <*>" fires inside "handler: load user 42: pq: ...".
 type Manifest struct {
 	Version   int         `json:"version"`
 	Module    string      `json:"module,omitempty"`

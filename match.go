@@ -29,9 +29,8 @@ type fuzzyTemplate struct {
 }
 
 // NewMatcher compiles a manifest into a matcher. Patterns are derived from
-// each Template string — the manifest's stored regex is for non-Go consumers
-// and is never trusted or read here. The manifest's Anchor field selects
-// whole-line or suffix (dictionary) semantics.
+// each Template string; the manifest's Anchor field selects whole-line or
+// suffix (dictionary) semantics.
 func NewMatcher(m *Manifest) (*Matcher, error) {
 	suffix := false
 	switch m.Anchor {

@@ -166,3 +166,7 @@ in-repo consumer (kept for non-Go matchers; delete in v2 if none materializes).
 Accepted note (unscored): the bare-line dictionary fallback drops the unmatched prefix
 before the suffix match from its output — reconstruction needs the input line, which
 the consumer still has. Add a prefix field if a consumer materializes that needs it.
+
+Final v2 scores: robpike 9.5/10, bradfitz 9/10 — no open deductions. Both flagged the
+same two stale comment fragments (fixed); bradfitz's residual half-point is the
+standing legacy ceilings already on record above.
