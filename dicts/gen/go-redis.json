@@ -1,0 +1,1398 @@
+{
+  "version": 1,
+  "module": "github.com/redis/go-redis/v9",
+  "commit": "v9.7.0",
+  "anchor": "suffix",
+  "stats": {
+    "files": 60,
+    "calls": 137,
+    "dynamic": 1,
+    "parse_errors": 0
+  },
+  "templates": [
+    {
+      "id": "f763041d0d17",
+      "template": "GeoRadius does not support Store or StoreDist",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "geo_commands.go",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "id": "750a163fa924",
+      "template": "GeoRadiusByMember does not support Store or StoreDist",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "geo_commands.go",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "id": "d52f869ddceb",
+      "template": "GeoRadiusByMemberStore requires Store or StoreDist",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "geo_commands.go",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "id": "6429f96a25f8",
+      "template": "GeoRadiusStore requires Store or StoreDist",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "geo_commands.go",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "id": "add06f682621",
+      "template": "args should have the same number of keys and vals",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/hscan/hscan.go",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "id": "87a1b2f61135",
+      "template": "at least one of LibName and LibVer should be set",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "commands.go",
+          "line": 329
+        }
+      ]
+    },
+    {
+      "id": "2492a8401e59",
+      "template": "bigInt(\u003c*\u003e) value out of range",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 317
+        },
+        {
+          "file": "internal/proto/reader.go",
+          "line": 344
+        }
+      ]
+    },
+    {
+      "id": "88426851471d",
+      "template": "both LibName and LibVer cannot be set at the same time",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "commands.go",
+          "line": 326
+        }
+      ]
+    },
+    {
+      "id": "389aab524685",
+      "template": "cannot scan redis.result \u003c*\u003e into struct field \u003c*\u003e.\u003c*\u003e of type \u003c*\u003e, error-\u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/hscan/structmap.go",
+          "line": 121
+        }
+      ]
+    },
+    {
+      "id": "8ba23e173853",
+      "template": "got \u003c*\u003e elements in cluster info address, expected 2, 3, or 4",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 2907
+        }
+      ]
+    },
+    {
+      "id": "6167f8bd768c",
+      "template": "invalid document ID format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1555
+        }
+      ]
+    },
+    {
+      "id": "b46091a6e251",
+      "template": "invalid document fields format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1597
+        }
+      ]
+    },
+    {
+      "id": "def56fd1f379",
+      "template": "invalid field key format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 605
+        },
+        {
+          "file": "search_commands.go",
+          "line": 1603
+        }
+      ]
+    },
+    {
+      "id": "b2068f7c7810",
+      "template": "invalid field value format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1607
+        }
+      ]
+    },
+    {
+      "id": "1677dd41e4c0",
+      "template": "invalid row format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 598
+        }
+      ]
+    },
+    {
+      "id": "639b078bd125",
+      "template": "invalid score format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1573
+        }
+      ]
+    },
+    {
+      "id": "0d0df9628b68",
+      "template": "invalid suggestion format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1509
+        },
+        {
+          "file": "search_commands.go",
+          "line": 1523
+        }
+      ]
+    },
+    {
+      "id": "bd8de9afd5f1",
+      "template": "invalid suggestion score format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1514
+        }
+      ]
+    },
+    {
+      "id": "5b68492c713e",
+      "template": "invalid suggestion score value",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1518
+        }
+      ]
+    },
+    {
+      "id": "7d63205e148d",
+      "template": "invalid suggestions format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1502
+        }
+      ]
+    },
+    {
+      "id": "09e194744564",
+      "template": "invalid synonym format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1968
+        }
+      ]
+    },
+    {
+      "id": "fe99e18de5e3",
+      "template": "invalid synonyms format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1961
+        }
+      ]
+    },
+    {
+      "id": "2ca069ca0fd4",
+      "template": "invalid term format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1492
+        },
+        {
+          "file": "search_commands.go",
+          "line": 1497
+        },
+        {
+          "file": "search_commands.go",
+          "line": 1956
+        }
+      ]
+    },
+    {
+      "id": "4ef6278f094c",
+      "template": "invalid total format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 591
+        }
+      ]
+    },
+    {
+      "id": "c36c077ccbd3",
+      "template": "invalid total results format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1548
+        }
+      ]
+    },
+    {
+      "id": "5faefb3ead10",
+      "template": "no data returned",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 586
+        }
+      ]
+    },
+    {
+      "id": "8cbbed385ec5",
+      "template": "opt is nil",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "sentinel.go",
+          "line": 494
+        }
+      ]
+    },
+    {
+      "id": "484267feb661",
+      "template": "redis.Scan(non-pointer \u003c*\u003e)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/hscan/hscan.go",
+          "line": 60
+        }
+      ]
+    },
+    {
+      "id": "c26986f31fd1",
+      "template": "redis.Scan(non-struct \u003c*\u003e)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/hscan/hscan.go",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "id": "17dfd283268c",
+      "template": "redis.Scan(unsupported \u003c*\u003e)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/hscan/hscan.go",
+          "line": 206
+        }
+      ]
+    },
+    {
+      "id": "0278edc56ca3",
+      "template": "redis: BLOOM.INFO unexpected key \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "probabilistic.go",
+          "line": 347
+        }
+      ]
+    },
+    {
+      "id": "f5bf078eeed7",
+      "template": "redis: CF.INFO unexpected key \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "probabilistic.go",
+          "line": 651
+        }
+      ]
+    },
+    {
+      "id": "8746a04edb13",
+      "template": "redis: CMS.INFO unexpected key \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "probabilistic.go",
+          "line": 802
+        }
+      ]
+    },
+    {
+      "id": "2ee661676624",
+      "template": "redis: Channel can't be called after ChannelWithSubscriptions",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "pubsub.go",
+          "line": 501
+        }
+      ]
+    },
+    {
+      "id": "9e6e5c7a4dae",
+      "template": "redis: ChannelWithSubscriptions can't be called after Channel",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "pubsub.go",
+          "line": 526
+        }
+      ]
+    },
+    {
+      "id": "aaa648f4e431",
+      "template": "redis: Scan(nil)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/scan.go",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "id": "19b445481e27",
+      "template": "redis: ScanSlice index=\u003c*\u003e value=\u003c*\u003e failed: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/scan.go",
+          "line": 146
+        }
+      ]
+    },
+    {
+      "id": "981cf1e0ef9e",
+      "template": "redis: ScanSlice(nil)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/scan.go",
+          "line": 132
+        }
+      ]
+    },
+    {
+      "id": "0d6a5d1f06ce",
+      "template": "redis: ScanSlice(non-pointer \u003c*\u003e)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/scan.go",
+          "line": 135
+        }
+      ]
+    },
+    {
+      "id": "070b48df8f97",
+      "template": "redis: ScanSlice(non-slice \u003c*\u003e)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/scan.go",
+          "line": 139
+        }
+      ]
+    },
+    {
+      "id": "14dc6a744aa9",
+      "template": "redis: StickyConnPool does not have a Conn",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/pool/pool_sticky.go",
+          "line": 162
+        }
+      ]
+    },
+    {
+      "id": "ab70be23ccde",
+      "template": "redis: StickyConnPool.Close: infinite loop",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/pool/pool_sticky.go",
+          "line": 146
+        }
+      ]
+    },
+    {
+      "id": "b5759e68c040",
+      "template": "redis: StickyConnPool.Get: infinite loop",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/pool/pool_sticky.go",
+          "line": 96
+        }
+      ]
+    },
+    {
+      "id": "7b551e5da527",
+      "template": "redis: Watch requires all keys to be in the same shard",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "ring.go",
+          "line": 812
+        }
+      ]
+    },
+    {
+      "id": "36eb33a52e86",
+      "template": "redis: Watch requires all keys to be in the same slot",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "osscluster.go",
+          "line": 1632
+        }
+      ]
+    },
+    {
+      "id": "ea74a944a0bd",
+      "template": "redis: Watch requires at least one key",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "osscluster.go",
+          "line": 1626
+        },
+        {
+          "file": "ring.go",
+          "line": 789
+        }
+      ]
+    },
+    {
+      "id": "88db8ef7a846",
+      "template": "redis: Watch requires at least one shard",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "ring.go",
+          "line": 806
+        }
+      ]
+    },
+    {
+      "id": "d9f87cc3a39b",
+      "template": "redis: all ring shards are down",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "ring.go",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "id": "561aab1bf847",
+      "template": "redis: all sentinels specified in configuration are unreachable",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "sentinel.go",
+          "line": 574
+        },
+        {
+          "file": "sentinel.go",
+          "line": 647
+        }
+      ]
+    },
+    {
+      "id": "0455ae625314",
+      "template": "redis: can't marshal \u003c*\u003e (implement encoding.BinaryMarshaler)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/writer.go",
+          "line": 144
+        }
+      ]
+    },
+    {
+      "id": "7b40ec30a94e",
+      "template": "redis: can't parse \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 182
+        },
+        {
+          "file": "internal/proto/reader.go",
+          "line": 524
+        }
+      ]
+    },
+    {
+      "id": "d36d0af84cb1",
+      "template": "redis: can't parse array/set/push reply: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 435
+        }
+      ]
+    },
+    {
+      "id": "dbef10f7f8f6",
+      "template": "redis: can't parse bigInt reply: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 213
+        }
+      ]
+    },
+    {
+      "id": "0009d8e529cc",
+      "template": "redis: can't parse bool reply: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 205
+        }
+      ]
+    },
+    {
+      "id": "778d3e4e8b14",
+      "template": "redis: can't parse float reply: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 368
+        }
+      ]
+    },
+    {
+      "id": "4156c81de504",
+      "template": "redis: can't parse int reply: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 321
+        }
+      ]
+    },
+    {
+      "id": "53c47448dd39",
+      "template": "redis: can't parse map reply: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 474
+        }
+      ]
+    },
+    {
+      "id": "18c52d56a88e",
+      "template": "redis: can't parse reply=\u003c*\u003e reading string",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 394
+        }
+      ]
+    },
+    {
+      "id": "85f2fcd9c1a5",
+      "template": "redis: can't parse uint reply: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 348
+        }
+      ]
+    },
+    {
+      "id": "8c9230a35846",
+      "template": "redis: can't parse verbatim string reply: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 237
+        }
+      ]
+    },
+    {
+      "id": "ebaa59375084",
+      "template": "redis: can't unmarshal \u003c*\u003e (consider implementing BinaryUnmarshaler)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/scan.go",
+          "line": 124
+        }
+      ]
+    },
+    {
+      "id": "aba9b279b168",
+      "template": "redis: client is closed",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/pool/pool.go",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "id": "31d537480284",
+      "template": "redis: cluster has no nodes",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "osscluster.go",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "id": "b160a34f5a6a",
+      "template": "redis: connection pool exhausted",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/pool/pool.go",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "id": "bf3370d8dab8",
+      "template": "redis: connection pool timeout",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/pool/pool.go",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "id": "018f25287d6c",
+      "template": "redis: empty unix socket path",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "options.go",
+          "line": 355
+        }
+      ]
+    },
+    {
+      "id": "02450ac245e0",
+      "template": "redis: expected '*', but got line \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "osscluster.go",
+          "line": 1589
+        },
+        {
+          "file": "redis.go",
+          "line": 627
+        }
+      ]
+    },
+    {
+      "id": "9e181aae4a15",
+      "template": "redis: function list unexpected key \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 4150
+        },
+        {
+          "file": "command.go",
+          "line": 4207
+        }
+      ]
+    },
+    {
+      "id": "f88912d9ffc6",
+      "template": "redis: function stats unexpected \u003c*\u003e engine map length",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 4376
+        }
+      ]
+    },
+    {
+      "id": "25c49a26ff53",
+      "template": "redis: function stats unexpected key \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 4313
+        }
+      ]
+    },
+    {
+      "id": "e2a843049a4f",
+      "template": "redis: function stats unexpected running_script key \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 4349
+        }
+      ]
+    },
+    {
+      "id": "5ec6cb4e9f45",
+      "template": "redis: got \u003c*\u003e elements commands reply in slowlog get, expected at least 1",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 3640
+        }
+      ]
+    },
+    {
+      "id": "142309dfb865",
+      "template": "redis: got \u003c*\u003e elements in COMMAND reply, wanted 6/7/10",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 3434
+        }
+      ]
+    },
+    {
+      "id": "d102e4def58e",
+      "template": "redis: got \u003c*\u003e elements in XAutoClaim reply, wanted 2/3",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 1869
+        }
+      ]
+    },
+    {
+      "id": "c8f708926266",
+      "template": "redis: got \u003c*\u003e elements in XAutoClaimJustID reply, wanted 2/3",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 1939
+        }
+      ]
+    },
+    {
+      "id": "4db4e7982b7d",
+      "template": "redis: got \u003c*\u003e elements in cluster info, expected at least 2",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 2885
+        }
+      ]
+    },
+    {
+      "id": "580a95121096",
+      "template": "redis: got \u003c*\u003e elements in slowlog get, expected at least 4",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 3616
+        }
+      ]
+    },
+    {
+      "id": "f272f6476446",
+      "template": "redis: got \u003c*\u003e elements in the array, wanted \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 420
+        }
+      ]
+    },
+    {
+      "id": "9b35bcb543e5",
+      "template": "redis: got \u003c*\u003e elements in the map, wanted \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 446
+        }
+      ]
+    },
+    {
+      "id": "28ac3ebcfb2a",
+      "template": "redis: invalid \u003c*\u003e boolean: expected true/false/1/0 or an empty string, got \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "options.go",
+          "line": 432
+        }
+      ]
+    },
+    {
+      "id": "f60e178b0eb3",
+      "template": "redis: invalid \u003c*\u003e duration: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "options.go",
+          "line": 419
+        }
+      ]
+    },
+    {
+      "id": "ba01563db5e3",
+      "template": "redis: invalid \u003c*\u003e number: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "options.go",
+          "line": 396
+        }
+      ]
+    },
+    {
+      "id": "5f2ef05b084f",
+      "template": "redis: invalid StickyConnPool state: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/pool/pool_sticky.go",
+          "line": 167
+        }
+      ]
+    },
+    {
+      "id": "4ac412bba439",
+      "template": "redis: invalid URL path: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "options.go",
+          "line": 319
+        }
+      ]
+    },
+    {
+      "id": "9c54bf1fc289",
+      "template": "redis: invalid URL scheme: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "options.go",
+          "line": 295
+        },
+        {
+          "file": "osscluster.go",
+          "line": 210
+        }
+      ]
+    },
+    {
+      "id": "40ed6da32dce",
+      "template": "redis: invalid bitcount index",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "bitmap_commands.go",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "id": "a3da27b8c48b",
+      "template": "redis: invalid database number: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "options.go",
+          "line": 316
+        },
+        {
+          "file": "options.go",
+          "line": 458
+        }
+      ]
+    },
+    {
+      "id": "854ddfa77629",
+      "template": "redis: invalid line",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 490
+        }
+      ]
+    },
+    {
+      "id": "565c7a619bca",
+      "template": "redis: invalid reply: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 149
+        },
+        {
+          "file": "internal/proto/reader.go",
+          "line": 534
+        }
+      ]
+    },
+    {
+      "id": "e16df649085e",
+      "template": "redis: please enter the command to be executed",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "pipeline.go",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "id": "2233b8bd5518",
+      "template": "redis: tdigest.info unexpected key \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "probabilistic.go",
+          "line": 1270
+        }
+      ]
+    },
+    {
+      "id": "83f037d106f3",
+      "template": "redis: the length of the array must be a multiple of 2, got: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/proto/reader.go",
+          "line": 470
+        }
+      ]
+    },
+    {
+      "id": "d960d196c8b6",
+      "template": "redis: topk.info unexpected key \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "probabilistic.go",
+          "line": 997
+        }
+      ]
+    },
+    {
+      "id": "25af7a7371d5",
+      "template": "redis: unable to parse addr param: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "osscluster.go",
+          "line": 256
+        }
+      ]
+    },
+    {
+      "id": "2f86a2fb5a07",
+      "template": "redis: unexpected client info data (\u003c*\u003e)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 5141
+        }
+      ]
+    },
+    {
+      "id": "c9b135c2593c",
+      "template": "redis: unexpected client info flags(\u003c*\u003e)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 5208
+        }
+      ]
+    },
+    {
+      "id": "542ec87cd283",
+      "template": "redis: unexpected client info key(\u003c*\u003e)",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 5258
+        }
+      ]
+    },
+    {
+      "id": "73ea6594aebf",
+      "template": "redis: unexpected content \u003c*\u003e in XINFO CONSUMERS reply",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 2044
+        }
+      ]
+    },
+    {
+      "id": "5c33db597099",
+      "template": "redis: unexpected content \u003c*\u003e in XINFO STREAM FULL reply",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 2608
+        }
+      ]
+    },
+    {
+      "id": "b117b2a1fdc9",
+      "template": "redis: unexpected key \u003c*\u003e in ACL LOG reply",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 5366
+        }
+      ]
+    },
+    {
+      "id": "f273a9067edf",
+      "template": "redis: unexpected key \u003c*\u003e in CLUSTER LINKS reply",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 4772
+        }
+      ]
+    },
+    {
+      "id": "07a66d58f050",
+      "template": "redis: unexpected key \u003c*\u003e in CLUSTER SHARDS node reply",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 4917
+        }
+      ]
+    },
+    {
+      "id": "348aaead92e8",
+      "template": "redis: unexpected key \u003c*\u003e in CLUSTER SHARDS reply",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 4926
+        }
+      ]
+    },
+    {
+      "id": "ddebb470bb0e",
+      "template": "redis: unexpected key \u003c*\u003e in XINFO GROUPS reply",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 2155
+        }
+      ]
+    },
+    {
+      "id": "2537b1c9b6d9",
+      "template": "redis: unexpected key \u003c*\u003e in XINFO STREAM FULL reply",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 2418
+        },
+        {
+          "file": "command.go",
+          "line": 2483
+        }
+      ]
+    },
+    {
+      "id": "5795aff6b110",
+      "template": "redis: unexpected key \u003c*\u003e in XINFO STREAM reply",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 2274
+        }
+      ]
+    },
+    {
+      "id": "d19e031c8f71",
+      "template": "redis: unexpected option: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "options.go",
+          "line": 493
+        },
+        {
+          "file": "osscluster.go",
+          "line": 264
+        }
+      ]
+    },
+    {
+      "id": "0dd492b1792d",
+      "template": "redis: unexpected type=\u003c*\u003e for Bool",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 366
+        }
+      ]
+    },
+    {
+      "id": "1e6a1c3080f1",
+      "template": "redis: unexpected type=\u003c*\u003e for Float32",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 326
+        }
+      ]
+    },
+    {
+      "id": "22fa728599ea",
+      "template": "redis: unexpected type=\u003c*\u003e for Float64",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 345
+        }
+      ]
+    },
+    {
+      "id": "dc24dec97661",
+      "template": "redis: unexpected type=\u003c*\u003e for Int",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 265
+        }
+      ]
+    },
+    {
+      "id": "e69a3f261048",
+      "template": "redis: unexpected type=\u003c*\u003e for Int64",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 284
+        }
+      ]
+    },
+    {
+      "id": "f6a8f4ae4a3c",
+      "template": "redis: unexpected type=\u003c*\u003e for Slice",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 379
+        }
+      ]
+    },
+    {
+      "id": "9049fcd2272a",
+      "template": "redis: unexpected type=\u003c*\u003e for String",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 250
+        }
+      ]
+    },
+    {
+      "id": "f8b44e5016bf",
+      "template": "redis: unexpected type=\u003c*\u003e for Uint64",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "command.go",
+          "line": 303
+        }
+      ]
+    },
+    {
+      "id": "6bdd8023e0b4",
+      "template": "redis: unknown message: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "pubsub.go",
+          "line": 473
+        }
+      ]
+    },
+    {
+      "id": "f5bc1b34c441",
+      "template": "redis: unsupported pubsub message payload: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "pubsub.go",
+          "line": 400
+        }
+      ]
+    },
+    {
+      "id": "d882b43e731d",
+      "template": "redis: unsupported pubsub message: \u003c*\u003e",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "pubsub.go",
+          "line": 413
+        },
+        {
+          "file": "pubsub.go",
+          "line": 416
+        }
+      ]
+    },
+    {
+      "id": "f8096a740935",
+      "template": "unexpected read from socket",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "internal/pool/conn_check.go",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "id": "69a58a1352b2",
+      "template": "unexpected search result format",
+      "lib": "go-redis",
+      "locations": [
+        {
+          "file": "search_commands.go",
+          "line": 1543
+        }
+      ]
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 // callKind describes how a recognized call carries its message.
@@ -59,7 +60,32 @@ func ExtractErrors(dir string) (*Manifest, error) {
 		return nil, err
 	}
 	m.Anchor = "suffix"
+	// The constructing package (fmt, errors, status) says nothing about the
+	// service; label entries with the scanned module instead when known.
+	if lib := shortModule(m.Module); lib != "" {
+		for _, t := range m.Templates {
+			t.Lib = lib
+		}
+	}
 	return m, nil
+}
+
+// shortModule reduces a module path to a service-ish name:
+// github.com/jackc/pgx/v5 → pgx, github.com/lib/pq → pq.
+func shortModule(module string) string {
+	parts := strings.Split(module, "/")
+	for len(parts) > 1 {
+		last := parts[len(parts)-1]
+		if len(last) > 1 && last[0] == 'v' && strings.TrimLeft(last[1:], "0123456789") == "" {
+			parts = parts[:len(parts)-1]
+			continue
+		}
+		return strings.TrimSuffix(last, ".go")
+	}
+	if len(parts) == 1 {
+		return parts[0]
+	}
+	return ""
 }
 
 type visitFunc func(fset *token.FileSet, file string, call *ast.CallExpr, byKey map[string]*Template, stats *Stats)
@@ -243,10 +269,21 @@ func identIs(e ast.Expr, name string) bool {
 	return ok && id.Name == name
 }
 
-// isZeroLiteral reports whether a template has no literal text left once
-// placeholders are removed.
+// isZeroLiteral reports whether a template's literal part carries no real
+// information. Whitespace and punctuation alone don't count: "%s: %w" leaves
+// literal ":" and would compile to a near-catch-all like (?:^|: )(.*?): (.*?)$.
+// The bar is at least two letters or digits.
 func isZeroLiteral(tmpl string) bool {
-	return strings.TrimSpace(strings.ReplaceAll(tmpl, Placeholder, "")) == ""
+	alnum := 0
+	for _, r := range strings.ReplaceAll(tmpl, Placeholder, "") {
+		if unicode.IsLetter(r) || unicode.IsDigit(r) {
+			alnum++
+			if alnum >= 2 {
+				return false
+			}
+		}
+	}
+	return true
 }
 
 // stringTemplate folds an expression into a template string. String literals

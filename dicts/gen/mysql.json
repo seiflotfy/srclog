@@ -1,0 +1,720 @@
+{
+  "version": 1,
+  "module": "github.com/go-sql-driver/mysql",
+  "commit": "v1.8.1",
+  "anchor": "suffix",
+  "stats": {
+    "files": 22,
+    "calls": 75,
+    "dynamic": 0,
+    "parse_errors": 0
+  },
+  "templates": [
+    {
+      "id": "e69ee58cad86",
+      "template": "MySQL server does not support required protocol 41+",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "id": "2d68d8dc4fe9",
+      "template": "TLS requested but server does not support TLS",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "id": "89a35d5437e5",
+      "template": "argument count mismatch (got: \u003c*\u003e; has: \u003c*\u003e)",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "packets.go",
+          "line": 966
+        }
+      ]
+    },
+    {
+      "id": "723a8767ce76",
+      "template": "bad connection",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "id": "fc55e9f6e131",
+      "template": "bad value for field: `\u003c*\u003e`",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 121
+        },
+        {
+          "file": "utils.go",
+          "line": 131
+        },
+        {
+          "file": "utils.go",
+          "line": 143
+        },
+        {
+          "file": "utils.go",
+          "line": 151
+        },
+        {
+          "file": "utils.go",
+          "line": 159
+        },
+        {
+          "file": "utils.go",
+          "line": 171
+        }
+      ]
+    },
+    {
+      "id": "6858a89df721",
+      "template": "busy buffer",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "id": "57fb89536f79",
+      "template": "can't convert \u003c*\u003e to time.Time",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "nulltime.go",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "id": "e6c9fda45f4a",
+      "template": "cannot convert type: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "packets.go",
+          "line": 1186
+        }
+      ]
+    },
+    {
+      "id": "0d3b459e6128",
+      "template": "column count mismatch n:\u003c*\u003e len:\u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "packets.go",
+          "line": 683
+        }
+      ]
+    },
+    {
+      "id": "4defde70b46e",
+      "template": "commands out of sync. Did you run multiple statements at once?",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "id": "b2282f37fb10",
+      "template": "commands out of sync. You can't run this command now",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "id": "6ca2bb0721e5",
+      "template": "compression not implemented yet",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 517
+        }
+      ]
+    },
+    {
+      "id": "8f5a21c838b1",
+      "template": "default addr for network '\u003c*\u003e' unknown",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 163
+        }
+      ]
+    },
+    {
+      "id": "6754844f9b54",
+      "template": "illegal \u003c*\u003e length \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 404
+        }
+      ]
+    },
+    {
+      "id": "e11d7f64754e",
+      "template": "illegal \u003c*\u003e packet length \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 413
+        }
+      ]
+    },
+    {
+      "id": "4344c4e5be1d",
+      "template": "illegal TIME length \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 460
+        }
+      ]
+    },
+    {
+      "id": "a95955afc4c5",
+      "template": "invalid DATETIME packet length \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 265
+        }
+      ]
+    },
+    {
+      "id": "3cf498076218",
+      "template": "invalid DSN: did you forget to escape a param value?",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "id": "1922b307cea5",
+      "template": "invalid DSN: interpolateParams can not be used with unsafe collations",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "id": "92d00355c6c0",
+      "template": "invalid DSN: missing the slash separating the database name",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "id": "0c6cd271c4c7",
+      "template": "invalid DSN: network address not terminated (missing closing brace)",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "id": "98be55dd6fbf",
+      "template": "invalid TIME packet length \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 465
+        }
+      ]
+    },
+    {
+      "id": "4574c0b75f6a",
+      "template": "invalid bool value: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 453
+        },
+        {
+          "file": "dsn.go",
+          "line": 461
+        },
+        {
+          "file": "dsn.go",
+          "line": 469
+        },
+        {
+          "file": "dsn.go",
+          "line": 477
+        },
+        {
+          "file": "dsn.go",
+          "line": 485
+        },
+        {
+          "file": "dsn.go",
+          "line": 493
+        },
+        {
+          "file": "dsn.go",
+          "line": 501
+        },
+        {
+          "file": "dsn.go",
+          "line": 512
+        },
+        {
+          "file": "dsn.go",
+          "line": 524
+        },
+        {
+          "file": "dsn.go",
+          "line": 542
+        },
+        {
+          "file": "dsn.go",
+          "line": 550
+        },
+        {
+          "file": "dsn.go",
+          "line": 572
+        }
+      ]
+    },
+    {
+      "id": "3905c10789ce",
+      "template": "invalid connection",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "id": "8e7646ebb378",
+      "template": "invalid connectionAttributes value: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 629
+        }
+      ]
+    },
+    {
+      "id": "08c4c0f91d8b",
+      "template": "invalid dbname \u003c*\u003e: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 420
+        }
+      ]
+    },
+    {
+      "id": "db6a490179cc",
+      "template": "invalid time bytes: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 179
+        }
+      ]
+    },
+    {
+      "id": "64d4e4aabbbe",
+      "template": "invalid timeTruncate value: \u003c*\u003e, error: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 557
+        }
+      ]
+    },
+    {
+      "id": "656f08ea02b4",
+      "template": "invalid value / unknown config name: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 183
+        }
+      ]
+    },
+    {
+      "id": "88d4642cc3db",
+      "template": "invalid value / unknown server pub key name: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 198
+        }
+      ]
+    },
+    {
+      "id": "1868b1bc3774",
+      "template": "invalid value for TLS config name: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 608
+        }
+      ]
+    },
+    {
+      "id": "ff3969867bdc",
+      "template": "invalid value for server pub key name: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "dsn.go",
+          "line": 579
+        }
+      ]
+    },
+    {
+      "id": "d473bfd44101",
+      "template": "key '\u003c*\u003e' is reserved",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "id": "ae4621da3261",
+      "template": "local file '\u003c*\u003e' is not registered",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "infile.go",
+          "line": 145
+        }
+      ]
+    },
+    {
+      "id": "749c2fdc0c1b",
+      "template": "logger is nil",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "id": "7af26b0c6eee",
+      "template": "malformed packet",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "id": "36b4d4c7db80",
+      "template": "mysql: driver does not support the use of Named Parameters",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 823
+        }
+      ]
+    },
+    {
+      "id": "9f91ae35a0c2",
+      "template": "mysql: unsupported isolation level: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 841
+        }
+      ]
+    },
+    {
+      "id": "e9fb8f3c3c7d",
+      "template": "no Pem data found, data: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "auth.go",
+          "line": 463
+        }
+      ]
+    },
+    {
+      "id": "469c369b8b4f",
+      "template": "no pem data found, data: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "auth.go",
+          "line": 432
+        }
+      ]
+    },
+    {
+      "id": "3336411df326",
+      "template": "non-Value type \u003c*\u003e returned from Value",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "statement.go",
+          "line": 163
+        }
+      ]
+    },
+    {
+      "id": "6f830eacf1ac",
+      "template": "not [0-9]",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 225
+        }
+      ]
+    },
+    {
+      "id": "d76ae238c25b",
+      "template": "packet for query is too large. Try adjusting the `Config.MaxAllowedPacket`",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "id": "8de17377ab1f",
+      "template": "protocol error, illegal decimals value \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "packets.go",
+          "line": 1364
+        },
+        {
+          "file": "packets.go",
+          "line": 1383
+        }
+      ]
+    },
+    {
+      "id": "a61c761e928d",
+      "template": "reader '\u003c*\u003e' is \u003cnil\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "infile.go",
+          "line": 119
+        }
+      ]
+    },
+    {
+      "id": "4c85cf46d5cd",
+      "template": "reader '\u003c*\u003e' is not registered",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "infile.go",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "id": "91815157b795",
+      "template": "this authentication plugin is not supported",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "id": "4b34aea95099",
+      "template": "this user requires clear text authentication. If you still want to use it, please add 'allowCleartextPasswords=1' to your DSN",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "id": "e36417c6058c",
+      "template": "this user requires mysql native password authentication",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "id": "1c55958e9ffa",
+      "template": "this user requires old password authentication. If you still want to use it, please add 'allowOldPasswords=1' to your DSN. See also https://github.com/go-sql-driver/mysql/wiki/old_passwords",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "id": "f8096a740935",
+      "template": "unexpected read from socket",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "conncheck.go",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "id": "da2604e80ed9",
+      "template": "unexpected resp from server for caching_sha2_password, perform full authentication",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "auth.go",
+          "line": 426
+        }
+      ]
+    },
+    {
+      "id": "18a7b75b9d08",
+      "template": "unknown collation: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "packets.go",
+          "line": 332
+        }
+      ]
+    },
+    {
+      "id": "b70523d2497f",
+      "template": "unknown field type \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "packets.go",
+          "line": 1401
+        }
+      ]
+    },
+    {
+      "id": "f9a57f1a15e7",
+      "template": "unsupported protocol version \u003c*\u003e. Version \u003c*\u003e or higher is required",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "packets.go",
+          "line": 176
+        }
+      ]
+    },
+    {
+      "id": "1a4d280b5cb9",
+      "template": "unsupported type \u003c*\u003e, a \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "statement.go",
+          "line": 194
+        }
+      ]
+    },
+    {
+      "id": "f67031dcd4d6",
+      "template": "unsupported type \u003c*\u003e, a slice of \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "statement.go",
+          "line": 189
+        }
+      ]
+    },
+    {
+      "id": "8b88767be44d",
+      "template": "year is not in the range [1, 9999]: \u003c*\u003e",
+      "lib": "mysql",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 278
+        }
+      ]
+    }
+  ]
+}

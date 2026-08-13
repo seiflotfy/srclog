@@ -78,9 +78,13 @@ func TestNewMatcherRejectsNullTemplate(t *testing.T) {
 // pattern; the boundary must reject it in both anchor modes.
 func TestNewMatcherRejectsZeroLiteral(t *testing.T) {
 	for _, anchor := range []string{"", "suffix"} {
-		m := &Manifest{Anchor: anchor, Templates: []*Template{{ID: "x", Template: "<*>"}}}
-		if _, err := NewMatcher(m); err == nil {
-			t.Errorf("anchor %q: NewMatcher accepted a zero-literal template", anchor)
+		// "<*>: <*>" leaves literal ":" — no alphanumeric information, still
+		// a near-catch-all (found in the wild via pgx's Errorf("%s: %w", ...)).
+		for _, tmpl := range []string{"<*>", "<*>: <*>"} {
+			m := &Manifest{Anchor: anchor, Templates: []*Template{{ID: "x", Template: tmpl}}}
+			if _, err := NewMatcher(m); err == nil {
+				t.Errorf("anchor %q: NewMatcher accepted zero-literal %q", anchor, tmpl)
+			}
 		}
 	}
 }

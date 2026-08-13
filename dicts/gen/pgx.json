@@ -1,0 +1,5796 @@
+{
+  "version": 1,
+  "module": "github.com/jackc/pgx/v5",
+  "commit": "v5.9.2",
+  "anchor": "suffix",
+  "stats": {
+    "files": 164,
+    "calls": 750,
+    "dynamic": 1,
+    "parse_errors": 0
+  },
+  "templates": [
+    {
+      "id": "0571029c6378",
+      "template": "\u003c*\u003e cannot be encoded to \"char\"",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/qchar.go",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "id": "0c4644e01c1b",
+      "template": "\u003c*\u003e is greater than maximum value for Int2",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 40
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 84
+        },
+        {
+          "file": "pgtype/zeronull/int.go",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "id": "4579251d483c",
+      "template": "\u003c*\u003e is greater than maximum value for Int4",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 603
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 647
+        },
+        {
+          "file": "pgtype/zeronull/int.go",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "id": "d27610e13d88",
+      "template": "\u003c*\u003e is greater than maximum value for Int8",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 1177
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1218
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1221
+        },
+        {
+          "file": "pgtype/zeronull/int.go",
+          "line": 143
+        }
+      ]
+    },
+    {
+      "id": "af17b28f51ae",
+      "template": "\u003c*\u003e is greater than maximum value for Uint32",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/uint32.go",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "id": "ddab8c51e72f",
+      "template": "\u003c*\u003e is greater than maximum value for int",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 117
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1677
+        }
+      ]
+    },
+    {
+      "id": "eb2e4e9a5008",
+      "template": "\u003c*\u003e is greater than maximum value for int16",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 51
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 940
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1514
+        }
+      ]
+    },
+    {
+      "id": "fe073ddfee4d",
+      "template": "\u003c*\u003e is greater than maximum value for int2",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 182
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 204
+        }
+      ]
+    },
+    {
+      "id": "11a4d96b304e",
+      "template": "\u003c*\u003e is greater than maximum value for int32",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 75
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1572
+        }
+      ]
+    },
+    {
+      "id": "75971872655c",
+      "template": "\u003c*\u003e is greater than maximum value for int4",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 745
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 767
+        }
+      ]
+    },
+    {
+      "id": "a7b7f53a4343",
+      "template": "\u003c*\u003e is greater than maximum value for int64",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 221
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 274
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 325
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 361
+        }
+      ]
+    },
+    {
+      "id": "f0189744e4f9",
+      "template": "\u003c*\u003e is greater than maximum value for int8",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 27
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 319
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 882
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1319
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1341
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1456
+        }
+      ]
+    },
+    {
+      "id": "a49976621c0e",
+      "template": "\u003c*\u003e is greater than maximum value for uint",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 264
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1707
+        }
+      ]
+    },
+    {
+      "id": "e0d72976fedb",
+      "template": "\u003c*\u003e is greater than maximum value for uint16",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 166
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 970
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1544
+        }
+      ]
+    },
+    {
+      "id": "7f921a9ec9c1",
+      "template": "\u003c*\u003e is greater than maximum value for uint32",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 190
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1602
+        },
+        {
+          "file": "pgtype/uint32.go",
+          "line": 177
+        },
+        {
+          "file": "pgtype/uint32.go",
+          "line": 221
+        }
+      ]
+    },
+    {
+      "id": "e4802d49d2a2",
+      "template": "\u003c*\u003e is greater than maximum value for uint8",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 142
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 349
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 912
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1486
+        }
+      ]
+    },
+    {
+      "id": "67599444425e",
+      "template": "\u003c*\u003e is less than minimum value for Int2",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 37
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 81
+        },
+        {
+          "file": "pgtype/zeronull/int.go",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "id": "75fea0bccfb4",
+      "template": "\u003c*\u003e is less than minimum value for Int4",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 600
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 644
+        },
+        {
+          "file": "pgtype/zeronull/int.go",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "id": "712c2f82cabd",
+      "template": "\u003c*\u003e is less than minimum value for Int8",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 1174
+        },
+        {
+          "file": "pgtype/zeronull/int.go",
+          "line": 140
+        }
+      ]
+    },
+    {
+      "id": "e5dabe112583",
+      "template": "\u003c*\u003e is less than minimum value for int",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 114
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1675
+        }
+      ]
+    },
+    {
+      "id": "b529e69a1b06",
+      "template": "\u003c*\u003e is less than minimum value for int16",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 48
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 938
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1512
+        }
+      ]
+    },
+    {
+      "id": "3ef7bffecddc",
+      "template": "\u003c*\u003e is less than minimum value for int2",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 185
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 207
+        }
+      ]
+    },
+    {
+      "id": "b7092c0257bc",
+      "template": "\u003c*\u003e is less than minimum value for int32",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 72
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1570
+        }
+      ]
+    },
+    {
+      "id": "bb2987645901",
+      "template": "\u003c*\u003e is less than minimum value for int4",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 748
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 770
+        }
+      ]
+    },
+    {
+      "id": "eb0722749204",
+      "template": "\u003c*\u003e is less than minimum value for int8",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 24
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 317
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 880
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1322
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1344
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1454
+        }
+      ]
+    },
+    {
+      "id": "0ba09fb9fcaf",
+      "template": "\u003c*\u003e is less than minimum value for uint",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 537
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1111
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1703
+        }
+      ]
+    },
+    {
+      "id": "94dc56fd3e37",
+      "template": "\u003c*\u003e is less than minimum value for uint16",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 163
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 396
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 966
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1540
+        }
+      ]
+    },
+    {
+      "id": "b1e2f915a325",
+      "template": "\u003c*\u003e is less than minimum value for uint32",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 187
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 443
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1017
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1598
+        },
+        {
+          "file": "pgtype/uint32.go",
+          "line": 174
+        },
+        {
+          "file": "pgtype/uint32.go",
+          "line": 218
+        }
+      ]
+    },
+    {
+      "id": "479eac73b734",
+      "template": "\u003c*\u003e is less than minimum value for uint64",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 211
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 260
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 490
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1064
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1649
+        },
+        {
+          "file": "pgtype/uint64.go",
+          "line": 151
+        },
+        {
+          "file": "pgtype/uint64.go",
+          "line": 192
+        }
+      ]
+    },
+    {
+      "id": "942aa08b3150",
+      "template": "\u003c*\u003e is less than minimum value for uint8",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 139
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 345
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 908
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1482
+        }
+      ]
+    },
+    {
+      "id": "c0ecb61a2422",
+      "template": "\u003c*\u003e is less than the minimum value for Uint32",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/uint32.go",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "id": "eb0e427d58a6",
+      "template": "\u003c*\u003e is less than the minimum value for Uint64",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/uint64.go",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "id": "174c3f33ec3a",
+      "template": "\u003c*\u003e is not a number",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/numeric.go",
+          "line": 189
+        }
+      ]
+    },
+    {
+      "id": "e1d31c1ec8b1",
+      "template": "\u003c*\u003e is out of range for int64",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/numeric.go",
+          "line": 748
+        }
+      ]
+    },
+    {
+      "id": "fc9d13d96d30",
+      "template": "\u003c*\u003e microseconds cannot be represented as time.Time",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 474
+        }
+      ]
+    },
+    {
+      "id": "1e629e258067",
+      "template": "\u003c*\u003e only has \u003c*\u003e public fields - \u003c*\u003e is out of bounds",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 723
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 741
+        }
+      ]
+    },
+    {
+      "id": "5b1751d955e5",
+      "template": "AfterConnect error: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 169
+        }
+      ]
+    },
+    {
+      "id": "cdee0f659dbf",
+      "template": "Array element OID \u003c*\u003e not registered while loading pgtype \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 189
+        }
+      ]
+    },
+    {
+      "id": "69f5c198aa50",
+      "template": "AuthTypeSCMCreds is unimplemented",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/frontend.go",
+          "line": 435
+        }
+      ]
+    },
+    {
+      "id": "68ea530b6f93",
+      "template": "AuthTypeSSPI is unimplemented",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/frontend.go",
+          "line": 441
+        }
+      ]
+    },
+    {
+      "id": "71a45beaa7da",
+      "template": "BUG: missing statement description or result formats for QueryStatement",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2644
+        }
+      ]
+    },
+    {
+      "id": "6dcc63283893",
+      "template": "BUG: pipelineFlushRequest should not be in request queue",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2552
+        }
+      ]
+    },
+    {
+      "id": "da20a50c85f8",
+      "template": "BUG: unknown pipeline request type",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2554
+        }
+      ]
+    },
+    {
+      "id": "60168d5f6f3c",
+      "template": "Bad startup message last byte. Expected 0, got \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/startup_message.go",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "id": "6f57ea48dee6",
+      "template": "Bad startup message version number. Expected \u003c*\u003e or \u003c*\u003e, got \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/startup_message.go",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "id": "acf615686a08",
+      "template": "Cannot identify server version in \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 248
+        }
+      ]
+    },
+    {
+      "id": "c2f3f1bafd6b",
+      "template": "Domain base type OID \u003c*\u003e was not already registered, needed for \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 206
+        }
+      ]
+    },
+    {
+      "id": "e54f7f9c1690",
+      "template": "EscapeString must be run with client_encoding=UTF8",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 1998
+        }
+      ]
+    },
+    {
+      "id": "daf3184ceb1e",
+      "template": "EscapeString must be run with standard_conforming_strings=on",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 1994
+        }
+      ]
+    },
+    {
+      "id": "774ec08e76bd",
+      "template": "Lower cannot be NULL unless LowerType is Unbounded",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 110
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 126
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 187
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 200
+        }
+      ]
+    },
+    {
+      "id": "c14e28a3297b",
+      "template": "Multirange element OID \u003c*\u003e was not already registered, needed for \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 222
+        }
+      ]
+    },
+    {
+      "id": "06b7bfaa08be",
+      "template": "No type names were supplied.",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 165
+        }
+      ]
+    },
+    {
+      "id": "5edb4c2ca5b5",
+      "template": "OAuth authentication failed: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_oauth.go",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "id": "5ba771d3a4de",
+      "template": "OAuth authentication required but no token provider configured",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_oauth.go",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "id": "abd34b240902",
+      "template": "PlanScan did not find a plan",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/pgtype.go",
+          "line": 1172
+        }
+      ]
+    },
+    {
+      "id": "320aabd02873",
+      "template": "PostgreSQL array has \u003c*\u003e dimensions but slice has \u003c*\u003e dimensions",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 870
+        }
+      ]
+    },
+    {
+      "id": "f444ebd9e75d",
+      "template": "Range element OID \u003c*\u003e was not already registered, needed for \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 215
+        }
+      ]
+    },
+    {
+      "id": "525e3459a5a7",
+      "template": "Received an invalid size for an inet: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/inet.go",
+          "line": 158
+        }
+      ]
+    },
+    {
+      "id": "0614cc25cd1d",
+      "template": "Received an invalid size for an interval: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/interval.go",
+          "line": 188
+        }
+      ]
+    },
+    {
+      "id": "36522d422a04",
+      "template": "Record incomplete \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/composite.go",
+          "line": 296
+        },
+        {
+          "file": "pgtype/composite.go",
+          "line": 322
+        },
+        {
+          "file": "pgtype/composite.go",
+          "line": 376
+        }
+      ]
+    },
+    {
+      "id": "5459c1e79ccf",
+      "template": "Record incomplete rp=\u003c*\u003e src=\u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/composite.go",
+          "line": 333
+        }
+      ]
+    },
+    {
+      "id": "5ce8bdaa5781",
+      "template": "Stmt.Exec deprecated and not implemented",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "stdlib/sql.go",
+          "line": 612
+        }
+      ]
+    },
+    {
+      "id": "305fb58d3353",
+      "template": "Stmt.Query deprecated and not implemented",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "stdlib/sql.go",
+          "line": 620
+        }
+      ]
+    },
+    {
+      "id": "8021f7284aac",
+      "template": "SyncConn: Ping failed while syncing conn: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2088
+        }
+      ]
+    },
+    {
+      "id": "98a42bd04dd3",
+      "template": "SyncConn: conn never synchronized",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2094
+        }
+      ]
+    },
+    {
+      "id": "33c3e6b8c7a7",
+      "template": "Unknown field for composite type \u003c*\u003e:  field \u003c*\u003e (OID \u003c*\u003e) is not already registered.",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 197
+        }
+      ]
+    },
+    {
+      "id": "4a150b9a12ed",
+      "template": "Unknown typtype \u003c*\u003e was found while registering \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 227
+        }
+      ]
+    },
+    {
+      "id": "27f388050187",
+      "template": "Upper cannot be NULL unless UpperType is Unbounded",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 134
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 150
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 208
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 221
+        }
+      ]
+    },
+    {
+      "id": "7921c1e7cc83",
+      "template": "While generating load types query: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 174
+        }
+      ]
+    },
+    {
+      "id": "e470db6662df",
+      "template": "While scanning type information: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 182
+        }
+      ]
+    },
+    {
+      "id": "105c417c99c0",
+      "template": "anyArrayArrayReflect: cannot scan NULL into \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 932
+        }
+      ]
+    },
+    {
+      "id": "7e4fc060bb5e",
+      "template": "anyArrayArrayReflect: cannot scan array with length \u003c*\u003e into \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 940
+        }
+      ]
+    },
+    {
+      "id": "c7cd22b05052",
+      "template": "anyArrayArrayReflect: cannot scan multi-dimensional array into \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 936
+        }
+      ]
+    },
+    {
+      "id": "b0575df3a631",
+      "template": "argument \u003c*\u003e found in sql query but not present in StrictNamedArgs",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "named_args.go",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "id": "4ef4841a730a",
+      "template": "argument \u003c*\u003e of StrictNamedArgs not found in sql query",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "named_args.go",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "id": "f1516fc4e200",
+      "template": "array element OID not registered",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1314
+        }
+      ]
+    },
+    {
+      "id": "eb95166fbab1",
+      "template": "array has too many dimensions: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array.go",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "id": "c0ae2c4b9007",
+      "template": "array header too short for \u003c*\u003e dimensions: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array.go",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "id": "1c7395c81e26",
+      "template": "array header too short: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array.go",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "id": "6c8ca5e6985d",
+      "template": "authType not recognized: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/backend.go",
+          "line": 285
+        }
+      ]
+    },
+    {
+      "id": "c6469508470f",
+      "template": "authentication message too short",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/authentication_gss.go",
+          "line": 19
+        },
+        {
+          "file": "pgproto3/authentication_gss_continue.go",
+          "line": 21
+        },
+        {
+          "file": "pgproto3/authentication_sasl.go",
+          "line": 27
+        },
+        {
+          "file": "pgproto3/authentication_sasl_continue.go",
+          "line": 26
+        },
+        {
+          "file": "pgproto3/authentication_sasl_final.go",
+          "line": 26
+        },
+        {
+          "file": "pgproto3/frontend.go",
+          "line": 423
+        }
+      ]
+    },
+    {
+      "id": "8009176418c4",
+      "template": "bad auth type",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/authentication_cleartext_password.go",
+          "line": 30
+        },
+        {
+          "file": "pgproto3/authentication_gss.go",
+          "line": 25
+        },
+        {
+          "file": "pgproto3/authentication_gss_continue.go",
+          "line": 27
+        },
+        {
+          "file": "pgproto3/authentication_md5_password.go",
+          "line": 32
+        },
+        {
+          "file": "pgproto3/authentication_ok.go",
+          "line": 30
+        },
+        {
+          "file": "pgproto3/authentication_sasl.go",
+          "line": 33
+        },
+        {
+          "file": "pgproto3/authentication_sasl_continue.go",
+          "line": 32
+        },
+        {
+          "file": "pgproto3/authentication_sasl_final.go",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "id": "2d0513c28142",
+      "template": "bad authentication message size",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/authentication_cleartext_password.go",
+          "line": 24
+        },
+        {
+          "file": "pgproto3/authentication_md5_password.go",
+          "line": 26
+        },
+        {
+          "file": "pgproto3/authentication_ok.go",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "id": "210dc813fa57",
+      "template": "bad cancel request code",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/cancel_request.go",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "id": "59c8f69de810",
+      "template": "bad gss encoding request code",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/gss_enc_request.go",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "id": "fd1b2b50af66",
+      "template": "bad interval decimal format: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/interval.go",
+          "line": 264
+        }
+      ]
+    },
+    {
+      "id": "b3339225621e",
+      "template": "bad interval format",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/interval.go",
+          "line": 216
+        },
+        {
+          "file": "pgtype/interval.go",
+          "line": 234
+        }
+      ]
+    },
+    {
+      "id": "86bcb984cacf",
+      "template": "bad interval format: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/interval.go",
+          "line": 227
+        }
+      ]
+    },
+    {
+      "id": "d6b002e415b6",
+      "template": "bad interval hour format: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/interval.go",
+          "line": 245
+        }
+      ]
+    },
+    {
+      "id": "46ee13a07d52",
+      "template": "bad interval minute format: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/interval.go",
+          "line": 250
+        }
+      ]
+    },
+    {
+      "id": "e4ee7f2d6d53",
+      "template": "bad interval second format: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/interval.go",
+          "line": 257
+        }
+      ]
+    },
+    {
+      "id": "ba6f01636a48",
+      "template": "bad ssl request code",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/ssl_request.go",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "id": "d688c6079304",
+      "template": "batch already closed",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "batch.go",
+          "line": 135
+        },
+        {
+          "file": "batch.go",
+          "line": 185
+        },
+        {
+          "file": "batch.go",
+          "line": 297
+        },
+        {
+          "file": "batch.go",
+          "line": 341
+        },
+        {
+          "file": "batch.go",
+          "line": 463
+        },
+        {
+          "file": "batch.go",
+          "line": 471
+        }
+      ]
+    },
+    {
+      "id": "047c6e9dee76",
+      "template": "both \"sslcert\" and \"sslkey\" are required",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 846
+        }
+      ]
+    },
+    {
+      "id": "32f9749e00b8",
+      "template": "cancel request too long",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/cancel_request.go",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "id": "d01e43177978",
+      "template": "cancel request too short",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/cancel_request.go",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "id": "911eaaf95eb1",
+      "template": "cannot convert \u003c*\u003e to Line",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/line.go",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "id": "d12123a816fb",
+      "template": "cannot convert \u003c*\u003e to int64",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/numeric.go",
+          "line": 124
+        }
+      ]
+    },
+    {
+      "id": "8e444167262b",
+      "template": "cannot convert \u003c*\u003e to integer",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/numeric.go",
+          "line": 169
+        }
+      ]
+    },
+    {
+      "id": "ef6e6d0d6316",
+      "template": "cannot convert to sql.Scanner: cannot find registered type for \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/pgtype.go",
+          "line": 2018
+        }
+      ]
+    },
+    {
+      "id": "8b98ff4df4e5",
+      "template": "cannot decode \u003c*\u003e into Time",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/time.go",
+          "line": 218
+        },
+        {
+          "file": "pgtype/time.go",
+          "line": 223
+        },
+        {
+          "file": "pgtype/time.go",
+          "line": 229
+        },
+        {
+          "file": "pgtype/time.go",
+          "line": 235
+        },
+        {
+          "file": "pgtype/time.go",
+          "line": 241
+        },
+        {
+          "file": "pgtype/time.go",
+          "line": 247
+        }
+      ]
+    },
+    {
+      "id": "bbfe54b73255",
+      "template": "cannot encode \u003c*\u003e as element of range",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 118
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 142
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 192
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 213
+        }
+      ]
+    },
+    {
+      "id": "eda20be4dfb6",
+      "template": "cannot find encode plan",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/pgtype.go",
+          "line": 1985
+        }
+      ]
+    },
+    {
+      "id": "4cca22f5d6c7",
+      "template": "cannot find field \u003c*\u003e in returned row",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "rows.go",
+          "line": 692
+        }
+      ]
+    },
+    {
+      "id": "d702682f0618",
+      "template": "cannot get param \u003c*\u003e: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/bind.go",
+          "line": 219
+        }
+      ]
+    },
+    {
+      "id": "9201df0428cf",
+      "template": "cannot losslessly convert \u003c*\u003e to int64",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/float4.go",
+          "line": 256
+        },
+        {
+          "file": "pgtype/float8.go",
+          "line": 294
+        }
+      ]
+    },
+    {
+      "id": "a0c3ade81808",
+      "template": "cannot parse UUID \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/uuid.go",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "id": "9abbdac4111b",
+      "template": "cannot scan -Infinity into *time.Time",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 412
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 434
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 456
+        },
+        {
+          "file": "pgtype/zeronull/timestamp.go",
+          "line": 30
+        },
+        {
+          "file": "pgtype/zeronull/timestamptz.go",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "id": "829657fa98c5",
+      "template": "cannot scan \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/bits.go",
+          "line": 49
+        },
+        {
+          "file": "pgtype/bool.go",
+          "line": 63
+        },
+        {
+          "file": "pgtype/box.go",
+          "line": 50
+        },
+        {
+          "file": "pgtype/circle.go",
+          "line": 51
+        },
+        {
+          "file": "pgtype/date.go",
+          "line": 59
+        },
+        {
+          "file": "pgtype/float4.go",
+          "line": 61
+        },
+        {
+          "file": "pgtype/float8.go",
+          "line": 69
+        },
+        {
+          "file": "pgtype/hstore.go",
+          "line": 48
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 77
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 640
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1214
+        },
+        {
+          "file": "pgtype/interval.go",
+          "line": 59
+        },
+        {
+          "file": "pgtype/line.go",
+          "line": 54
+        },
+        {
+          "file": "pgtype/lseg.go",
+          "line": 50
+        },
+        {
+          "file": "pgtype/numeric.go",
+          "line": 223
+        },
+        {
+          "file": "pgtype/path.go",
+          "line": 51
+        },
+        {
+          "file": "pgtype/point.go",
+          "line": 85
+        },
+        {
+          "file": "pgtype/polygon.go",
+          "line": 50
+        },
+        {
+          "file": "pgtype/text.go",
+          "line": 49
+        },
+        {
+          "file": "pgtype/tid.go",
+          "line": 61
+        },
+        {
+          "file": "pgtype/time.go",
+          "line": 60
+        },
+        {
+          "file": "pgtype/timestamp.go",
+          "line": 60
+        },
+        {
+          "file": "pgtype/timestamptz.go",
+          "line": 67
+        },
+        {
+          "file": "pgtype/tsvector.go",
+          "line": 62
+        },
+        {
+          "file": "pgtype/uint32.go",
+          "line": 58
+        },
+        {
+          "file": "pgtype/uint64.go",
+          "line": 60
+        },
+        {
+          "file": "pgtype/uuid.go",
+          "line": 89
+        }
+      ]
+    },
+    {
+      "id": "d79cfae3d2d5",
+      "template": "cannot scan \u003c*\u003e (OID \u003c*\u003e) in \u003c*\u003e format into \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/pgtype.go",
+          "line": 482
+        }
+      ]
+    },
+    {
+      "id": "dfc869c1f309",
+      "template": "cannot scan \u003c*\u003e into *uint",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 291
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 297
+        }
+      ]
+    },
+    {
+      "id": "b5793b9e460d",
+      "template": "cannot scan \u003c*\u003e into *uint64",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 238
+        }
+      ]
+    },
+    {
+      "id": "4230ee6ceb4f",
+      "template": "cannot scan \u003c*\u003e to *net.IP",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 553
+        }
+      ]
+    },
+    {
+      "id": "7d698be6aef1",
+      "template": "cannot scan \u003c*\u003e to netip.Addr",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 593
+        }
+      ]
+    },
+    {
+      "id": "60a8564db9ec",
+      "template": "cannot scan Infinity into *time.Time",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 410
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 432
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 454
+        },
+        {
+          "file": "pgtype/zeronull/timestamp.go",
+          "line": 28
+        },
+        {
+          "file": "pgtype/zeronull/timestamptz.go",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "id": "d966cc8b3a4d",
+      "template": "cannot scan NULL into *[16]byte",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 659
+        }
+      ]
+    },
+    {
+      "id": "89761e97dc88",
+      "template": "cannot scan NULL into *float32",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 315
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 333
+        }
+      ]
+    },
+    {
+      "id": "8d71b352c799",
+      "template": "cannot scan NULL into *float64",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 351
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 369
+        }
+      ]
+    },
+    {
+      "id": "877fb54a8128",
+      "template": "cannot scan NULL into *int",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 110
+        }
+      ]
+    },
+    {
+      "id": "badb81a1f71d",
+      "template": "cannot scan NULL into *int16",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "id": "b19500ad5eea",
+      "template": "cannot scan NULL into *int32",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 68
+        }
+      ]
+    },
+    {
+      "id": "5c16a59390a0",
+      "template": "cannot scan NULL into *int64",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 92
+        }
+      ]
+    },
+    {
+      "id": "68b2b65ef57b",
+      "template": "cannot scan NULL into *int8",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "id": "d9c57824fe8b",
+      "template": "cannot scan NULL into *net.IPNet",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 520
+        }
+      ]
+    },
+    {
+      "id": "94d7b77ee5a3",
+      "template": "cannot scan NULL into *string",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 387
+        }
+      ]
+    },
+    {
+      "id": "4cc74a6f038e",
+      "template": "cannot scan NULL into *time.Interval",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 504
+        }
+      ]
+    },
+    {
+      "id": "2f56c031321e",
+      "template": "cannot scan NULL into *time.Time",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 402
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 424
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 446
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 468
+        }
+      ]
+    },
+    {
+      "id": "4e36223646ee",
+      "template": "cannot scan NULL into *uint",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 282
+        }
+      ]
+    },
+    {
+      "id": "98645058ee1e",
+      "template": "cannot scan NULL into *uint16",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 159
+        }
+      ]
+    },
+    {
+      "id": "9449dc2ceb70",
+      "template": "cannot scan NULL into *uint32",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 183
+        }
+      ]
+    },
+    {
+      "id": "0e6bcecc3fdf",
+      "template": "cannot scan NULL into *uint64",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 207
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 229
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 256
+        }
+      ]
+    },
+    {
+      "id": "e396772962eb",
+      "template": "cannot scan NULL into *uint8",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 135
+        }
+      ]
+    },
+    {
+      "id": "98ada65c1acb",
+      "template": "cannot scan NULL into \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/bool.go",
+          "line": 248
+        },
+        {
+          "file": "pgtype/bool.go",
+          "line": 269
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 736
+        },
+        {
+          "file": "pgtype/enum_codec.go",
+          "line": 88
+        },
+        {
+          "file": "pgtype/float4.go",
+          "line": 208
+        },
+        {
+          "file": "pgtype/float4.go",
+          "line": 285
+        },
+        {
+          "file": "pgtype/float8.go",
+          "line": 246
+        },
+        {
+          "file": "pgtype/float8.go",
+          "line": 323
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 303
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 331
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 361
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 382
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 408
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 429
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 455
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 476
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 502
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 523
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 866
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 894
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 924
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 952
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 982
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1003
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1029
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1050
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1076
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1097
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1440
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1468
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1498
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1526
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1556
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1584
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1614
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1635
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1661
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1689
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1761
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1782
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1803
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1824
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1845
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1866
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1887
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1908
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1929
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1950
+        },
+        {
+          "file": "pgtype/json.go",
+          "line": 211
+        },
+        {
+          "file": "pgtype/pgtype.go",
+          "line": 411
+        },
+        {
+          "file": "pgtype/qchar.go",
+          "line": 77
+        },
+        {
+          "file": "pgtype/qchar.go",
+          "line": 99
+        },
+        {
+          "file": "pgtype/text.go",
+          "line": 186
+        },
+        {
+          "file": "pgtype/uint32.go",
+          "line": 280
+        },
+        {
+          "file": "pgtype/uint64.go",
+          "line": 251
+        },
+        {
+          "file": "pgtype/xml.go",
+          "line": 171
+        }
+      ]
+    },
+    {
+      "id": "514698021e92",
+      "template": "cannot scan NULL into CompositeFields",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/composite.go",
+          "line": 596
+        }
+      ]
+    },
+    {
+      "id": "bf88802fb6fd",
+      "template": "cannot scan NULL to string",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 627
+        }
+      ]
+    },
+    {
+      "id": "a7d525f738d8",
+      "template": "cannot scan empty string into \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/bool.go",
+          "line": 273
+        },
+        {
+          "file": "pgtype/bool.go",
+          "line": 323
+        }
+      ]
+    },
+    {
+      "id": "4c58768c4d2d",
+      "template": "cannot scan into *pgtype.DriverBytes from QueryRow",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "rows.go",
+          "line": 105
+        }
+      ]
+    },
+    {
+      "id": "12b16e9cfdab",
+      "template": "cannot scan into *uint64: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 234
+        }
+      ]
+    },
+    {
+      "id": "102e5c76e850",
+      "template": "cannot scan into *uint: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 287
+        }
+      ]
+    },
+    {
+      "id": "614d515fecc7",
+      "template": "cannot scan into \u003c*\u003e from range element",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 280
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 292
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 330
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 342
+        }
+      ]
+    },
+    {
+      "id": "a96f6f42a4f3",
+      "template": "cannot scan into \u003c*\u003e from range element: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 285
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 297
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 335
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 347
+        }
+      ]
+    },
+    {
+      "id": "f1cdad5f848d",
+      "template": "cannot scan into non-pointer or nil destinations \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/json.go",
+          "line": 216
+        }
+      ]
+    },
+    {
+      "id": "c985b2ee82ca",
+      "template": "cannot unmarshal \u003c*\u003e to timestamp with layout \u003c*\u003e or \u003c*\u003e (\u003c*\u003e)",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/timestamp.go",
+          "line": 128
+        }
+      ]
+    },
+    {
+      "id": "78453b2199d2",
+      "template": "cannot use QueryExecModeCacheDescribe with disabled description cache",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "id": "21fb9337557b",
+      "template": "cannot use QueryExecModeCacheStatement with disabled statement cache",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 129
+        }
+      ]
+    },
+    {
+      "id": "e5885dbb2443",
+      "template": "channel binding required but channel binding data is not available",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "id": "aeae10eccda8",
+      "template": "channel binding required but failed to get server certificate hash: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "id": "8944a62b4b3a",
+      "template": "channel binding required but server does not support SCRAM-SHA-256-PLUS",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "id": "c572327bd5e9",
+      "template": "commit unexpectedly resulted in rollback",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "tx.go",
+          "line": 90
+        }
+      ]
+    },
+    {
+      "id": "f83406b19739",
+      "template": "composite text format must end with ')'",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/composite.go",
+          "line": 384
+        }
+      ]
+    },
+    {
+      "id": "d5c78b326be5",
+      "template": "composite text format must start with '('",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/composite.go",
+          "line": 380
+        }
+      ]
+    },
+    {
+      "id": "ac2c0e8fdc30",
+      "template": "connection is not read only",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 983
+        }
+      ]
+    },
+    {
+      "id": "8ff986854143",
+      "template": "convert field \u003c*\u003e failed: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "stdlib/sql.go",
+          "line": 882
+        }
+      ]
+    },
+    {
+      "id": "2a4a1d39dbdd",
+      "template": "domain base type OID not registered",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1328
+        }
+      ]
+    },
+    {
+      "id": "bb505e5f87d3",
+      "template": "empty",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/date.go",
+          "line": 368
+        }
+      ]
+    },
+    {
+      "id": "6df29f898ff4",
+      "template": "error generating query response: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/example/pgfortune/server.go",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "id": "c5904cb4944e",
+      "template": "error parsing port (\u003c*\u003e) from lookup: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 219
+        }
+      ]
+    },
+    {
+      "id": "2d204e623118",
+      "template": "error receiving message: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/example/pgfortune/server.go",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "id": "5caec4e9e9ef",
+      "template": "error receiving startup message: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/example/pgfortune/server.go",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "id": "1fde423df1ae",
+      "template": "error sending deny SSL request: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/example/pgfortune/server.go",
+          "line": 92
+        }
+      ]
+    },
+    {
+      "id": "8940677859d2",
+      "template": "error sending ready for query: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/example/pgfortune/server.go",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "id": "247a11e970e1",
+      "template": "error writing query response: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/example/pgfortune/server.go",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "id": "c0c32b62deb8",
+      "template": "expected '\u003c*\u003e' ('\u003c*\u003e'); found '\u003c*\u003e' ('\u003c*\u003e')",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/hstore.go",
+          "line": 310
+        }
+      ]
+    },
+    {
+      "id": "70529cabed37",
+      "template": "expected '\u003c*\u003e' ('\u003c*\u003e'); found end",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/hstore.go",
+          "line": 317
+        }
+      ]
+    },
+    {
+      "id": "e3ad9e0354ab",
+      "template": "expected 2 digits",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/date.go",
+          "line": 356
+        }
+      ]
+    },
+    {
+      "id": "7249278437fd",
+      "template": "expected \u003c*\u003e arguments, got \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 821
+        }
+      ]
+    },
+    {
+      "id": "f8c978024fec",
+      "template": "expected \u003c*\u003e values, got \u003c*\u003e values",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "copy_from.go",
+          "line": 230
+        }
+      ]
+    },
+    {
+      "id": "4aebfe0035d7",
+      "template": "expected AuthenticationGSSContinue message but received unexpected message \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/krb5.go",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "id": "5bfc4ecc4a48",
+      "template": "expected AuthenticationSASLContinue message but received unexpected message \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 126
+        }
+      ]
+    },
+    {
+      "id": "4bd5b6a21f8a",
+      "template": "expected AuthenticationSASLFinal message but received unexpected message \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 141
+        }
+      ]
+    },
+    {
+      "id": "9d9848bd3ed3",
+      "template": "expected digits",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/date.go",
+          "line": 360
+        }
+      ]
+    },
+    {
+      "id": "d3336f6371a6",
+      "template": "expected statement description, got \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1202
+        }
+      ]
+    },
+    {
+      "id": "e846e24a4692",
+      "template": "expected sync, got \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1217
+        }
+      ]
+    },
+    {
+      "id": "41b8ba2e1d78",
+      "template": "extended protocol limited to \u003c*\u003e parameters",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 1269
+        }
+      ]
+    },
+    {
+      "id": "af669592e865",
+      "template": "failed to deallocate cached statement(s): \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1457
+        },
+        {
+          "file": "conn.go",
+          "line": 1462
+        }
+      ]
+    },
+    {
+      "id": "af672f1b8578",
+      "template": "failed to deallocate previously failed statement \u003c*\u003e: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 323
+        }
+      ]
+    },
+    {
+      "id": "bd8498cb613f",
+      "template": "failed to decode sslkey",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 856
+        }
+      ]
+    },
+    {
+      "id": "5c4b9cf8a165",
+      "template": "failed to encode \u003c*\u003e as element of range: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 123
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 147
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 197
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 218
+        }
+      ]
+    },
+    {
+      "id": "c6e25206d631",
+      "template": "failed to encode args[\u003c*\u003e]: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "extended_query_builder.go",
+          "line": 28
+        },
+        {
+          "file": "extended_query_builder.go",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "id": "24c64887e75a",
+      "template": "failed to obtain OAuth token: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_oauth.go",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "id": "47278bfeb8cf",
+      "template": "failed to parse certificate from server: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 821
+        }
+      ]
+    },
+    {
+      "id": "bb85734e9dfd",
+      "template": "failed to read service file: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 705
+        }
+      ]
+    },
+    {
+      "id": "4422048d7235",
+      "template": "failed to remove large object",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "large_objects.go",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "id": "84cb99df89ff",
+      "template": "failed to scan array element \u003c*\u003e: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array_codec.go",
+          "line": 284
+        }
+      ]
+    },
+    {
+      "id": "b65d11a98229",
+      "template": "failed to scan multirange element \u003c*\u003e: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/multirange.go",
+          "line": 243
+        }
+      ]
+    },
+    {
+      "id": "d0d008a3e556",
+      "template": "failed to split host:port in '\u003c*\u003e', err: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 585
+        }
+      ]
+    },
+    {
+      "id": "769ad537fb88",
+      "template": "failed to write to large object",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "large_objects.go",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "id": "aeafa14b902a",
+      "template": "first sql argument must be \u003e 0",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "internal/sanitize/sanitize.go",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "id": "b9aa58f254ba",
+      "template": "found end before closing double-quote ('\"')",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/hstore.go",
+          "line": 341
+        }
+      ]
+    },
+    {
+      "id": "2c8c94020e47",
+      "template": "found end instead of value",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/hstore.go",
+          "line": 419
+        }
+      ]
+    },
+    {
+      "id": "77d699394d51",
+      "template": "got \u003c*\u003e values, but dst struct has only \u003c*\u003e fields",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "rows.go",
+          "line": 589
+        }
+      ]
+    },
+    {
+      "id": "5345b1aa6af9",
+      "template": "gss encoding request too short",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/gss_enc_request.go",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "id": "15ffd31f872a",
+      "template": "hostname resolving error: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 156
+        }
+      ]
+    },
+    {
+      "id": "87fa58020e3a",
+      "template": "hstore incomplete \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/hstore.go",
+          "line": 196
+        },
+        {
+          "file": "pgtype/hstore.go",
+          "line": 211
+        },
+        {
+          "file": "pgtype/hstore.go",
+          "line": 220
+        },
+        {
+          "file": "pgtype/hstore.go",
+          "line": 226
+        }
+      ]
+    },
+    {
+      "id": "38de6c7ba106",
+      "template": "hstore invalid key length: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/hstore.go",
+          "line": 217
+        }
+      ]
+    },
+    {
+      "id": "d898d8f8e8cd",
+      "template": "hstore invalid pair count: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/hstore.go",
+          "line": 202
+        }
+      ]
+    },
+    {
+      "id": "48ab353640e7",
+      "template": "insufficient arguments",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "internal/sanitize/sanitize.go",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "id": "cddfe1d67477",
+      "template": "invalid InfinityModifier: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 414
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 436
+        },
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 458
+        },
+        {
+          "file": "pgtype/zeronull/timestamp.go",
+          "line": 32
+        },
+        {
+          "file": "pgtype/zeronull/timestamptz.go",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "id": "a0779cba5b70",
+      "template": "invalid OAuth error response from server: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_oauth.go",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "id": "8047ceefa6c1",
+      "template": "invalid Part type: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "internal/sanitize/sanitize.go",
+          "line": 97
+        }
+      ]
+    },
+    {
+      "id": "616f503d2192",
+      "template": "invalid SASLInitialResponse",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/sasl_initial_response.go",
+          "line": 29
+        },
+        {
+          "file": "pgproto3/sasl_initial_response.go",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "id": "f125f44667b5",
+      "template": "invalid SCRAM ServerSignature received from server",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 333
+        }
+      ]
+    },
+    {
+      "id": "b4f147989f7c",
+      "template": "invalid SCRAM iteration count received from server: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 284
+        }
+      ]
+    },
+    {
+      "id": "b652881db51c",
+      "template": "invalid SCRAM nonce: did not include server nonce",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 292
+        }
+      ]
+    },
+    {
+      "id": "2b5c6c381518",
+      "template": "invalid SCRAM nonce: did not start with client nonce",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 288
+        }
+      ]
+    },
+    {
+      "id": "13ef2b0279dd",
+      "template": "invalid SCRAM salt received from server: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 279
+        }
+      ]
+    },
+    {
+      "id": "12a8f13a3916",
+      "template": "invalid SCRAM server-final-message received from server",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 327
+        }
+      ]
+    },
+    {
+      "id": "96a5d63b953a",
+      "template": "invalid SCRAM server-first-message received from server: did not include i=",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 265
+        },
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 271
+        }
+      ]
+    },
+    {
+      "id": "fd52327c2041",
+      "template": "invalid SCRAM server-first-message received from server: did not include r=",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 247
+        }
+      ]
+    },
+    {
+      "id": "2deb0c283e74",
+      "template": "invalid SCRAM server-first-message received from server: did not include s=",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 253
+        },
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 259
+        }
+      ]
+    },
+    {
+      "id": "bea31028d7e0",
+      "template": "invalid arg type: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "internal/sanitize/sanitize.go",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "id": "f4e7899b4677",
+      "template": "invalid array value: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array.go",
+          "line": 225
+        }
+      ]
+    },
+    {
+      "id": "e9b8b5799b80",
+      "template": "invalid array, expected ':' got \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array.go",
+          "line": 153
+        }
+      ]
+    },
+    {
+      "id": "236edd62b5e4",
+      "template": "invalid array, expected '[' or '=' got \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array.go",
+          "line": 139
+        }
+      ]
+    },
+    {
+      "id": "e09721ee05de",
+      "template": "invalid array, expected ']' got \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array.go",
+          "line": 167
+        }
+      ]
+    },
+    {
+      "id": "df4a9cc46f8c",
+      "template": "invalid array, expected '{' got \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array.go",
+          "line": 180
+        }
+      ]
+    },
+    {
+      "id": "2d8a325cd92f",
+      "template": "invalid array: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array.go",
+          "line": 121
+        },
+        {
+          "file": "pgtype/array.go",
+          "line": 133
+        },
+        {
+          "file": "pgtype/array.go",
+          "line": 144
+        },
+        {
+          "file": "pgtype/array.go",
+          "line": 149
+        },
+        {
+          "file": "pgtype/array.go",
+          "line": 158
+        },
+        {
+          "file": "pgtype/array.go",
+          "line": 163
+        },
+        {
+          "file": "pgtype/array.go",
+          "line": 175
+        },
+        {
+          "file": "pgtype/array.go",
+          "line": 189
+        },
+        {
+          "file": "pgtype/array.go",
+          "line": 206
+        },
+        {
+          "file": "pgtype/multirange.go",
+          "line": 347
+        }
+      ]
+    },
+    {
+      "id": "6971f04faa0f",
+      "template": "invalid backslash",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 653
+        }
+      ]
+    },
+    {
+      "id": "7d5d16870e7d",
+      "template": "invalid date format",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/date.go",
+          "line": 291
+        },
+        {
+          "file": "pgtype/date.go",
+          "line": 310
+        },
+        {
+          "file": "pgtype/date.go",
+          "line": 314
+        },
+        {
+          "file": "pgtype/date.go",
+          "line": 319
+        },
+        {
+          "file": "pgtype/date.go",
+          "line": 325
+        },
+        {
+          "file": "pgtype/date.go",
+          "line": 331
+        },
+        {
+          "file": "pgtype/date.go",
+          "line": 337
+        },
+        {
+          "file": "pgtype/date.go",
+          "line": 342
+        }
+      ]
+    },
+    {
+      "id": "4fa39a6bc73d",
+      "template": "invalid digitsRead: \u003c*\u003e (this can't happen)",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/numeric.go",
+          "line": 652
+        }
+      ]
+    },
+    {
+      "id": "1fc4d3343e24",
+      "template": "invalid format for line",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/line.go",
+          "line": 190
+        }
+      ]
+    },
+    {
+      "id": "831bce48401f",
+      "template": "invalid format for point",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/point.go",
+          "line": 57
+        },
+        {
+          "file": "pgtype/point.go",
+          "line": 255
+        }
+      ]
+    },
+    {
+      "id": "eebeca2b3513",
+      "template": "invalid format for tid",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tid.go",
+          "line": 211
+        }
+      ]
+    },
+    {
+      "id": "775a8fd18ec5",
+      "template": "invalid hex format",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/bytea.go",
+          "line": 227
+        }
+      ]
+    },
+    {
+      "id": "8c18b78c0865",
+      "template": "invalid keyword/value",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 638
+        },
+        {
+          "file": "pgconn/config.go",
+          "line": 690
+        }
+      ]
+    },
+    {
+      "id": "b18219ae8dea",
+      "template": "invalid length for \"char\": \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/qchar.go",
+          "line": 81
+        },
+        {
+          "file": "pgtype/qchar.go",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "id": "7656b8f05c67",
+      "template": "invalid length for Box: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/box.go",
+          "line": 158
+        },
+        {
+          "file": "pgtype/box.go",
+          "line": 185
+        }
+      ]
+    },
+    {
+      "id": "663d26fb2a9f",
+      "template": "invalid length for Circle: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/circle.go",
+          "line": 174
+        },
+        {
+          "file": "pgtype/circle.go",
+          "line": 198
+        }
+      ]
+    },
+    {
+      "id": "dfbd0611d599",
+      "template": "invalid length for Close.ObjectType",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/close.go",
+          "line": 75
+        }
+      ]
+    },
+    {
+      "id": "ceab2e51ffc0",
+      "template": "invalid length for CopyBothResponse.OverallFormat",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/copy_both_response.go",
+          "line": 89
+        }
+      ]
+    },
+    {
+      "id": "059862eac2a0",
+      "template": "invalid length for CopyInResponse.OverallFormat",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/copy_in_response.go",
+          "line": 90
+        }
+      ]
+    },
+    {
+      "id": "924c928cbf16",
+      "template": "invalid length for CopyOutResponse.OverallFormat",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/copy_out_response.go",
+          "line": 90
+        }
+      ]
+    },
+    {
+      "id": "c1ffad5062ed",
+      "template": "invalid length for Describe.ObjectType",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/describe.go",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "id": "508a2d912358",
+      "template": "invalid length for Path with \u003c*\u003e points: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/path.go",
+          "line": 194
+        }
+      ]
+    },
+    {
+      "id": "15615ff7af7b",
+      "template": "invalid length for Path: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/path.go",
+          "line": 185
+        },
+        {
+          "file": "pgtype/path.go",
+          "line": 223
+        }
+      ]
+    },
+    {
+      "id": "6254a648278c",
+      "template": "invalid length for Polygon with \u003c*\u003e points: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/polygon.go",
+          "line": 177
+        }
+      ]
+    },
+    {
+      "id": "1176886cc750",
+      "template": "invalid length for Polygon: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/polygon.go",
+          "line": 205
+        }
+      ]
+    },
+    {
+      "id": "09a97f6cd996",
+      "template": "invalid length for ReadyForQuery.TxStatus",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/ready_for_query.go",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "id": "899ca35bf6d9",
+      "template": "invalid length for UUID: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/uuid.go",
+          "line": 129
+        },
+        {
+          "file": "pgtype/uuid.go",
+          "line": 223
+        },
+        {
+          "file": "pgtype/uuid.go",
+          "line": 242
+        }
+      ]
+    },
+    {
+      "id": "472d4068b8ec",
+      "template": "invalid length for bit/varbit: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/bits.go",
+          "line": 175
+        }
+      ]
+    },
+    {
+      "id": "f2e67312a7e6",
+      "template": "invalid length for bool: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/bool.go",
+          "line": 252
+        },
+        {
+          "file": "pgtype/bool.go",
+          "line": 304
+        }
+      ]
+    },
+    {
+      "id": "48edb3a8d003",
+      "template": "invalid length for date: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/date.go",
+          "line": 255
+        }
+      ]
+    },
+    {
+      "id": "963fa84a10d0",
+      "template": "invalid length for float4: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/float4.go",
+          "line": 212
+        },
+        {
+          "file": "pgtype/float4.go",
+          "line": 232
+        },
+        {
+          "file": "pgtype/float4.go",
+          "line": 249
+        },
+        {
+          "file": "pgtype/float4.go",
+          "line": 272
+        }
+      ]
+    },
+    {
+      "id": "da961c7725a6",
+      "template": "invalid length for float8: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/float8.go",
+          "line": 250
+        },
+        {
+          "file": "pgtype/float8.go",
+          "line": 270
+        },
+        {
+          "file": "pgtype/float8.go",
+          "line": 287
+        },
+        {
+          "file": "pgtype/float8.go",
+          "line": 310
+        }
+      ]
+    },
+    {
+      "id": "595b4126a95e",
+      "template": "invalid length for int2: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 307
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 365
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 412
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 459
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 506
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 558
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 579
+        }
+      ]
+    },
+    {
+      "id": "bc8725dc6983",
+      "template": "invalid length for int4: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 870
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 928
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 986
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1033
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1080
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1132
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1153
+        }
+      ]
+    },
+    {
+      "id": "a58380ed93ad",
+      "template": "invalid length for int8: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 1444
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1502
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1560
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1618
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1665
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1728
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1749
+        }
+      ]
+    },
+    {
+      "id": "dc130cc51fa1",
+      "template": "invalid length for line: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/line.go",
+          "line": 160
+        },
+        {
+          "file": "pgtype/line.go",
+          "line": 185
+        }
+      ]
+    },
+    {
+      "id": "0ffedd84567b",
+      "template": "invalid length for lseg: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/lseg.go",
+          "line": 158
+        },
+        {
+          "file": "pgtype/lseg.go",
+          "line": 185
+        }
+      ]
+    },
+    {
+      "id": "dfaede8276f6",
+      "template": "invalid length for point: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/point.go",
+          "line": 50
+        },
+        {
+          "file": "pgtype/point.go",
+          "line": 228
+        },
+        {
+          "file": "pgtype/point.go",
+          "line": 250
+        }
+      ]
+    },
+    {
+      "id": "cb4172d53707",
+      "template": "invalid length for polygon: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/polygon.go",
+          "line": 170
+        }
+      ]
+    },
+    {
+      "id": "e2c532d72ea7",
+      "template": "invalid length for tid: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tid.go",
+          "line": 164
+        },
+        {
+          "file": "pgtype/tid.go",
+          "line": 184
+        },
+        {
+          "file": "pgtype/tid.go",
+          "line": 206
+        }
+      ]
+    },
+    {
+      "id": "601d5c478deb",
+      "template": "invalid length for time: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/time.go",
+          "line": 170
+        },
+        {
+          "file": "pgtype/time.go",
+          "line": 191
+        }
+      ]
+    },
+    {
+      "id": "de6455f5bc94",
+      "template": "invalid length for timestamp: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/timestamp.go",
+          "line": 269
+        }
+      ]
+    },
+    {
+      "id": "f490a7140d1f",
+      "template": "invalid length for timestamptz: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/timestamptz.go",
+          "line": 260
+        }
+      ]
+    },
+    {
+      "id": "7a8c64879847",
+      "template": "invalid length for uint2: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 335
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 386
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 433
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 480
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 527
+        }
+      ]
+    },
+    {
+      "id": "6863136d0472",
+      "template": "invalid length for uint32: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/uint32.go",
+          "line": 284
+        },
+        {
+          "file": "pgtype/uint32.go",
+          "line": 306
+        },
+        {
+          "file": "pgtype/uint32.go",
+          "line": 327
+        }
+      ]
+    },
+    {
+      "id": "793b5af8e8e6",
+      "template": "invalid length for uint4: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 898
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 956
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1007
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1054
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1101
+        }
+      ]
+    },
+    {
+      "id": "48cb62cc1776",
+      "template": "invalid length for uint64: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/uint64.go",
+          "line": 255
+        },
+        {
+          "file": "pgtype/uint64.go",
+          "line": 277
+        },
+        {
+          "file": "pgtype/uint64.go",
+          "line": 298
+        }
+      ]
+    },
+    {
+      "id": "a6fa963a2202",
+      "template": "invalid length for uint8: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/int.go",
+          "line": 1472
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1530
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1588
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1639
+        },
+        {
+          "file": "pgtype/int.go",
+          "line": 1693
+        }
+      ]
+    },
+    {
+      "id": "324e8922bfe6",
+      "template": "invalid length of startup packet: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/backend.go",
+          "line": 129
+        }
+      ]
+    },
+    {
+      "id": "b85df9eae564",
+      "template": "invalid log level",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "tracelog/tracelog.go",
+          "line": 90
+        }
+      ]
+    },
+    {
+      "id": "ec1220edb2d8",
+      "template": "invalid lower bound: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "id": "7a4fb83161ba",
+      "template": "invalid lower value: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 56
+        },
+        {
+          "file": "pgtype/range.go",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "id": "374f4b9d2352",
+      "template": "invalid message length: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/backend.go",
+          "line": 181
+        },
+        {
+          "file": "pgproto3/frontend.go",
+          "line": 318
+        }
+      ]
+    },
+    {
+      "id": "a0f674a5e23e",
+      "template": "invalid multirange value: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/multirange.go",
+          "line": 369
+        }
+      ]
+    },
+    {
+      "id": "e9b7ad865e80",
+      "template": "invalid multirange, expected '{' got \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/multirange.go",
+          "line": 351
+        }
+      ]
+    },
+    {
+      "id": "ba07d7c1b1cf",
+      "template": "invalid multirange: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/multirange.go",
+          "line": 358
+        }
+      ]
+    },
+    {
+      "id": "c29151892d4e",
+      "template": "invalid net.IP",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 567
+        }
+      ]
+    },
+    {
+      "id": "feac8eedca41",
+      "template": "invalid net.IPNet",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/builtin_wrappers.go",
+          "line": 534
+        }
+      ]
+    },
+    {
+      "id": "7c920cd2a77f",
+      "template": "invalid protocol version: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 1041
+        }
+      ]
+    },
+    {
+      "id": "b97e0cc89361",
+      "template": "invalid read of large object",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "large_objects.go",
+          "line": 132
+        }
+      ]
+    },
+    {
+      "id": "dde8772bef27",
+      "template": "invalid tsvector binary format: incomplete position count",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tsvector.go",
+          "line": 223
+        }
+      ]
+    },
+    {
+      "id": "01d57a342360",
+      "template": "invalid tsvector binary format: incomplete positions",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tsvector.go",
+          "line": 231
+        }
+      ]
+    },
+    {
+      "id": "fb6f605352b9",
+      "template": "invalid tsvector binary format: missing null terminator",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tsvector.go",
+          "line": 215
+        }
+      ]
+    },
+    {
+      "id": "7a59ca006dd8",
+      "template": "invalid tsvector format: expected position number",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tsvector.go",
+          "line": 442
+        }
+      ]
+    },
+    {
+      "id": "41a592c92d03",
+      "template": "invalid tsvector format: invalid position number \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tsvector.go",
+          "line": 447
+        }
+      ]
+    },
+    {
+      "id": "8203503842a4",
+      "template": "invalid tsvector format: lexeme must start with a single quote",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tsvector.go",
+          "line": 380
+        }
+      ]
+    },
+    {
+      "id": "ae19567e7515",
+      "template": "invalid tsvector format: unexpected end after backslash",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tsvector.go",
+          "line": 403
+        }
+      ]
+    },
+    {
+      "id": "eaa4fdd7fde7",
+      "template": "invalid tsvector format: unterminated quoted lexeme",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tsvector.go",
+          "line": 387
+        }
+      ]
+    },
+    {
+      "id": "e8669737c8c5",
+      "template": "invalid upper value: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 79
+        },
+        {
+          "file": "pgtype/range.go",
+          "line": 88
+        }
+      ]
+    },
+    {
+      "id": "ee3885c3e0cb",
+      "template": "invalid write to large object",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "large_objects.go",
+          "line": 102
+        }
+      ]
+    },
+    {
+      "id": "d3ca308e6f33",
+      "template": "jsonb too short",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/jsonb.go",
+          "line": 68
+        },
+        {
+          "file": "pgtype/jsonb.go",
+          "line": 86
+        },
+        {
+          "file": "pgtype/jsonb.go",
+          "line": 113
+        }
+      ]
+    },
+    {
+      "id": "430251e077b1",
+      "template": "kerberos error: no GSSAPI provider registered, see https://github.com/otan/gopgkrb5",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/krb5.go",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "id": "91bbc257040a",
+      "template": "message body too large",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/pgproto3.go",
+          "line": 116
+        }
+      ]
+    },
+    {
+      "id": "7285a313138c",
+      "template": "mismatched param and argument count",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "extended_query_builder.go",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "id": "79232685b49f",
+      "template": "missing lower bound, instead got: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "id": "36dae9e950b7",
+      "template": "missing range separator: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 71
+        },
+        {
+          "file": "pgtype/range.go",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "id": "c278d7092ed4",
+      "template": "missing upper bound, instead got: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 101
+        }
+      ]
+    },
+    {
+      "id": "d7eb29a563ef",
+      "template": "missing upper bound: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "id": "51bc5e9b9e41",
+      "template": "msg =\u003e \u003c*\u003e, e.want =\u003e \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "internal/pgmock/pgmock.go",
+          "line": 51
+        },
+        {
+          "file": "internal/pgmock/pgmock.go",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "id": "42ff5a248be4",
+      "template": "multirange cannot contain NULL element",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/multirange.go",
+          "line": 124
+        },
+        {
+          "file": "pgtype/multirange.go",
+          "line": 176
+        }
+      ]
+    },
+    {
+      "id": "2415b7ab544d",
+      "template": "multirange element OID not registered",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1354
+        }
+      ]
+    },
+    {
+      "id": "2a135a8cb20d",
+      "template": "multirange element count \u003c*\u003e exceeds available data",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/multirange.go",
+          "line": 215
+        }
+      ]
+    },
+    {
+      "id": "f4711e49bfea",
+      "template": "negative timeout",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 948
+        }
+      ]
+    },
+    {
+      "id": "ab603bb87406",
+      "template": "netip.AddrFromSlice failed",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/inet.go",
+          "line": 168
+        }
+      ]
+    },
+    {
+      "id": "f62887855900",
+      "template": "no more results in batch",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "batch.go",
+          "line": 143
+        },
+        {
+          "file": "batch.go",
+          "line": 195
+        },
+        {
+          "file": "batch.go",
+          "line": 447
+        },
+        {
+          "file": "batch.go",
+          "line": 465
+        },
+        {
+          "file": "batch.go",
+          "line": 476
+        }
+      ]
+    },
+    {
+      "id": "8c866904b2b1",
+      "template": "no peer certificates for channel binding",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 373
+        }
+      ]
+    },
+    {
+      "id": "13bdcceb4839",
+      "template": "no reference to batch",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "batch.go",
+          "line": 443
+        }
+      ]
+    },
+    {
+      "id": "1f71c05b13ea",
+      "template": "non-digit",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/date.go",
+          "line": 373
+        }
+      ]
+    },
+    {
+      "id": "7654a597c663",
+      "template": "not a string and cannot be encoded as text",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "values.go",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "id": "3fb5f7a391f4",
+      "template": "number of field descriptions must equal number of destinations, got \u003c*\u003e and \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "rows.go",
+          "line": 257
+        },
+        {
+          "file": "rows.go",
+          "line": 372
+        }
+      ]
+    },
+    {
+      "id": "ab0dfdc885e9",
+      "template": "number of field descriptions must equal number of values, got \u003c*\u003e and \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "rows.go",
+          "line": 241
+        },
+        {
+          "file": "rows.go",
+          "line": 369
+        }
+      ]
+    },
+    {
+      "id": "88ed4c086c93",
+      "template": "numeric incomplete \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/numeric.go",
+          "line": 605
+        },
+        {
+          "file": "pgtype/numeric.go",
+          "line": 631
+        }
+      ]
+    },
+    {
+      "id": "7ec55b88e22f",
+      "template": "outside range",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 928
+        }
+      ]
+    },
+    {
+      "id": "69f1b930a703",
+      "template": "pgxpool: too many failed attempts acquiring connection; likely bug in PrepareConn, BeforeAcquire, or ShouldPing hook",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgxpool/pool.go",
+          "line": 657
+        }
+      ]
+    },
+    {
+      "id": "680a58872c5e",
+      "template": "pipeline closed",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2487
+        },
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2521
+        }
+      ]
+    },
+    {
+      "id": "6145babd8c62",
+      "template": "pipeline has unsynced requests",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2843
+        }
+      ]
+    },
+    {
+      "id": "43dea31ef07a",
+      "template": "pipeline: \u003c*\u003e: received unexpected message type \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2828
+        }
+      ]
+    },
+    {
+      "id": "6f1202affe64",
+      "template": "pipeline: no more results but expected ReadyForQuery",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2865
+        }
+      ]
+    },
+    {
+      "id": "89d7cc366237",
+      "template": "postgres version parsing failed: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "derived_types.go",
+          "line": 253
+        }
+      ]
+    },
+    {
+      "id": "bcf0d18dabab",
+      "template": "range element OID not registered",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1342
+        }
+      ]
+    },
+    {
+      "id": "af66fc904340",
+      "template": "range too short: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 206
+        }
+      ]
+    },
+    {
+      "id": "165e52be7780",
+      "template": "read only connection",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 968
+        }
+      ]
+    },
+    {
+      "id": "ca8dae6c6449",
+      "template": "read past end of composite",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/composite.go",
+          "line": 157
+        },
+        {
+          "file": "pgtype/composite.go",
+          "line": 196
+        }
+      ]
+    },
+    {
+      "id": "157596e1fcbf",
+      "template": "received message other than Query from client: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/example/pgfortune/server.go",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "id": "7d776e0b3232",
+      "template": "result format codes length \u003c*\u003e does not match field count \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 2968
+        }
+      ]
+    },
+    {
+      "id": "de6b8005f47b",
+      "template": "rewrite query failed: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 511
+        },
+        {
+          "file": "conn.go",
+          "line": 795
+        },
+        {
+          "file": "conn.go",
+          "line": 981
+        }
+      ]
+    },
+    {
+      "id": "aed06a4aafce",
+      "template": "rows is closed",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "rows.go",
+          "line": 294
+        }
+      ]
+    },
+    {
+      "id": "d94c4cb4f89f",
+      "template": "scan target type changed",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/pgtype.go",
+          "line": 1167
+        }
+      ]
+    },
+    {
+      "id": "a80c6ef54d24",
+      "template": "secret key too long",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/cancel_request.go",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "id": "22fbcde763bc",
+      "template": "server does not support SCRAM-SHA-256",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 192
+        }
+      ]
+    },
+    {
+      "id": "2dd28338e6c4",
+      "template": "server is in standby mode",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 1013
+        }
+      ]
+    },
+    {
+      "id": "43247cb522ef",
+      "template": "server is not in hot standby mode",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 998
+        },
+        {
+          "file": "pgconn/config.go",
+          "line": 1028
+        }
+      ]
+    },
+    {
+      "id": "6ea4c647f8c8",
+      "template": "server refused TLS connection",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 505
+        }
+      ]
+    },
+    {
+      "id": "f0291dd36216",
+      "template": "short write to large object",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "large_objects.go",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "id": "50d56ef0bdc3",
+      "template": "simple protocol queries must be run with client_encoding=UTF8",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1265
+        }
+      ]
+    },
+    {
+      "id": "dcd481c8d05d",
+      "template": "simple protocol queries must be run with standard_conforming_strings=on",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1261
+        }
+      ]
+    },
+    {
+      "id": "2ee7312f41ee",
+      "template": "ssl request too short",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/ssl_request.go",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "id": "fa2004805fd6",
+      "template": "sslmode is invalid",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 842
+        }
+      ]
+    },
+    {
+      "id": "037bb04621e8",
+      "template": "startup message too short",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/startup_message.go",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "id": "64bb96f4cecd",
+      "template": "statement description failed: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "copy_from.go",
+          "line": 155
+        }
+      ]
+    },
+    {
+      "id": "a40a0bef6561",
+      "template": "struct doesn't have corresponding row field \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "rows.go",
+          "line": 738
+        }
+      ]
+    },
+    {
+      "id": "898f7d77381f",
+      "template": "tls-server-end-point channel binding is undefined for certificate signature algorithm \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_scram.go",
+          "line": 394
+        }
+      ]
+    },
+    {
+      "id": "d1d77c5cfc8d",
+      "template": "too few bytes for size: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 245
+        },
+        {
+          "file": "pgtype/range.go",
+          "line": 265
+        }
+      ]
+    },
+    {
+      "id": "94ca09e222f3",
+      "template": "too many arg format codes",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/function_call.go",
+          "line": 102
+        }
+      ]
+    },
+    {
+      "id": "c993f47c9d6a",
+      "template": "too many arguments",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/function_call.go",
+          "line": 110
+        }
+      ]
+    },
+    {
+      "id": "157d6a217b3f",
+      "template": "too many column format codes",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/copy_both_response.go",
+          "line": 52
+        },
+        {
+          "file": "pgproto3/copy_in_response.go",
+          "line": 53
+        },
+        {
+          "file": "pgproto3/copy_out_response.go",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "id": "b6563e6fd93c",
+      "template": "too many fields",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/row_description.go",
+          "line": 107
+        }
+      ]
+    },
+    {
+      "id": "b601a9608776",
+      "template": "too many parameter format codes",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/bind.go",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "id": "a231056beced",
+      "template": "too many parameter oids",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/parameter_description.go",
+          "line": 48
+        },
+        {
+          "file": "pgproto3/parse.go",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "id": "98d3c1ad0c54",
+      "template": "too many parameters",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/bind.go",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "id": "8a5d4210723b",
+      "template": "too many result format codes",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/bind.go",
+          "line": 144
+        }
+      ]
+    },
+    {
+      "id": "605ce23db35c",
+      "template": "too many rows in result set",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 109
+        }
+      ]
+    },
+    {
+      "id": "47de2c2637d5",
+      "template": "too many values",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/data_row.go",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "id": "dc039040862b",
+      "template": "tried to encode \u003c*\u003e via encoding to text and scanning but failed due to receiving same type back",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/pgtype.go",
+          "line": 1329
+        }
+      ]
+    },
+    {
+      "id": "13aec6686b63",
+      "template": "tsvector incomplete \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/tsvector.go",
+          "line": 202
+        }
+      ]
+    },
+    {
+      "id": "47b7869a08f2",
+      "template": "tx is closed",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "tx.go",
+          "line": 85
+        }
+      ]
+    },
+    {
+      "id": "3e2947120a77",
+      "template": "unable to add CA to cert pool",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 780
+        }
+      ]
+    },
+    {
+      "id": "a5fbbfd9ec3b",
+      "template": "unable to decrypt key: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 881
+        }
+      ]
+    },
+    {
+      "id": "52b098cecdd8",
+      "template": "unable to encode \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array_codec.go",
+          "line": 140
+        },
+        {
+          "file": "pgtype/array_codec.go",
+          "line": 204
+        },
+        {
+          "file": "pgtype/multirange.go",
+          "line": 114
+        },
+        {
+          "file": "pgtype/multirange.go",
+          "line": 166
+        }
+      ]
+    },
+    {
+      "id": "a3c2e3ead1f8",
+      "template": "unable to encode \u003c*\u003e into \u003c*\u003e format for \u003c*\u003e (OID \u003c*\u003e): \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/pgtype.go",
+          "line": 1963
+        }
+      ]
+    },
+    {
+      "id": "3f135f20debd",
+      "template": "unable to encode \u003c*\u003e into OID \u003c*\u003e in binary format",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/composite.go",
+          "line": 148
+        },
+        {
+          "file": "pgtype/composite.go",
+          "line": 488
+        }
+      ]
+    },
+    {
+      "id": "a2a8fa04581c",
+      "template": "unable to encode \u003c*\u003e into OID \u003c*\u003e in text format",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/composite.go",
+          "line": 187
+        },
+        {
+          "file": "pgtype/composite.go",
+          "line": 543
+        }
+      ]
+    },
+    {
+      "id": "19bc2daa25ed",
+      "template": "unable to find service: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 710
+        }
+      ]
+    },
+    {
+      "id": "e2170c5fe39e",
+      "template": "unable to find sslpassword",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 875
+        }
+      ]
+    },
+    {
+      "id": "6e1c4f25a89c",
+      "template": "unable to load cert: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 898
+        }
+      ]
+    },
+    {
+      "id": "ebac1a3d1c1f",
+      "template": "unable to load system certificate pool: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 766
+        }
+      ]
+    },
+    {
+      "id": "08ffc4276455",
+      "template": "unable to read CA file: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 776
+        }
+      ]
+    },
+    {
+      "id": "2aae2854b820",
+      "template": "unable to read cert: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 894
+        }
+      ]
+    },
+    {
+      "id": "01e11cec6ffe",
+      "template": "unable to read sslkey: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 852
+        }
+      ]
+    },
+    {
+      "id": "07050ce563f5",
+      "template": "unable to scan OID \u003c*\u003e in binary format into \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/composite.go",
+          "line": 260
+        },
+        {
+          "file": "pgtype/record_codec.go",
+          "line": 56
+        },
+        {
+          "file": "pgtype/record_codec.go",
+          "line": 105
+        }
+      ]
+    },
+    {
+      "id": "23a25ac545eb",
+      "template": "unable to scan OID \u003c*\u003e in text format into \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/composite.go",
+          "line": 237
+        }
+      ]
+    },
+    {
+      "id": "d2cb4aaa62be",
+      "template": "unexpected DataRow message without preceding RowDescription",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 1581
+        }
+      ]
+    },
+    {
+      "id": "18963d63dcc9",
+      "template": "unexpected end of string",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/hstore.go",
+          "line": 329
+        }
+      ]
+    },
+    {
+      "id": "311342a1cdb6",
+      "template": "unexpected escape in quoted string: found '\u003c*\u003e'",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/hstore.go",
+          "line": 394
+        }
+      ]
+    },
+    {
+      "id": "06bb02fb2af1",
+      "template": "unexpected message type during OAuth auth: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/auth_oauth.go",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "id": "75b6c82839d2",
+      "template": "unexpected pipeline result: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "batch.go",
+          "line": 319
+        },
+        {
+          "file": "batch.go",
+          "line": 377
+        }
+      ]
+    },
+    {
+      "id": "4d4d6b72a22c",
+      "template": "unexpected trailing bytes parsing empty range: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 214
+        }
+      ]
+    },
+    {
+      "id": "a1a8852b8558",
+      "template": "unexpected trailing bytes parsing range: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 258
+        },
+        {
+          "file": "pgtype/range.go",
+          "line": 274
+        }
+      ]
+    },
+    {
+      "id": "3afae9530cbb",
+      "template": "unexpected trailing bytes parsing unbounded range: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range.go",
+          "line": 239
+        }
+      ]
+    },
+    {
+      "id": "db9f6ebd56f2",
+      "template": "unexpected trailing data: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array.go",
+          "line": 242
+        },
+        {
+          "file": "pgtype/multirange.go",
+          "line": 378
+        },
+        {
+          "file": "pgtype/range.go",
+          "line": 108
+        }
+      ]
+    },
+    {
+      "id": "e00280491bd7",
+      "template": "unknown LowerType: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "id": "85208ae3db22",
+      "template": "unknown QueryExecMode: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 576
+        },
+        {
+          "file": "conn.go",
+          "line": 876
+        },
+        {
+          "file": "copy_from.go",
+          "line": 158
+        }
+      ]
+    },
+    {
+      "id": "f29e5601fdec",
+      "template": "unknown UpperType: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "id": "3c72e389232a",
+      "template": "unknown authentication type: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/frontend.go",
+          "line": 449
+        }
+      ]
+    },
+    {
+      "id": "e81f404d1507",
+      "template": "unknown boolean string representation \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/bool.go",
+          "line": 344
+        }
+      ]
+    },
+    {
+      "id": "f69bfd745d68",
+      "template": "unknown composite type field OID: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1418
+        }
+      ]
+    },
+    {
+      "id": "98a3ccc98be6",
+      "template": "unknown format code",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "rows.go",
+          "line": 323
+        }
+      ]
+    },
+    {
+      "id": "bcfee6483692",
+      "template": "unknown format code \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/array_codec.go",
+          "line": 353
+        },
+        {
+          "file": "pgtype/array_codec.go",
+          "line": 370
+        },
+        {
+          "file": "pgtype/composite.go",
+          "line": 220
+        },
+        {
+          "file": "pgtype/composite.go",
+          "line": 277
+        },
+        {
+          "file": "pgtype/multirange.go",
+          "line": 307
+        },
+        {
+          "file": "pgtype/multirange.go",
+          "line": 324
+        },
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 367
+        },
+        {
+          "file": "pgtype/record_codec.go",
+          "line": 86
+        },
+        {
+          "file": "pgtype/record_codec.go",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "id": "62ef2a91f3d6",
+      "template": "unknown format code: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/jsonb.go",
+          "line": 101
+        },
+        {
+          "file": "pgtype/jsonb.go",
+          "line": 123
+        }
+      ]
+    },
+    {
+      "id": "f96855aead18",
+      "template": "unknown jsonb version number \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/jsonb.go",
+          "line": 72
+        },
+        {
+          "file": "pgtype/jsonb.go",
+          "line": 90
+        },
+        {
+          "file": "pgtype/jsonb.go",
+          "line": 117
+        }
+      ]
+    },
+    {
+      "id": "30c336058acb",
+      "template": "unknown lower bound type \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 182
+        }
+      ]
+    },
+    {
+      "id": "b253eb2e488c",
+      "template": "unknown message type: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/backend.go",
+          "line": 236
+        },
+        {
+          "file": "pgproto3/frontend.go",
+          "line": 390
+        }
+      ]
+    },
+    {
+      "id": "7f5fc69cf7bf",
+      "template": "unknown protocol representation",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/pgproto3.go",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "id": "2d162978a8e5",
+      "template": "unknown startup message code: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/backend.go",
+          "line": 165
+        }
+      ]
+    },
+    {
+      "id": "080ce3e7cdf1",
+      "template": "unknown startup message: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgproto3/example/pgfortune/server.go",
+          "line": 96
+        }
+      ]
+    },
+    {
+      "id": "d99d8d1940db",
+      "template": "unknown typtype",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1359
+        }
+      ]
+    },
+    {
+      "id": "bc83e49c2687",
+      "template": "unknown upper bound type \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/range_codec.go",
+          "line": 231
+        }
+      ]
+    },
+    {
+      "id": "57a178832f32",
+      "template": "unknown value \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 207
+        }
+      ]
+    },
+    {
+      "id": "da089e0701ea",
+      "template": "unsupported isolation: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "stdlib/sql.go",
+          "line": 473
+        }
+      ]
+    },
+    {
+      "id": "3f311e1acea8",
+      "template": "unsupported ltree version \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgtype/ltree.go",
+          "line": 93
+        },
+        {
+          "file": "pgtype/ltree.go",
+          "line": 107
+        }
+      ]
+    },
+    {
+      "id": "c297988a1727",
+      "template": "unterminated quoted string in connection info string",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/config.go",
+          "line": 675
+        }
+      ]
+    },
+    {
+      "id": "61b62d70f153",
+      "template": "unused argument: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "internal/sanitize/sanitize.go",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "id": "c784436a4c22",
+      "template": "write to connection for cancellation: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "pgconn/pgconn.go",
+          "line": 1082
+        }
+      ]
+    },
+    {
+      "id": "a503e27a64b3",
+      "template": "writeCertificate: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "testsetup/generate_certs.go",
+          "line": 169
+        },
+        {
+          "file": "testsetup/generate_certs.go",
+          "line": 177
+        },
+        {
+          "file": "testsetup/generate_certs.go",
+          "line": 182
+        }
+      ]
+    },
+    {
+      "id": "d47c75e6abe9",
+      "template": "writeEncryptedPrivateKey: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "testsetup/generate_certs.go",
+          "line": 145
+        },
+        {
+          "file": "testsetup/generate_certs.go",
+          "line": 150
+        },
+        {
+          "file": "testsetup/generate_certs.go",
+          "line": 155
+        },
+        {
+          "file": "testsetup/generate_certs.go",
+          "line": 160
+        }
+      ]
+    },
+    {
+      "id": "5cda874f9e71",
+      "template": "writePrivateKey: \u003c*\u003e",
+      "lib": "pgx",
+      "locations": [
+        {
+          "file": "testsetup/generate_certs.go",
+          "line": 123
+        },
+        {
+          "file": "testsetup/generate_certs.go",
+          "line": 131
+        },
+        {
+          "file": "testsetup/generate_certs.go",
+          "line": 136
+        }
+      ]
+    }
+  ]
+}

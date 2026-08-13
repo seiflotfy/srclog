@@ -1,0 +1,1609 @@
+{
+  "version": 1,
+  "module": "github.com/lib/pq",
+  "commit": "v1.11.2",
+  "anchor": "suffix",
+  "stats": {
+    "files": 38,
+    "calls": 172,
+    "dynamic": 6,
+    "parse_errors": 0
+  },
+  "templates": [
+    {
+      "id": "a323ff0b21d6",
+      "template": "\u003c*\u003e\u003c*\u003e is not supported; supported values are \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 698
+        },
+        {
+          "file": "connector.go",
+          "line": 701
+        },
+        {
+          "file": "connector.go",
+          "line": 704
+        },
+        {
+          "file": "connector.go",
+          "line": 707
+        }
+      ]
+    },
+    {
+      "id": "499601f30df1",
+      "template": "SCRAM-SHA-256 authentication error: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "scram/scram.go",
+          "line": 203
+        }
+      ]
+    },
+    {
+      "id": "c1191e3bb437",
+      "template": "cannot authenticate SCRAM-SHA-256 server signature: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "scram/scram.go",
+          "line": 208
+        }
+      ]
+    },
+    {
+      "id": "071c5e8651c7",
+      "template": "cannot decode SCRAM-SHA-256 salt sent by server: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "scram/scram.go",
+          "line": 176
+        }
+      ]
+    },
+    {
+      "id": "967da98678f9",
+      "template": "cannot read random SCRAM-SHA-256 nonce from operating system: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "scram/scram.go",
+          "line": 133
+        }
+      ]
+    },
+    {
+      "id": "18eac0203446",
+      "template": "connecting to \u003c*\u003e:\u003c*\u003e: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 253
+        }
+      ]
+    },
+    {
+      "id": "cf0195169ab2",
+      "template": "could not parse bytea array index \u003c*\u003e: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 180
+        }
+      ]
+    },
+    {
+      "id": "52362b00e207",
+      "template": "could not parse bytea value: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 578
+        }
+      ]
+    },
+    {
+      "id": "f2a85d5dc086",
+      "template": "don't know how to set \u003c*\u003e: unknown type \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 670
+        },
+        {
+          "file": "connector.go",
+          "line": 694
+        }
+      ]
+    },
+    {
+      "id": "3dd6aaaa934b",
+      "template": "expected '-' or '+' at position \u003c*\u003e; got \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 453
+        }
+      ]
+    },
+    {
+      "id": "d44c92a7bd77",
+      "template": "expected '\u003c*\u003e' at position \u003c*\u003e; got '\u003c*\u003e'",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 263
+        }
+      ]
+    },
+    {
+      "id": "33a105c9fa6a",
+      "template": "expected 3 fields in first SCRAM-SHA-256 server message, got \u003c*\u003e: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "scram/scram.go",
+          "line": 156
+        }
+      ]
+    },
+    {
+      "id": "eecd521dcee3",
+      "template": "expected end of input, got \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 481
+        }
+      ]
+    },
+    {
+      "id": "69f76a3c020d",
+      "template": "expected number; got '\u003c*\u003e'",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 278
+        }
+      ]
+    },
+    {
+      "id": "56b65f351984",
+      "template": "invalid bytea sequence \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 574
+        }
+      ]
+    },
+    {
+      "id": "37b67e89fda8",
+      "template": "invalid connection protocol: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 914
+        }
+      ]
+    },
+    {
+      "id": "02c13180b092",
+      "template": "invalid timestamp",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 248
+        }
+      ]
+    },
+    {
+      "id": "f514eaa83de1",
+      "template": "missing \"=\" after \u003c*\u003e in connection info string\"",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 588
+        }
+      ]
+    },
+    {
+      "id": "dab6f4209397",
+      "template": "missing character after backslash",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 602
+        }
+      ]
+    },
+    {
+      "id": "1481ea403e2c",
+      "template": "no LastInsertId available after the empty statement",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "id": "4a4751381545",
+      "template": "no RowsAffected available after the empty statement",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "id": "b49c36a0abff",
+      "template": "no connection",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "notify.go",
+          "line": 654
+        }
+      ]
+    },
+    {
+      "id": "2584485c29d7",
+      "template": "parseBool: unknown type \u003c*\u003e: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 336
+        }
+      ]
+    },
+    {
+      "id": "60474a87910b",
+      "template": "pq: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 83
+        },
+        {
+          "file": "encode.go",
+          "line": 116
+        },
+        {
+          "file": "encode.go",
+          "line": 132
+        },
+        {
+          "file": "encode.go",
+          "line": 141
+        },
+        {
+          "file": "encode.go",
+          "line": 240
+        },
+        {
+          "file": "encode.go",
+          "line": 383
+        }
+      ]
+    },
+    {
+      "id": "54d2ba9e2068",
+      "template": "pq: COPY TO is not supported",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "copy.go",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "id": "50b963221cb7",
+      "template": "pq: COPY in progress",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "copy.go",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "id": "c1d391297ba2",
+      "template": "pq: COPY is only allowed inside a transaction",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "copy.go",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "id": "af65e4b4cd89",
+      "template": "pq: GSSAPI protocol error",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1307
+        }
+      ]
+    },
+    {
+      "id": "b464468198d9",
+      "template": "pq: ListenerConn has been closed",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "notify.go",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "id": "24dec5e2fccb",
+      "template": "pq: SCRAM-SHA-256 error: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1328
+        },
+        {
+          "file": "conn.go",
+          "line": 1356
+        },
+        {
+          "file": "conn.go",
+          "line": 1382
+        }
+      ]
+    },
+    {
+      "id": "ea2adf6c93c4",
+      "template": "pq: SSL is not enabled on the server",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "id": "a3906c310f0e",
+      "template": "pq: Unable to convert \u003c*\u003e to array",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 489
+        }
+      ]
+    },
+    {
+      "id": "6aaedf8b0189",
+      "template": "pq: cannot convert \u003c*\u003e to \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 417
+        }
+      ]
+    },
+    {
+      "id": "10e53086ece5",
+      "template": "pq: cannot convert \u003c*\u003e to BoolArray",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "id": "cdc143163e54",
+      "template": "pq: cannot convert \u003c*\u003e to ByteaArray",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 165
+        }
+      ]
+    },
+    {
+      "id": "84d97510f7e1",
+      "template": "pq: cannot convert \u003c*\u003e to Float32Array",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 300
+        }
+      ]
+    },
+    {
+      "id": "c1d547b0e784",
+      "template": "pq: cannot convert \u003c*\u003e to Float64Array",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 237
+        }
+      ]
+    },
+    {
+      "id": "1a14dce38ab9",
+      "template": "pq: cannot convert \u003c*\u003e to Int32Array",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 581
+        }
+      ]
+    },
+    {
+      "id": "fa4d5da9db0d",
+      "template": "pq: cannot convert \u003c*\u003e to Int64Array",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 519
+        }
+      ]
+    },
+    {
+      "id": "dceb851b0018",
+      "template": "pq: cannot convert \u003c*\u003e to StringArray",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 644
+        }
+      ]
+    },
+    {
+      "id": "6a6541937bdd",
+      "template": "pq: cannot convert ARRAY\u003c*\u003e to \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 444
+        },
+        {
+          "file": "array.go",
+          "line": 900
+        }
+      ]
+    },
+    {
+      "id": "221f588af398",
+      "template": "pq: channel is already open",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "notify.go",
+          "line": 406
+        }
+      ]
+    },
+    {
+      "id": "0289af247024",
+      "template": "pq: channel is not open",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "notify.go",
+          "line": 409
+        }
+      ]
+    },
+    {
+      "id": "79ccfd79df17",
+      "template": "pq: copyin statement has already been closed",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "copy.go",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "id": "b1bb68a3b868",
+      "template": "pq: could not complete operation in a failed transaction",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "id": "52842890632e",
+      "template": "pq: could not connect to any of the hosts:\n\u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 318
+        }
+      ]
+    },
+    {
+      "id": "e5267a3307ad",
+      "template": "pq: could not detect default username; please provide one explicitly",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "id": "51ccb1d63b02",
+      "template": "pq: could not get owner information for private key, may not be properly protected",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "internal/pqutil/perm.go",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "id": "471a60984194",
+      "template": "pq: could not match \u003c*\u003e host names to \u003c*\u003e hostaddr values",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 426
+        }
+      ]
+    },
+    {
+      "id": "7baf6d9cdab3",
+      "template": "pq: could not match \u003c*\u003e port numbers to \u003c*\u003e hosts",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 432
+        }
+      ]
+    },
+    {
+      "id": "994612968061",
+      "template": "pq: could not parse boolean array index \u003c*\u003e: invalid boolean \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 105
+        },
+        {
+          "file": "array.go",
+          "line": 113
+        }
+      ]
+    },
+    {
+      "id": "9a44b20b1acc",
+      "template": "pq: could not parse commandTag: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1433
+        }
+      ]
+    },
+    {
+      "id": "ff80868ec3c5",
+      "template": "pq: couldn't parse pem in sslrootcert",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "ssl.go",
+          "line": 245
+        }
+      ]
+    },
+    {
+      "id": "2ce66bc8cdee",
+      "template": "pq: destination \u003c*\u003e is nil",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 394
+        }
+      ]
+    },
+    {
+      "id": "d491cc1d9df7",
+      "template": "pq: destination \u003c*\u003e is not a pointer to array or slice",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 392
+        },
+        {
+          "file": "array.go",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "id": "7fc81373f41e",
+      "template": "pq: don't know how to decode binary parameter of type \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "id": "e36b877c9c24",
+      "template": "pq: encode: unknown type for \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 55
+        },
+        {
+          "file": "encode.go",
+          "line": 168
+        }
+      ]
+    },
+    {
+      "id": "a56912c70d77",
+      "template": "pq: environment variable $\u003c*\u003e is not supported",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 518
+        }
+      ]
+    },
+    {
+      "id": "0214d86313df",
+      "template": "pq: environment variable $\u003c*\u003e is not supported as Kerberos is not enabled",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 521
+        }
+      ]
+    },
+    {
+      "id": "7762fca78d1e",
+      "template": "pq: expected ready for query, but got: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "stmt.go",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "id": "2f112260a808",
+      "template": "pq: failed to get Kerberos ticket: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1291
+        }
+      ]
+    },
+    {
+      "id": "c61138c1d4f5",
+      "template": "pq: got \u003c*\u003e parameters but PostgreSQL only supports 65535 parameters",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1486
+        },
+        {
+          "file": "stmt.go",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "id": "5c892110c521",
+      "template": "pq: got \u003c*\u003e parameters but the statement requires \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "stmt.go",
+          "line": 97
+        }
+      ]
+    },
+    {
+      "id": "18841966027c",
+      "template": "pq: invalid message format; expected string terminator",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "buf.go",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "id": "8a05ce05fd8c",
+      "template": "pq: isolation level not supported: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn_go18.go",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "id": "05769a80e3c0",
+      "template": "pq: kerberos error: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1275
+        }
+      ]
+    },
+    {
+      "id": "c8665ec1d8c9",
+      "template": "pq: kerberos error: no GSSAPI provider registered (import github.com/lib/pq/auth/kerberos)",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1271
+        }
+      ]
+    },
+    {
+      "id": "1e2abc9fc9d1",
+      "template": "pq: message too large (\u003c*\u003e \u003e math.MaxUint32)",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "buf.go",
+          "line": 86
+        },
+        {
+          "file": "buf.go",
+          "line": 95
+        }
+      ]
+    },
+    {
+      "id": "b70c1676b1ad",
+      "template": "pq: multidimensional arrays must have elements with matching dimensions",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 887
+        }
+      ]
+    },
+    {
+      "id": "10f7c2294dc2",
+      "template": "pq: only text format supported for COPY",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "copy.go",
+          "line": 17
+        }
+      ]
+    },
+    {
+      "id": "d0b2180624c7",
+      "template": "pq: parsing array element index \u003c*\u003e: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 252
+        },
+        {
+          "file": "array.go",
+          "line": 315
+        },
+        {
+          "file": "array.go",
+          "line": 456
+        },
+        {
+          "file": "array.go",
+          "line": 534
+        },
+        {
+          "file": "array.go",
+          "line": 596
+        }
+      ]
+    },
+    {
+      "id": "07513bddde73",
+      "template": "pq: parsing array element index \u003c*\u003e: cannot convert nil to string",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 658
+        }
+      ]
+    },
+    {
+      "id": "82d30e871364",
+      "template": "pq: private key has world access; permissions should be u=rw,g=r (0640) if owned by root, or u=rw (0600), or less",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "internal/pqutil/perm.go",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "id": "df49ce12833f",
+      "template": "pq: scanning from multidimensional ARRAY\u003c*\u003e is not implemented",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 430
+        }
+      ]
+    },
+    {
+      "id": "0bf708583e03",
+      "template": "pq: scanning to \u003c*\u003e is not implemented; only sql.Scanner",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 374
+        }
+      ]
+    },
+    {
+      "id": "3477e8bf18cf",
+      "template": "pq: server error: \u003c*\u003e\u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1066
+        }
+      ]
+    },
+    {
+      "id": "a092d2bd18d6",
+      "template": "pq: too many columns",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "copy.go",
+          "line": 162
+        }
+      ]
+    },
+    {
+      "id": "4be925c87b47",
+      "template": "pq: too many columns (\u003c*\u003e \u003e math.MaxUint16)",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 730
+        }
+      ]
+    },
+    {
+      "id": "e7e245068b84",
+      "template": "pq: two queries running at the same time",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "notify.go",
+          "line": 305
+        }
+      ]
+    },
+    {
+      "id": "391aac5729be",
+      "template": "pq: unable to decode uuid; bad length: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "encode.go",
+          "line": 95
+        }
+      ]
+    },
+    {
+      "id": "38bd6941511d",
+      "template": "pq: unable to parse array; expected \u003c*\u003e at offset \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 793
+        },
+        {
+          "file": "array.go",
+          "line": 882
+        }
+      ]
+    },
+    {
+      "id": "aa82594a9df7",
+      "template": "pq: unable to parse array; unexpected \u003c*\u003e at offset \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "array.go",
+          "line": 846
+        },
+        {
+          "file": "array.go",
+          "line": 868
+        },
+        {
+          "file": "array.go",
+          "line": 878
+        }
+      ]
+    },
+    {
+      "id": "5351a279f296",
+      "template": "pq: unexpected \u003c*\u003e after error \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1717
+        }
+      ]
+    },
+    {
+      "id": "a3efc639fc6c",
+      "template": "pq: unexpected Bind response \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1655
+        }
+      ]
+    },
+    {
+      "id": "14ce8500b855",
+      "template": "pq: unexpected CommandComplete after error \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1700
+        }
+      ]
+    },
+    {
+      "id": "07bb28294531",
+      "template": "pq: unexpected DataRow after error \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "rows.go",
+          "line": 116
+        }
+      ]
+    },
+    {
+      "id": "fd7cd6950ed7",
+      "template": "pq: unexpected DataRow in simple query execution",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 671
+        }
+      ]
+    },
+    {
+      "id": "48c46681bf59",
+      "template": "pq: unexpected Describe response \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1637
+        }
+      ]
+    },
+    {
+      "id": "c9275742580b",
+      "template": "pq: unexpected Describe statement response \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1616
+        }
+      ]
+    },
+    {
+      "id": "cbad4e3d7e57",
+      "template": "pq: unexpected INSERT command tag \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1421
+        }
+      ]
+    },
+    {
+      "id": "353ba8f41ea6",
+      "template": "pq: unexpected Parse response \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1588
+        }
+      ]
+    },
+    {
+      "id": "9f7ce887c550",
+      "template": "pq: unexpected ReadyForQuery in response to COPY",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "copy.go",
+          "line": 123
+        }
+      ]
+    },
+    {
+      "id": "78c13e48781e",
+      "template": "pq: unexpected authentication response: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1350
+        },
+        {
+          "file": "conn.go",
+          "line": 1376
+        }
+      ]
+    },
+    {
+      "id": "0c230a507980",
+      "template": "pq: unexpected close response: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "stmt.go",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "id": "dcab0a93360b",
+      "template": "pq: unexpected message \u003c*\u003e in simple query execution",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 641
+        }
+      ]
+    },
+    {
+      "id": "bca8c6507567",
+      "template": "pq: unexpected message \u003c*\u003e; expected ReadyForQuery",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1565
+        }
+      ]
+    },
+    {
+      "id": "e937c0de88e3",
+      "template": "pq: unexpected message after execute: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "rows.go",
+          "line": 138
+        }
+      ]
+    },
+    {
+      "id": "79df39de74ea",
+      "template": "pq: unexpected message during extended query execution: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1684
+        }
+      ]
+    },
+    {
+      "id": "59367160e665",
+      "template": "pq: unexpected password response: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1346
+        },
+        {
+          "file": "conn.go",
+          "line": 1372
+        }
+      ]
+    },
+    {
+      "id": "7cb27a6cc7a3",
+      "template": "pq: unexpected transaction status \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 458
+        }
+      ]
+    },
+    {
+      "id": "177e0e0e6089",
+      "template": "pq: unknown \u003c*\u003e response: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1725
+        }
+      ]
+    },
+    {
+      "id": "de649fc3eac7",
+      "template": "pq: unknown authentication response: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1249
+        }
+      ]
+    },
+    {
+      "id": "d2a4d4ba5559",
+      "template": "pq: unknown custom sslmode \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "ssl.go",
+          "line": 102
+        }
+      ]
+    },
+    {
+      "id": "ef0d7d3b728b",
+      "template": "pq: unknown error \u003c*\u003e: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "error.go",
+          "line": 628
+        }
+      ]
+    },
+    {
+      "id": "e9badffbcd61",
+      "template": "pq: unknown response for CopyFail: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "copy.go",
+          "line": 155
+        }
+      ]
+    },
+    {
+      "id": "f4d975f9a1ad",
+      "template": "pq: unknown response for copy query: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "copy.go",
+          "line": 129
+        }
+      ]
+    },
+    {
+      "id": "9d6f7a880232",
+      "template": "pq: unknown response for simple query: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 606
+        },
+        {
+          "file": "conn.go",
+          "line": 683
+        }
+      ]
+    },
+    {
+      "id": "4713366b39e2",
+      "template": "pq: unknown response for startup: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1241
+        }
+      ]
+    },
+    {
+      "id": "6b94cdcbdc8a",
+      "template": "pq: unsupported authentication method: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1251
+        }
+      ]
+    },
+    {
+      "id": "ab1c2e2fc10c",
+      "template": "pq: unsupported client_encoding \u003c*\u003e: must be absent or \"UTF8\"",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 468
+        }
+      ]
+    },
+    {
+      "id": "c7530a288f5b",
+      "template": "pq: unsupported command",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "id": "39354da88517",
+      "template": "pq: unsupported datestyle \u003c*\u003e: must be absent or \"ISO, MDY\"",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 472
+        }
+      ]
+    },
+    {
+      "id": "7125f8e0d7ae",
+      "template": "pq: unsupported sslmode \u003c*\u003e; only \"require\" (default), \"verify-full\", \"verify-ca\", and \"disable\" supported",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "ssl.go",
+          "line": 105
+        }
+      ]
+    },
+    {
+      "id": "0e9fbfd95364",
+      "template": "pqutil.User: not supported on current platform",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "internal/pqutil/user_other.go",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "id": "490c22cc1eeb",
+      "template": "server SCRAM-SHA-256 nonce is not prefixed by client nonce: got \u003c*\u003e, want \u003c*\u003e+\"...\"",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "scram/scram.go",
+          "line": 170
+        }
+      ]
+    },
+    {
+      "id": "1f030c4e971d",
+      "template": "server is in hot standby mode",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 395
+        },
+        {
+          "file": "conn.go",
+          "line": 410
+        }
+      ]
+    },
+    {
+      "id": "43247cb522ef",
+      "template": "server is not in hot standby mode",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 408
+        }
+      ]
+    },
+    {
+      "id": "6dd6e9051189",
+      "template": "server sent an invalid SCRAM-SHA-256 iteration count: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "scram/scram.go",
+          "line": 165
+        },
+        {
+          "file": "scram/scram.go",
+          "line": 181
+        }
+      ]
+    },
+    {
+      "id": "76d932931515",
+      "template": "server sent an invalid SCRAM-SHA-256 nonce: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "scram/scram.go",
+          "line": 159
+        }
+      ]
+    },
+    {
+      "id": "07debbc10f49",
+      "template": "server sent an invalid SCRAM-SHA-256 salt: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "scram/scram.go",
+          "line": 162
+        }
+      ]
+    },
+    {
+      "id": "b89177cf6cd4",
+      "template": "session is not read-only",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 385
+        }
+      ]
+    },
+    {
+      "id": "2f64c7c5f90f",
+      "template": "session is read-only",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 388
+        }
+      ]
+    },
+    {
+      "id": "f0b73c20f02a",
+      "template": "unexpected CommandComplete",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "notify.go",
+          "line": 215
+        }
+      ]
+    },
+    {
+      "id": "cc96d2f2b26f",
+      "template": "unexpected ReadyForQuery",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 40
+        },
+        {
+          "file": "notify.go",
+          "line": 222
+        }
+      ]
+    },
+    {
+      "id": "332aa73012f5",
+      "template": "unexpected command tag \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 481
+        },
+        {
+          "file": "conn.go",
+          "line": 527
+        },
+        {
+          "file": "conn.go",
+          "line": 558
+        }
+      ]
+    },
+    {
+      "id": "1bba04ad4ec7",
+      "template": "unexpected message \u003c*\u003e from server in listenerConnLoop",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "notify.go",
+          "line": 233
+        }
+      ]
+    },
+    {
+      "id": "585db8d0a893",
+      "template": "unexpected saveMessageType \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 1029
+        }
+      ]
+    },
+    {
+      "id": "701cdd18aa00",
+      "template": "unexpected transaction status \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "conn.go",
+          "line": 485
+        }
+      ]
+    },
+    {
+      "id": "2aa20d50fb56",
+      "template": "unknown response during CopyIn: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "copy.go",
+          "line": 202
+        }
+      ]
+    },
+    {
+      "id": "92bd55048b57",
+      "template": "unknown response for simple query: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "notify.go",
+          "line": 379
+        }
+      ]
+    },
+    {
+      "id": "2f432b523b8f",
+      "template": "unsupported SCRAM-SHA-256 final message from server: \u003c*\u003e",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "scram/scram.go",
+          "line": 205
+        }
+      ]
+    },
+    {
+      "id": "7c66b1c1bec3",
+      "template": "unterminated quoted string literal in connection string",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "connector.go",
+          "line": 615
+        }
+      ]
+    },
+    {
+      "id": "231796bb8cf1",
+      "template": "unused",
+      "lib": "pq",
+      "locations": [
+        {
+          "file": "internal/pqutil/perm_unsupported.go",
+          "line": 8
+        },
+        {
+          "file": "internal/pqutil/perm_unsupported.go",
+          "line": 9
+        }
+      ]
+    }
+  ]
+}

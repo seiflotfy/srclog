@@ -1,0 +1,1061 @@
+{
+  "version": 1,
+  "module": "github.com/IBM/sarama",
+  "commit": "v1.60.1",
+  "anchor": "suffix",
+  "stats": {
+    "files": 171,
+    "calls": 115,
+    "dynamic": 9,
+    "parse_errors": 0
+  },
+  "templates": [
+    {
+      "id": "56ee58afa8c9",
+      "template": "\u003c*\u003e: \u003c*\u003e batch decompressed to more than \u003c*\u003e bytes",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "decompress.go",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "id": "0509b9485f4a",
+      "template": "Error in ApiVersionsResponse V\u003c*\u003e from \u003c*\u003e: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "broker.go",
+          "line": 1481
+        }
+      ]
+    },
+    {
+      "id": "2b23e3b8404d",
+      "template": "Input message encoding failed: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "mocks/mocks.go",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "id": "d73d4ddbb16d",
+      "template": "assertion failed: message out of sequence added to a batch",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "produce_set.go",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "id": "4428a88b4822",
+      "template": "attempt to send message when transaction is not started or is in ending state",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "mocks/async_producer.go",
+          "line": 67
+        },
+        {
+          "file": "mocks/sync_producer.go",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "id": "3cdf0c0e56d6",
+      "template": "both MsgSet and RecordBatch are set, but record type is unknown",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "records.go",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "id": "39e5490260ab",
+      "template": "cannot get control record, record batch is empty",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "records.go",
+          "line": 230
+        }
+      ]
+    },
+    {
+      "id": "d2391cc4ae3c",
+      "template": "cannot parse \u003c*\u003e as a compression codec",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "message.go",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "id": "963bdde1b27c",
+      "template": "could not find broker id \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "admin.go",
+          "line": 483
+        }
+      ]
+    },
+    {
+      "id": "2fcd01b330d6",
+      "template": "describe producers on broker \u003c*\u003e: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "admin_transactions.go",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "id": "00b2e559172a",
+      "template": "describe producers: find leader for partition \u003c*\u003e of topic \u003c*\u003e: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "admin_transactions.go",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "id": "0bd3e5e1fc57",
+      "template": "describe transactions for \u003c*\u003e: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "admin_transactions.go",
+          "line": 190
+        }
+      ]
+    },
+    {
+      "id": "8aaf452912cf",
+      "template": "describe transactions: find coordinator for transactional id \u003c*\u003e: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "admin_transactions.go",
+          "line": 133
+        }
+      ]
+    },
+    {
+      "id": "6648b63c4342",
+      "template": "error creating toxic \u003c*\u003e: \u003c*\u003e \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "id": "348bbd522c85",
+      "template": "error decoding json for proxy \u003c*\u003e: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/client.go",
+          "line": 71
+        }
+      ]
+    },
+    {
+      "id": "38a7d6b66025",
+      "template": "error getting proxy \u003c*\u003e: \u003c*\u003e \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/client.go",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "id": "fe1fefeeaf30",
+      "template": "error resetting proxies: \u003c*\u003e \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/client.go",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "id": "a8cd32d5dc34",
+      "template": "error saving proxy: \u003c*\u003e \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 110
+        }
+      ]
+    },
+    {
+      "id": "973dc50cd9e5",
+      "template": "expected TopicResult for topic, \u003c*\u003e, for V5 protocol",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "create_topics_response.go",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "id": "a82ab1cc2d24",
+      "template": "expected int32 array to be non null",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "prep_encoder.go",
+          "line": 246
+        },
+        {
+          "file": "real_encoder.go",
+          "line": 251
+        }
+      ]
+    },
+    {
+      "id": "d183ec575e2a",
+      "template": "failed to advance the SCRAM exchange: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "broker.go",
+          "line": 1743
+        },
+        {
+          "file": "broker.go",
+          "line": 1799
+        }
+      ]
+    },
+    {
+      "id": "3bc04a799754",
+      "template": "failed to build client first message: token is nil",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "broker.go",
+          "line": 1837
+        }
+      ]
+    },
+    {
+      "id": "54b0a3da872b",
+      "template": "failed to control raw connection: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "sockopt_posix.go",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "id": "2441cff71f1e",
+      "template": "failed to encode \u003c*\u003e - \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "mockbroker.go",
+          "line": 299
+        }
+      ]
+    },
+    {
+      "id": "9ae8c10f012d",
+      "template": "failed to get ServerName from addr \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "broker.go",
+          "line": 2047
+        }
+      ]
+    },
+    {
+      "id": "a3ec251e4c62",
+      "template": "failed to get raw connection: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "sockopt_posix.go",
+          "line": 17
+        }
+      ]
+    },
+    {
+      "id": "e4216b5a94a3",
+      "template": "failed to get socket error: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "sockopt_posix.go",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "id": "2fca5c226e9b",
+      "template": "failed to http get proxy: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/client.go",
+          "line": 60
+        }
+      ]
+    },
+    {
+      "id": "6f531912936e",
+      "template": "failed to http post proxy: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 88
+        },
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "id": "d865eae4b41f",
+      "template": "failed to http post reset: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/client.go",
+          "line": 85
+        }
+      ]
+    },
+    {
+      "id": "8605f90c9314",
+      "template": "failed to http post toxic: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 49
+        }
+      ]
+    },
+    {
+      "id": "0da3391b90fe",
+      "template": "failed to json encode proxy: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "id": "ff5ac5f0512f",
+      "template": "failed to json encode toxic: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "id": "2bf2f90d8c35",
+      "template": "failed to make post proxy request: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 83
+        },
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 98
+        }
+      ]
+    },
+    {
+      "id": "7b4b895a4351",
+      "template": "failed to make post toxic request: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "id": "82a91494db4d",
+      "template": "failed to make proxy request: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/client.go",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "id": "5b861f7fb70b",
+      "template": "failed to make reset request: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/client.go",
+          "line": 81
+        }
+      ]
+    },
+    {
+      "id": "d3e0dfb37b9c",
+      "template": "failed to reassign partitions for topic",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "id": "e95ebfb91736",
+      "template": "failed to rewind post body: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "internal/toxiproxy/proxy.go",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "id": "d18680ec1286",
+      "template": "failed to start SCRAM exchange with the server: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "broker.go",
+          "line": 1738
+        },
+        {
+          "file": "broker.go",
+          "line": 1794
+        }
+      ]
+    },
+    {
+      "id": "366babec9ea6",
+      "template": "invalid version `\u003c*\u003e`",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "utils.go",
+          "line": 329
+        },
+        {
+          "file": "utils.go",
+          "line": 346
+        }
+      ]
+    },
+    {
+      "id": "053f3d0ca296",
+      "template": "kafka server: failed to create one or more ACL rules",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "id": "f637b840a204",
+      "template": "kafka server: failed to delete records",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "id": "2f21336b9384",
+      "template": "kafka: ConsumeClaim goroutine exited",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "consumer_group.go",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "id": "64f7580259c3",
+      "template": "kafka: broker connection already initiated",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "id": "1a459bdc307d",
+      "template": "kafka: broker for ID is not found",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "id": "15f7293cbbc2",
+      "template": "kafka: broker not connected",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "id": "44ef9bf0c5b3",
+      "template": "kafka: client has run out of available brokers to talk to",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "id": "55871abc1e70",
+      "template": "kafka: consumer offset was not advanced after a RecordBatch",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "id": "40728c6e5c01",
+      "template": "kafka: controller is not available",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 60
+        }
+      ]
+    },
+    {
+      "id": "c1813721ac71",
+      "template": "kafka: decompressed record batch is larger than the configured limit",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "id": "e91746015452",
+      "template": "kafka: heartbeat loop failed",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "consumer_group.go",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "id": "fe13b83d45d1",
+      "template": "kafka: insufficient data to decode packet, more bytes expected",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "id": "ea80008b5df6",
+      "template": "kafka: message is larger than Consumer.Fetch.Max",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "id": "1edd0c612ef8",
+      "template": "kafka: message received by producer in process of shutting down",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "id": "42fef0a78d1b",
+      "template": "kafka: no specific topics to update metadata",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 64
+        }
+      ]
+    },
+    {
+      "id": "b1acfb1d5bf0",
+      "template": "kafka: partition consumer giving up after consecutive failures",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "id": "a5abdc860232",
+      "template": "kafka: partition count changed for subscribed topic",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "consumer_group.go",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "id": "bcd2465dc1ab",
+      "template": "kafka: partitioner returned an invalid partition index",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "id": "1883035e62fe",
+      "template": "kafka: response did not contain all the expected topic/partition blocks",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "id": "77b396344291",
+      "template": "kafka: tried to use a client that was closed",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 17
+        }
+      ]
+    },
+    {
+      "id": "8a076aafba44",
+      "template": "kafka: tried to use a consumer group that was closed",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "consumer_group.go",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "id": "7d219ef0c176",
+      "template": "kafka: unknown SCRAM mechanism provided",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "id": "e5e5b4c1dd36",
+      "template": "kafka: unknown protocol message key",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "id": "045883ae1c06",
+      "template": "list transactions on broker \u003c*\u003e: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "admin_transactions.go",
+          "line": 270
+        },
+        {
+          "file": "admin_transactions.go",
+          "line": 272
+        }
+      ]
+    },
+    {
+      "id": "d6ee6dc11de4",
+      "template": "members and topics are not provided",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "balance_strategy.go",
+          "line": 415
+        }
+      ]
+    },
+    {
+      "id": "a7d1b2e61f6b",
+      "template": "no acl operation with name \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "acl_types.go",
+          "line": 84
+        }
+      ]
+    },
+    {
+      "id": "32bdbfc1a76f",
+      "template": "no acl permission with name \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "acl_types.go",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "id": "8c38dccd24ee",
+      "template": "no acl resource pattern with name \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "acl_types.go",
+          "line": 234
+        }
+      ]
+    },
+    {
+      "id": "b7169532b97e",
+      "template": "no acl resource with name \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "acl_types.go",
+          "line": 185
+        }
+      ]
+    },
+    {
+      "id": "9de048677352",
+      "template": "no available broker",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "admin.go",
+          "line": 492
+        }
+      ]
+    },
+    {
+      "id": "3f8ab05cf3a7",
+      "template": "no more expectations set on mock",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "mocks/mocks.go",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "id": "690bb8242fe0",
+      "template": "no such offset",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "offset_commit_request.go",
+          "line": 326
+        },
+        {
+          "file": "offset_commit_request.go",
+          "line": 330
+        }
+      ]
+    },
+    {
+      "id": "acbb74e4ed87",
+      "template": "no topics provided",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "consumer_group.go",
+          "line": 225
+        }
+      ]
+    },
+    {
+      "id": "8042d8e49588",
+      "template": "payload too large, will overflow int32",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "gssapi_kerberos.go",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "id": "9242c480ba9c",
+      "template": "retry buffer full: message discarded to prevent buffer overflow",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "async_producer.go",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "id": "7afa9ff5f869",
+      "template": "the extension `\u003c*\u003e` is invalid",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "broker.go",
+          "line": 1842
+        }
+      ]
+    },
+    {
+      "id": "392274981d32",
+      "template": "the partition consumer was never started",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "mocks/mocks.go",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "id": "62b2eb2c5355",
+      "template": "timed out feeding messages to the user",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "consumer.go",
+          "line": 481
+        }
+      ]
+    },
+    {
+      "id": "14d03a994adf",
+      "template": "transaction manager: cannot transition with a nil error",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "id": "cc084a76415f",
+      "template": "transaction manager: failed to send offsets to transaction",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 82
+        }
+      ]
+    },
+    {
+      "id": "c5262f6805aa",
+      "template": "transaction manager: failed to send partitions to transaction",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "id": "793bbc564324",
+      "template": "transaction manager: invalid transition attempted",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "id": "2ccf9a9961ce",
+      "template": "transaction manager: transaction is not ready",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 85
+        }
+      ]
+    },
+    {
+      "id": "632c8d54b54c",
+      "template": "transaction manager: unable to parse response",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 97
+        }
+      ]
+    },
+    {
+      "id": "5299d463f2d4",
+      "template": "transaction manager: you need to add TransactionalID to producer",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "errors.go",
+          "line": 88
+        }
+      ]
+    },
+    {
+      "id": "1a111fe3138d",
+      "template": "unable to find selected strategy: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "consumer_group.go",
+          "line": 403
+        }
+      ]
+    },
+    {
+      "id": "b07790bf44b5",
+      "template": "unknown records type: \u003c*\u003e",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "consumer.go",
+          "line": 1019
+        },
+        {
+          "file": "records.go",
+          "line": 65
+        },
+        {
+          "file": "records.go",
+          "line": 97
+        },
+        {
+          "file": "records.go",
+          "line": 119
+        },
+        {
+          "file": "records.go",
+          "line": 143
+        },
+        {
+          "file": "records.go",
+          "line": 162
+        },
+        {
+          "file": "records.go",
+          "line": 183
+        },
+        {
+          "file": "records.go",
+          "line": 205
+        },
+        {
+          "file": "records.go",
+          "line": 221
+        }
+      ]
+    },
+    {
+      "id": "c8c25258a093",
+      "template": "you must specify topic details",
+      "lib": "sarama",
+      "locations": [
+        {
+          "file": "admin.go",
+          "line": 329
+        }
+      ]
+    }
+  ]
+}

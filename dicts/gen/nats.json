@@ -1,0 +1,2973 @@
+{
+  "version": 1,
+  "module": "github.com/nats-io/nats.go",
+  "commit": "v1.53.1",
+  "anchor": "suffix",
+  "stats": {
+    "files": 126,
+    "calls": 349,
+    "dynamic": 38,
+    "parse_errors": 0
+  },
+  "templates": [
+    {
+      "id": "ecafd6a04d13",
+      "template": "\u003c*\u003e: at least one pending limit must be non-zero",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 1005
+        }
+      ]
+    },
+    {
+      "id": "12dd74fdb813",
+      "template": "\u003c*\u003e: auto stop after value cannot be less than 1",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 435
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 443
+        }
+      ]
+    },
+    {
+      "id": "e53f2e2ec805",
+      "template": "\u003c*\u003e: batch size must be at least 1",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/pull.go",
+          "line": 1112
+        }
+      ]
+    },
+    {
+      "id": "4ab6629ddecf",
+      "template": "\u003c*\u003e: both 'keep' and 'sequence' cannot be provided in purge request",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 107
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 120
+        }
+      ]
+    },
+    {
+      "id": "1d3c160c701b",
+      "template": "\u003c*\u003e: cannot specify both FetchContext and FetchMaxWait",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/pull.go",
+          "line": 834
+        },
+        {
+          "file": "jetstream/pull.go",
+          "line": 868
+        }
+      ]
+    },
+    {
+      "id": "25515802974c",
+      "template": "\u003c*\u003e: cannot specify both NextMaxWait and NextContext",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/pull.go",
+          "line": 601
+        }
+      ]
+    },
+    {
+      "id": "fd93b82ad281",
+      "template": "\u003c*\u003e: connection closed by remote after TLS handshake: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 2835
+        }
+      ]
+    },
+    {
+      "id": "3095e7f1b015",
+      "template": "\u003c*\u003e: context deadline already exceeded",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 567
+        }
+      ]
+    },
+    {
+      "id": "d138c362986a",
+      "template": "\u003c*\u003e: creating consumer \u003c*\u003e on stream \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jsm.go",
+          "line": 464
+        }
+      ]
+    },
+    {
+      "id": "0fedf62e8149",
+      "template": "\u003c*\u003e: cron expression cannot be empty",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 761
+        }
+      ]
+    },
+    {
+      "id": "e8112e2a0073",
+      "template": "\u003c*\u003e: description",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/request.go",
+          "line": 138
+        }
+      ]
+    },
+    {
+      "id": "2a98479fc0e4",
+      "template": "\u003c*\u003e: error code",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/request.go",
+          "line": 135
+        }
+      ]
+    },
+    {
+      "id": "54c156556b7d",
+      "template": "\u003c*\u003e: expires value must be at least 1s",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 231
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 240
+        }
+      ]
+    },
+    {
+      "id": "27be8a144ba6",
+      "template": "\u003c*\u003e: expiry time should be at least 2 times the heartbeat",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/pull.go",
+          "line": 847
+        },
+        {
+          "file": "jetstream/pull.go",
+          "line": 881
+        }
+      ]
+    },
+    {
+      "id": "8f0ef7905fd4",
+      "template": "\u003c*\u003e: idle heartbeat has to be greater than 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 2894
+        }
+      ]
+    },
+    {
+      "id": "cd15e74b990f",
+      "template": "\u003c*\u003e: idle heartbeat value too large",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 3053
+        },
+        {
+          "file": "js.go",
+          "line": 3355
+        }
+      ]
+    },
+    {
+      "id": "22143281f1fe",
+      "template": "\u003c*\u003e: idle_heartbeat value must be within 500ms-30s range",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 411
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 420
+        }
+      ]
+    },
+    {
+      "id": "79fa824bdb74",
+      "template": "\u003c*\u003e: include history cannot be used with updates only",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/kv_options.go",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "id": "e1f0c3cdbd88",
+      "template": "\u003c*\u003e: invalid endpoint name",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 420
+        }
+      ]
+    },
+    {
+      "id": "3c61840bc637",
+      "template": "\u003c*\u003e: invalid endpoint queue group",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 426
+        }
+      ]
+    },
+    {
+      "id": "0c7d9898c671",
+      "template": "\u003c*\u003e: invalid endpoint subject",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 423
+        }
+      ]
+    },
+    {
+      "id": "18e266ad3dfc",
+      "template": "\u003c*\u003e: max ack pending should be \u003e= 1",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "id": "6c167dc01b86",
+      "template": "\u003c*\u003e: max bytes must be greater than 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 263
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 271
+        }
+      ]
+    },
+    {
+      "id": "426b444b9e49",
+      "template": "\u003c*\u003e: maxBytes size must be at least 1",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 191
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 208
+        }
+      ]
+    },
+    {
+      "id": "8526490f3df4",
+      "template": "\u003c*\u003e: maxMessages already set",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 194
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 211
+        }
+      ]
+    },
+    {
+      "id": "b50d37b2a8a7",
+      "template": "\u003c*\u003e: maxMessages size must be at least 1",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 147
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 155
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 188
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 205
+        }
+      ]
+    },
+    {
+      "id": "de76d6276cd7",
+      "template": "\u003c*\u003e: min ack pending should be more than 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 495
+        }
+      ]
+    },
+    {
+      "id": "db661a072b11",
+      "template": "\u003c*\u003e: min pending should be more than 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 322
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 330
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 347
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 355
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 481
+        }
+      ]
+    },
+    {
+      "id": "a1311269ed35",
+      "template": "\u003c*\u003e: name is required",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/consumer.go",
+          "line": 532
+        }
+      ]
+    },
+    {
+      "id": "9b29c3512263",
+      "template": "\u003c*\u003e: not a JetStream subscription",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 2077
+        }
+      ]
+    },
+    {
+      "id": "8f32058e288a",
+      "template": "\u003c*\u003e: queue group: invalid queue group name",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 532
+        }
+      ]
+    },
+    {
+      "id": "e827f08c607a",
+      "template": "\u003c*\u003e: recreating ordered consumer",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 2262
+        }
+      ]
+    },
+    {
+      "id": "60f75b410509",
+      "template": "\u003c*\u003e: retry attempts cannot be negative",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 702
+        },
+        {
+          "file": "js.go",
+          "line": 1033
+        }
+      ]
+    },
+    {
+      "id": "84c23c85facd",
+      "template": "\u003c*\u003e: retry wait should be more than 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 690
+        }
+      ]
+    },
+    {
+      "id": "2249b72aa32a",
+      "template": "\u003c*\u003e: schedule TTL must be greater than 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 801
+        }
+      ]
+    },
+    {
+      "id": "53b95348b052",
+      "template": "\u003c*\u003e: schedule interval must be at least 1s",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 746
+        }
+      ]
+    },
+    {
+      "id": "79c2b9d0b58a",
+      "template": "\u003c*\u003e: schedule source subject cannot be empty",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 789
+        }
+      ]
+    },
+    {
+      "id": "f9ec71525969",
+      "template": "\u003c*\u003e: schedule target subject cannot be empty",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 775
+        }
+      ]
+    },
+    {
+      "id": "bbeeb632ca4f",
+      "template": "\u003c*\u003e: schedule time zone cannot be empty",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 826
+        }
+      ]
+    },
+    {
+      "id": "34e423abaf94",
+      "template": "\u003c*\u003e: service name: name should not be empty and should consist of alphanumerical characters, dashes and underscores",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 526
+        }
+      ]
+    },
+    {
+      "id": "cbab0b192d9e",
+      "template": "\u003c*\u003e: stall wait cannot be set to sync publish",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/publish.go",
+          "line": 200
+        }
+      ]
+    },
+    {
+      "id": "730be1289ad5",
+      "template": "\u003c*\u003e: stall wait should be more than 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 715
+        }
+      ]
+    },
+    {
+      "id": "11d68d2350eb",
+      "template": "\u003c*\u003e: subject cannot be empty",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 667
+        }
+      ]
+    },
+    {
+      "id": "458fae601de3",
+      "template": "\u003c*\u003e: subject should start with $JS.ACK",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "internal/parser/parse.go",
+          "line": 89
+        }
+      ]
+    },
+    {
+      "id": "d0e66b29a402",
+      "template": "\u003c*\u003e: the value of Heartbeat must be less than 50% of expiry",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/pull.go",
+          "line": 1209
+        }
+      ]
+    },
+    {
+      "id": "7bafc9cfa295",
+      "template": "\u003c*\u003e: timeout value must be greater than 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 85
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 530
+        },
+        {
+          "file": "jetstream/jetstream_options.go",
+          "line": 549
+        }
+      ]
+    },
+    {
+      "id": "56d48b0d7016",
+      "template": "\u003c*\u003e: updates only cannot be used with include history",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/kv_options.go",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "id": "a244faeb103c",
+      "template": "\u003c*\u003e: version: version should not be empty should match the SemVer format",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 529
+        }
+      ]
+    },
+    {
+      "id": "5da745ef236f",
+      "template": "API prefix cannot be empty",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream.go",
+          "line": 533
+        }
+      ]
+    },
+    {
+      "id": "14ef34af9609",
+      "template": "NATS error when sending response",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/request.go",
+          "line": 85
+        }
+      ]
+    },
+    {
+      "id": "a59fd3d376fc",
+      "template": "argument required",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/request.go",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "id": "54c7407130d5",
+      "template": "cannot create a queue subscription \u003c*\u003e for a consumer with a deliver group \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1609
+        }
+      ]
+    },
+    {
+      "id": "a381868c3c4b",
+      "template": "cannot create a queue subscription for a consumer without a deliver group",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1595
+        }
+      ]
+    },
+    {
+      "id": "912eaff377b8",
+      "template": "cannot create a subscription for a consumer with a deliver group \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1605
+        }
+      ]
+    },
+    {
+      "id": "6e40bd02237e",
+      "template": "cannot use custom backoff intervals when attempts are set",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/ordered.go",
+          "line": 781
+        }
+      ]
+    },
+    {
+      "id": "05281693b3b2",
+      "template": "compression negotiation error",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "ws.go",
+          "line": 687
+        }
+      ]
+    },
+    {
+      "id": "25ecb7ef4b0b",
+      "template": "connected",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/pull.go",
+          "line": 585
+        }
+      ]
+    },
+    {
+      "id": "e5f3241849e5",
+      "template": "consumer is already bound to a subscription",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1599
+        }
+      ]
+    },
+    {
+      "id": "432cf1f1bf48",
+      "template": "control frame does not have final bit set",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "ws.go",
+          "line": 273
+        }
+      ]
+    },
+    {
+      "id": "9302ba6ef409",
+      "template": "control frame length bigger than maximum allowed of \u003c*\u003e bytes",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "ws.go",
+          "line": 265
+        }
+      ]
+    },
+    {
+      "id": "4f022a284039",
+      "template": "control frame should not be compressed",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "ws.go",
+          "line": 270
+        }
+      ]
+    },
+    {
+      "id": "670f82ad8b29",
+      "template": "could not cleanup bucket after erroneous put operation: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 396
+        }
+      ]
+    },
+    {
+      "id": "3e172c267132",
+      "template": "disconnected",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/pull.go",
+          "line": 586
+        }
+      ]
+    },
+    {
+      "id": "4b3945f86ae5",
+      "template": "domain cannot be empty",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream.go",
+          "line": 572
+        }
+      ]
+    },
+    {
+      "id": "42fcbccf1d2e",
+      "template": "draining subscription for request handler: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 912
+        }
+      ]
+    },
+    {
+      "id": "082f677cbd81",
+      "template": "draining subscription for subject \u003c*\u003e: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 733
+        }
+      ]
+    },
+    {
+      "id": "eccc5da93d8a",
+      "template": "error signing nonce: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 3089
+        }
+      ]
+    },
+    {
+      "id": "07e5bc969feb",
+      "template": "failed to get in-process connection: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 2443
+        }
+      ]
+    },
+    {
+      "id": "5394afb399a2",
+      "template": "invalid ConsumerReplicas value (\u003c*\u003e), needs to be greater than 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 2814
+        }
+      ]
+    },
+    {
+      "id": "eadcb088ec41",
+      "template": "invalid InactiveThreshold value (\u003c*\u003e), needs to be greater or equal to 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 2803
+        }
+      ]
+    },
+    {
+      "id": "5eb7f5d05afb",
+      "template": "invalid continuation frame",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "ws.go",
+          "line": 284
+        }
+      ]
+    },
+    {
+      "id": "8b564f0e440f",
+      "template": "invalid format of ACK subject",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "internal/parser/parse.go",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "id": "0975cd9392be",
+      "template": "invalid semver",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 2721
+        }
+      ]
+    },
+    {
+      "id": "9e548bd4df65",
+      "template": "invalid websocket connection",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "ws.go",
+          "line": 675
+        }
+      ]
+    },
+    {
+      "id": "a3ba4a0fc642",
+      "template": "invalid websocket frame: MSB set in 64-bit payload length",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "ws.go",
+          "line": 308
+        }
+      ]
+    },
+    {
+      "id": "ad163f7d86ab",
+      "template": "marshaling response",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/request.go",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "id": "15dd45ced2e3",
+      "template": "nats: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/message.go",
+          "line": 505
+        },
+        {
+          "file": "jetstream/publish.go",
+          "line": 268
+        },
+        {
+          "file": "jetstream/stream.go",
+          "line": 643
+        },
+        {
+          "file": "js.go",
+          "line": 2978
+        },
+        {
+          "file": "jsm.go",
+          "line": 1344
+        },
+        {
+          "file": "nats.go",
+          "line": 142
+        },
+        {
+          "file": "nats.go",
+          "line": 4332
+        },
+        {
+          "file": "nats.go",
+          "line": 6746
+        },
+        {
+          "file": "nats.go",
+          "line": 6751
+        },
+        {
+          "file": "nats.go",
+          "line": 6800
+        }
+      ]
+    },
+    {
+      "id": "008867cd0397",
+      "template": "nats: Default Encoder can't decode to type \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "encoders/builtin/default_enc.go",
+          "line": 121
+        }
+      ]
+    },
+    {
+      "id": "ef3fc0b8f912",
+      "template": "nats: Got an error trying to unmarshal: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "enc.go",
+          "line": 235
+        },
+        {
+          "file": "netchan.go",
+          "line": 95
+        }
+      ]
+    },
+    {
+      "id": "18196e865db4",
+      "template": "nats: Handler required for EncodedConn Subscription",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "enc.go",
+          "line": 211
+        }
+      ]
+    },
+    {
+      "id": "1038c0fc3fdb",
+      "template": "nats: Handler requires at least one argument",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "enc.go",
+          "line": 215
+        }
+      ]
+    },
+    {
+      "id": "39585e5beb05",
+      "template": "nats: Invalid protobuf proto.Message object passed to decode",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "encoders/protobuf/protobuf_enc.go",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "id": "f975c8e074d9",
+      "template": "nats: Invalid protobuf proto.Message object passed to encode",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "encoders/protobuf/protobuf_enc.go",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "id": "635db6935f43",
+      "template": "nats: Nil Connection",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "enc.go",
+          "line": 71
+        }
+      ]
+    },
+    {
+      "id": "ffaf9d426056",
+      "template": "nats: Not a valid nkey user seed",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 6728
+        }
+      ]
+    },
+    {
+      "id": "5b86f84fd52d",
+      "template": "nats: Parse Error [\u003c*\u003e]: '\u003c*\u003e'",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "parser.go",
+          "line": 417
+        }
+      ]
+    },
+    {
+      "id": "b1172a36d6b6",
+      "template": "nats: account authentication expired",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 119
+        }
+      ]
+    },
+    {
+      "id": "2a5cd305876b",
+      "template": "nats: ack policy can not be set for an ordered consumer",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1765
+        }
+      ]
+    },
+    {
+      "id": "e158f225e5a0",
+      "template": "nats: an object already exists with that name",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "id": "51b131726f91",
+      "template": "nats: argument needs to be a channel type",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "id": "c5f764478af2",
+      "template": "nats: at least one of certCB or rootCAsCB must be set",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 127
+        }
+      ]
+    },
+    {
+      "id": "cee1021ce888",
+      "template": "nats: authentication expired",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 116
+        }
+      ]
+    },
+    {
+      "id": "9d2900778406",
+      "template": "nats: authentication revoked",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 117
+        }
+      ]
+    },
+    {
+      "id": "9bf949899106",
+      "template": "nats: authorization violation",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 115
+        }
+      ]
+    },
+    {
+      "id": "8ea7853eba0a",
+      "template": "nats: bucket malformed",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 139
+        }
+      ]
+    },
+    {
+      "id": "1311501ac077",
+      "template": "nats: bucket not found",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 353
+        }
+      ]
+    },
+    {
+      "id": "e7b7be4831ee",
+      "template": "nats: bucket not valid key-value store",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 354
+        }
+      ]
+    },
+    {
+      "id": "aeb13c6d0d8e",
+      "template": "nats: bucket required",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 138
+        }
+      ]
+    },
+    {
+      "id": "4eb55963070a",
+      "template": "nats: can not bind existing consumer for an ordered consumer",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1781
+        }
+      ]
+    },
+    {
+      "id": "e68af429613b",
+      "template": "nats: can not marshal \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/stream_config.go",
+          "line": 523
+        },
+        {
+          "file": "jetstream/stream_config.go",
+          "line": 559
+        },
+        {
+          "file": "jetstream/stream_config.go",
+          "line": 593
+        },
+        {
+          "file": "jetstream/stream_config.go",
+          "line": 639
+        },
+        {
+          "file": "js.go",
+          "line": 3994
+        },
+        {
+          "file": "js.go",
+          "line": 4030
+        },
+        {
+          "file": "js.go",
+          "line": 4079
+        }
+      ]
+    },
+    {
+      "id": "9039959d68d1",
+      "template": "nats: can not unmarshal \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/stream_config.go",
+          "line": 536
+        },
+        {
+          "file": "jetstream/stream_config.go",
+          "line": 570
+        },
+        {
+          "file": "jetstream/stream_config.go",
+          "line": 604
+        },
+        {
+          "file": "jetstream/stream_config.go",
+          "line": 650
+        },
+        {
+          "file": "js.go",
+          "line": 3788
+        },
+        {
+          "file": "js.go",
+          "line": 3847
+        },
+        {
+          "file": "js.go",
+          "line": 4007
+        },
+        {
+          "file": "js.go",
+          "line": 4041
+        },
+        {
+          "file": "js.go",
+          "line": 4090
+        }
+      ]
+    },
+    {
+      "id": "1f55bfe6cab7",
+      "template": "nats: can not use pull mode for an ordered consumer",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1785
+        }
+      ]
+    },
+    {
+      "id": "b62b26e92b4d",
+      "template": "nats: cannot set user info callback and user/pass",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 144
+        }
+      ]
+    },
+    {
+      "id": "b0c28e9d1093",
+      "template": "nats: cannot unmarshal \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/consumer_config.go",
+          "line": 389
+        },
+        {
+          "file": "jetstream/consumer_config.go",
+          "line": 449
+        },
+        {
+          "file": "jetstream/consumer_config.go",
+          "line": 521
+        },
+        {
+          "file": "jetstream/consumer_config.go",
+          "line": 570
+        }
+      ]
+    },
+    {
+      "id": "9acc78119311",
+      "template": "nats: cannot update meta for a deleted object",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 140
+        }
+      ]
+    },
+    {
+      "id": "2f5ec8c32286",
+      "template": "nats: client ID not supported by this server",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 136
+        }
+      ]
+    },
+    {
+      "id": "5aad0bccc462",
+      "template": "nats: client IP not supported by this server",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 147
+        }
+      ]
+    },
+    {
+      "id": "41a43cd913d0",
+      "template": "nats: config required",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 350
+        }
+      ]
+    },
+    {
+      "id": "f15f4b00dc72",
+      "template": "nats: configuration requests \u003c*\u003e to be \u003c*\u003e, but consumer's value is \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1621
+        }
+      ]
+    },
+    {
+      "id": "602895b042f1",
+      "template": "nats: connect message, json parse error",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 121
+        }
+      ]
+    },
+    {
+      "id": "523c7c52091e",
+      "template": "nats: connection closed",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 102
+        }
+      ]
+    },
+    {
+      "id": "243191dd18f2",
+      "template": "nats: connection draining",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "id": "ad0a9ecb435a",
+      "template": "nats: connection is not tls",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 154
+        }
+      ]
+    },
+    {
+      "id": "71f4e1e793c6",
+      "template": "nats: connection reconnecting",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 105
+        }
+      ]
+    },
+    {
+      "id": "317fe2f99bf9",
+      "template": "nats: context requires a deadline",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 134
+        }
+      ]
+    },
+    {
+      "id": "2871098bdab2",
+      "template": "nats: deliver subject can not be set for an ordered consumer",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1773
+        }
+      ]
+    },
+    {
+      "id": "cc55379704ae",
+      "template": "nats: domain and external are both set",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/jetstream.go",
+          "line": 674
+        },
+        {
+          "file": "jsm.go",
+          "line": 325
+        }
+      ]
+    },
+    {
+      "id": "3d9b1e707c60",
+      "template": "nats: draining connection timed out",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 104
+        }
+      ]
+    },
+    {
+      "id": "07e1495aee67",
+      "template": "nats: duplicate consumer names (\u003c*\u003e and \u003c*\u003e)",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 2542
+        },
+        {
+          "file": "js.go",
+          "line": 2716
+        }
+      ]
+    },
+    {
+      "id": "b03db93a29bd",
+      "template": "nats: duplicate stream name (\u003c*\u003e and \u003c*\u003e)",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 2694
+        },
+        {
+          "file": "js.go",
+          "line": 2719
+        }
+      ]
+    },
+    {
+      "id": "55ce99d467b2",
+      "template": "nats: durable can not be set for an ordered consumer",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1761
+        }
+      ]
+    },
+    {
+      "id": "599a6cb9eb5f",
+      "template": "nats: error creating async reply handler",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1078
+        }
+      ]
+    },
+    {
+      "id": "bba41fa057eb",
+      "template": "nats: error creating async reply handler: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/publish.go",
+          "line": 359
+        }
+      ]
+    },
+    {
+      "id": "5f9437634c8e",
+      "template": "nats: error loading client certificate: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 1217
+        }
+      ]
+    },
+    {
+      "id": "8ea61374461b",
+      "template": "nats: error loading or parsing rootCA file: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 1189
+        }
+      ]
+    },
+    {
+      "id": "68362a322676",
+      "template": "nats: error parsing client certificate: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 1221
+        }
+      ]
+    },
+    {
+      "id": "9a27ee9c74f6",
+      "template": "nats: expected '\u003c*\u003e', got '\u003c*\u003e'",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 3214
+        }
+      ]
+    },
+    {
+      "id": "dbd4a0ab65ff",
+      "template": "nats: failed to get home dir, require $HOME",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 6777
+        }
+      ]
+    },
+    {
+      "id": "de9004b36f0a",
+      "template": "nats: failed to get home dir, require %HOMEDRIVE% and %HOMEPATH% or %USERPROFILE%",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 6765
+        }
+      ]
+    },
+    {
+      "id": "69a7f523b553",
+      "template": "nats: failed to parse root certificate from \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 1193
+        }
+      ]
+    },
+    {
+      "id": "aa04cef415ad",
+      "template": "nats: headers not supported by this server",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 149
+        }
+      ]
+    },
+    {
+      "id": "166e48777630",
+      "template": "nats: history limited to a max of 64",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 357
+        }
+      ]
+    },
+    {
+      "id": "c3928926ec80",
+      "template": "nats: illegal call on an async subscription",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 125
+        }
+      ]
+    },
+    {
+      "id": "452add98cccc",
+      "template": "nats: include history can not be used with updates only",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 183
+        }
+      ]
+    },
+    {
+      "id": "b1fdb4f4c4ec",
+      "template": "nats: invalid Get, object is a link to a bucket",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 137
+        }
+      ]
+    },
+    {
+      "id": "2ac2fd87fba0",
+      "template": "nats: invalid argument",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 132
+        }
+      ]
+    },
+    {
+      "id": "5a974bcff624",
+      "template": "nats: invalid bucket name",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 351
+        }
+      ]
+    },
+    {
+      "id": "f607d5f16208",
+      "template": "nats: invalid connection",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "id": "cbdaee2fcbad",
+      "template": "nats: invalid context",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 133
+        }
+      ]
+    },
+    {
+      "id": "518c7f926e25",
+      "template": "nats: invalid custom prefix",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 1699
+        }
+      ]
+    },
+    {
+      "id": "a6c6f5572f97",
+      "template": "nats: invalid durable name",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jserrors.go",
+          "line": 167
+        }
+      ]
+    },
+    {
+      "id": "ad5e1df93b44",
+      "template": "nats: invalid format of Nats-Pending-Bytes",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/message.go",
+          "line": 523
+        }
+      ]
+    },
+    {
+      "id": "39ac4fcacc18",
+      "template": "nats: invalid format of Nats-Pending-Messages",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/message.go",
+          "line": 515
+        }
+      ]
+    },
+    {
+      "id": "0db40d42b9f1",
+      "template": "nats: invalid key",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 352
+        }
+      ]
+    },
+    {
+      "id": "a69c7ff51094",
+      "template": "nats: invalid message or message nil",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 131
+        }
+      ]
+    },
+    {
+      "id": "dad17785aa62",
+      "template": "nats: invalid object-store name",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 126
+        }
+      ]
+    },
+    {
+      "id": "d5f001ddbaa8",
+      "template": "nats: invalid queue name",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 111
+        }
+      ]
+    },
+    {
+      "id": "1cf897ad1dc6",
+      "template": "nats: invalid sequence header '\u003c*\u003e': \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/stream.go",
+          "line": 664
+        },
+        {
+          "file": "jsm.go",
+          "line": 1367
+        }
+      ]
+    },
+    {
+      "id": "7fd395c3833e",
+      "template": "nats: invalid subject",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 110
+        }
+      ]
+    },
+    {
+      "id": "8a2cdd36f2d0",
+      "template": "nats: invalid subscription",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 108
+        }
+      ]
+    },
+    {
+      "id": "df8867218a40",
+      "template": "nats: invalid subscription type",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 109
+        }
+      ]
+    },
+    {
+      "id": "9daf140240f5",
+      "template": "nats: invalid timestamp header '\u003c*\u003e': \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/stream.go",
+          "line": 673
+        },
+        {
+          "file": "jsm.go",
+          "line": 1381
+        }
+      ]
+    },
+    {
+      "id": "dc0c1ecc10ca",
+      "template": "nats: key not found",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 355
+        }
+      ]
+    },
+    {
+      "id": "b316c10cc135",
+      "template": "nats: key was deleted",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 356
+        }
+      ]
+    },
+    {
+      "id": "fabab729892f",
+      "template": "nats: key watcher timed out waiting for initial keys",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 359
+        }
+      ]
+    },
+    {
+      "id": "270002148a2f",
+      "template": "nats: key-value requires at least server version 2.6.2",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 399
+        },
+        {
+          "file": "kv.go",
+          "line": 424
+        }
+      ]
+    },
+    {
+      "id": "cff17f0606ad",
+      "template": "nats: link cannot be set when putting the object in bucket",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 133
+        }
+      ]
+    },
+    {
+      "id": "410c98b1e248",
+      "template": "nats: max ack pending should be \u003e= 1",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 996
+        }
+      ]
+    },
+    {
+      "id": "36912f1f3fa1",
+      "template": "nats: max deliver can not be set for an ordered consumer",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1769
+        }
+      ]
+    },
+    {
+      "id": "21f32abedecf",
+      "template": "nats: maximum account active connections exceeded",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 153
+        }
+      ]
+    },
+    {
+      "id": "6ae1d088b8b5",
+      "template": "nats: maximum messages delivered",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 124
+        }
+      ]
+    },
+    {
+      "id": "428ebdd09a15",
+      "template": "nats: maximum payload exceeded",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 123
+        }
+      ]
+    },
+    {
+      "id": "e18719d64b42",
+      "template": "nats: message could not decode headers",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "id": "d5a456413460",
+      "template": "nats: message does not have a reply",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 146
+        }
+      ]
+    },
+    {
+      "id": "fa512b5b9bf0",
+      "template": "nats: message is not bound to subscription/connection",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 145
+        }
+      ]
+    },
+    {
+      "id": "42590de2b8a5",
+      "template": "nats: missing sequence header",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/stream.go",
+          "line": 660
+        },
+        {
+          "file": "jsm.go",
+          "line": 1363
+        }
+      ]
+    },
+    {
+      "id": "08a698dbd2f7",
+      "template": "nats: missing stream header",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/stream.go",
+          "line": 655
+        },
+        {
+          "file": "jsm.go",
+          "line": 1355
+        }
+      ]
+    },
+    {
+      "id": "b82a606cea0a",
+      "template": "nats: missing subject header",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/stream.go",
+          "line": 677
+        },
+        {
+          "file": "jsm.go",
+          "line": 1386
+        }
+      ]
+    },
+    {
+      "id": "168b0e7508a5",
+      "template": "nats: missing timestamp header",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/stream.go",
+          "line": 668
+        },
+        {
+          "file": "jsm.go",
+          "line": 1371
+        }
+      ]
+    },
+    {
+      "id": "78a5607e4d01",
+      "template": "nats: mixing of websocket and non websocket URLs is not allowed",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 159
+        }
+      ]
+    },
+    {
+      "id": "a45e4e5ec784",
+      "template": "nats: multiple tls.Configs not allowed",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 126
+        }
+      ]
+    },
+    {
+      "id": "d7181e35506e",
+      "template": "nats: name is required",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 131
+        }
+      ]
+    },
+    {
+      "id": "c092da4b4b75",
+      "template": "nats: nkey defined without a signature handler",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 138
+        }
+      ]
+    },
+    {
+      "id": "2d45dd5513c4",
+      "template": "nats: nkeys not supported by the server",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 141
+        }
+      ]
+    },
+    {
+      "id": "39393e8676b2",
+      "template": "nats: no echo option not supported by this server",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 135
+        }
+      ]
+    },
+    {
+      "id": "8bef8712e5d4",
+      "template": "nats: no keys found",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 358
+        }
+      ]
+    },
+    {
+      "id": "77920638582b",
+      "template": "nats: no messages",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 2911
+        }
+      ]
+    },
+    {
+      "id": "a03e4f076f92",
+      "template": "nats: no objects found",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 129
+        }
+      ]
+    },
+    {
+      "id": "58483cd5a17d",
+      "template": "nats: no responders available for request",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 151
+        }
+      ]
+    },
+    {
+      "id": "d5ccaab1c2a4",
+      "template": "nats: no servers available for connection",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 120
+        }
+      ]
+    },
+    {
+      "id": "cc7599f241f6",
+      "template": "nats: not allowed to link to a deleted object",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 135
+        }
+      ]
+    },
+    {
+      "id": "3324bd826aae",
+      "template": "nats: not allowed to link to another link",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 136
+        }
+      ]
+    },
+    {
+      "id": "f12cccad48db",
+      "template": "nats: object digest hash has invalid format",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 128
+        }
+      ]
+    },
+    {
+      "id": "c3d90bc92e12",
+      "template": "nats: object not found",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 125
+        }
+      ]
+    },
+    {
+      "id": "5a45103734a1",
+      "template": "nats: object required",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 134
+        }
+      ]
+    },
+    {
+      "id": "7b006ff2f1ca",
+      "template": "nats: object-store config required",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 123
+        }
+      ]
+    },
+    {
+      "id": "44c6fe2fe85a",
+      "template": "nats: object-store meta information invalid",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 124
+        }
+      ]
+    },
+    {
+      "id": "cdfa4f8bcd50",
+      "template": "nats: object-store requires at least server version 2.6.2",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 132
+        }
+      ]
+    },
+    {
+      "id": "5d4b909b9fe1",
+      "template": "nats: option Durable set more than once",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 2539
+        }
+      ]
+    },
+    {
+      "id": "e32c9fba7d26",
+      "template": "nats: outbound buffer limit exceeded",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 129
+        }
+      ]
+    },
+    {
+      "id": "fbae2a1eecbd",
+      "template": "nats: permissions violation",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 118
+        }
+      ]
+    },
+    {
+      "id": "2ae8bd3de2d2",
+      "template": "nats: processHeaderMsgArgs Bad or Missing Header Size: '\u003c*\u003e'",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "parser.go",
+          "line": 527
+        }
+      ]
+    },
+    {
+      "id": "f15ddea65876",
+      "template": "nats: processHeaderMsgArgs Bad or Missing Sid: '\u003c*\u003e'",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "parser.go",
+          "line": 524
+        }
+      ]
+    },
+    {
+      "id": "24b3c4454353",
+      "template": "nats: processHeaderMsgArgs Bad or Missing Size: '\u003c*\u003e'",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "parser.go",
+          "line": 530
+        }
+      ]
+    },
+    {
+      "id": "e9704d5542a8",
+      "template": "nats: processHeaderMsgArgs Parse Error: '\u003c*\u003e'",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "parser.go",
+          "line": 521
+        }
+      ]
+    },
+    {
+      "id": "54156520a7a0",
+      "template": "nats: processMsgArgs Bad or Missing Sid: '\u003c*\u003e'",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "parser.go",
+          "line": 476
+        }
+      ]
+    },
+    {
+      "id": "45030e13c7f6",
+      "template": "nats: processMsgArgs Bad or Missing Size: '\u003c*\u003e'",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "parser.go",
+          "line": 479
+        }
+      ]
+    },
+    {
+      "id": "a2c0c5c386f9",
+      "template": "nats: processMsgArgs Parse Error: '\u003c*\u003e'",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "parser.go",
+          "line": 473
+        }
+      ]
+    },
+    {
+      "id": "bc39b7a12cc8",
+      "template": "nats: protocol exception, INFO not received",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 128
+        }
+      ]
+    },
+    {
+      "id": "51d98debb499",
+      "template": "nats: queue subscription doesn't support idle heartbeat nor flow control",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1723
+        }
+      ]
+    },
+    {
+      "id": "3c3c9ffecefb",
+      "template": "nats: queues not be set for an ordered consumer",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1777
+        }
+      ]
+    },
+    {
+      "id": "c6900fd9c89f",
+      "template": "nats: received a corrupt object, digests do not match",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "object.go",
+          "line": 127
+        }
+      ]
+    },
+    {
+      "id": "2fde36e3d9da",
+      "template": "nats: reply subject should be empty",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1068
+        }
+      ]
+    },
+    {
+      "id": "4f411ad85315",
+      "template": "nats: requests pending",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 2915
+        }
+      ]
+    },
+    {
+      "id": "df354a55fb8d",
+      "template": "nats: response should have headers",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/stream.go",
+          "line": 651
+        },
+        {
+          "file": "jsm.go",
+          "line": 1351
+        }
+      ]
+    },
+    {
+      "id": "4607f09e5d47",
+      "template": "nats: secure connection not available",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 107
+        }
+      ]
+    },
+    {
+      "id": "f64517855234",
+      "template": "nats: secure connection required",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "id": "c274d271d0bf",
+      "template": "nats: selected server is not in the pool",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 158
+        }
+      ]
+    },
+    {
+      "id": "e1089f7bba33",
+      "template": "nats: server is disconnected",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 148
+        }
+      ]
+    },
+    {
+      "id": "e88f5b0e13fc",
+      "template": "nats: server maximum connections exceeded",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 152
+        }
+      ]
+    },
+    {
+      "id": "872506532d79",
+      "template": "nats: server maximum subscriptions exceeded",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 156
+        }
+      ]
+    },
+    {
+      "id": "d63da27afc26",
+      "template": "nats: slow consumer, messages dropped",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 112
+        }
+      ]
+    },
+    {
+      "id": "9544ad8b5b41",
+      "template": "nats: stall wait cannot be set to sync publish",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 562
+        }
+      ]
+    },
+    {
+      "id": "235cccd1c9c8",
+      "template": "nats: stall wait should be more than 0",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1225
+        }
+      ]
+    },
+    {
+      "id": "b09a9407e5b0",
+      "template": "nats: subject required",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "js.go",
+          "line": 1701
+        }
+      ]
+    },
+    {
+      "id": "5897e2d799e4",
+      "template": "nats: timeout",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 113
+        }
+      ]
+    },
+    {
+      "id": "d24d5662a756",
+      "template": "nats: timeout invalid",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 114
+        }
+      ]
+    },
+    {
+      "id": "2e98bc5a683c",
+      "template": "nats: tls error",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 155
+        }
+      ]
+    },
+    {
+      "id": "3a3693d90fac",
+      "template": "nats: token and token handler both set",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 143
+        }
+      ]
+    },
+    {
+      "id": "712b3511890e",
+      "template": "nats: unknown acknowledgement policy \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/consumer_config.go",
+          "line": 537
+        },
+        {
+          "file": "js.go",
+          "line": 3805
+        }
+      ]
+    },
+    {
+      "id": "26d9b9594403",
+      "template": "nats: unknown deliver policy \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/consumer_config.go",
+          "line": 470
+        },
+        {
+          "file": "js.go",
+          "line": 3937
+        }
+      ]
+    },
+    {
+      "id": "66e3adadffec",
+      "template": "nats: unknown priority policy \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/consumer_config.go",
+          "line": 405
+        }
+      ]
+    },
+    {
+      "id": "a84cb2e86d62",
+      "template": "nats: unknown replay policy \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/consumer_config.go",
+          "line": 582
+        },
+        {
+          "file": "js.go",
+          "line": 3860
+        }
+      ]
+    },
+    {
+      "id": "344c8d25889b",
+      "template": "nats: updates only can not be used with include history",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "kv.go",
+          "line": 194
+        }
+      ]
+    },
+    {
+      "id": "496d9715c23c",
+      "template": "nats: user callback and nkey defined",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 140
+        }
+      ]
+    },
+    {
+      "id": "ca0d633272d5",
+      "template": "nats: user callback defined without a signature handler",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 137
+        }
+      ]
+    },
+    {
+      "id": "7cf5cc857518",
+      "template": "nats: user callback not defined",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 139
+        }
+      ]
+    },
+    {
+      "id": "eb3106a14cd5",
+      "template": "nats: websocket connection headers already set",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 157
+        }
+      ]
+    },
+    {
+      "id": "8c161d236f85",
+      "template": "new message started before final frame for previous message was received",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "ws.go",
+          "line": 277
+        }
+      ]
+    },
+    {
+      "id": "b5216b5049f5",
+      "template": "no encoder registered for '\u003c*\u003e'",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "enc.go",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "id": "688d7a09e4a9",
+      "template": "only one of MaxMessages and MaxBytes can be specified",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/pull.go",
+          "line": 1169
+        }
+      ]
+    },
+    {
+      "id": "5dd7d2042c4f",
+      "template": "ordered consumer closed",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/ordered.go",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "id": "1ccccb9f9294",
+      "template": "parsing message metadata: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/pull.go",
+          "line": 965
+        }
+      ]
+    },
+    {
+      "id": "1b8116a38e87",
+      "template": "retry attempts have to be set when not using custom backoff intervals",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/ordered.go",
+          "line": 808
+        }
+      ]
+    },
+    {
+      "id": "fcb63a87717d",
+      "template": "sequence mismatch",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/ordered.go",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "id": "6561cbbed81e",
+      "template": "service name is required to generate ID control subject",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 303
+        }
+      ]
+    },
+    {
+      "id": "02defddb1399",
+      "template": "stopping service: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 579
+        },
+        {
+          "file": "micro/service.go",
+          "line": 676
+        },
+        {
+          "file": "micro/service.go",
+          "line": 686
+        }
+      ]
+    },
+    {
+      "id": "b834e29d57c4",
+      "template": "unable to extract key pair from bytes: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 1535
+        }
+      ]
+    },
+    {
+      "id": "de8fb6898571",
+      "template": "unable to extract key pair from file \u003c*\u003e: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 6811
+        }
+      ]
+    },
+    {
+      "id": "725bd73b671f",
+      "template": "unable to extract key pair from seed: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "nats.go",
+          "line": 1556
+        }
+      ]
+    },
+    {
+      "id": "8c02f6b36201",
+      "template": "unknown compression algorithm",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "jetstream/stream_config.go",
+          "line": 686
+        },
+        {
+          "file": "jetstream/stream_config.go",
+          "line": 702
+        },
+        {
+          "file": "js.go",
+          "line": 4121
+        },
+        {
+          "file": "js.go",
+          "line": 4137
+        }
+      ]
+    },
+    {
+      "id": "3082b85784f2",
+      "template": "unknown opcode \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "ws.go",
+          "line": 288
+        }
+      ]
+    },
+    {
+      "id": "b5b32ec0b078",
+      "template": "unsupported verb",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 300
+        }
+      ]
+    },
+    {
+      "id": "254193a507ed",
+      "template": "validation",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "micro/service.go",
+          "line": 297
+        }
+      ]
+    },
+    {
+      "id": "1418d6e91bb0",
+      "template": "websocket frame too large: \u003c*\u003e",
+      "lib": "nats",
+      "locations": [
+        {
+          "file": "ws.go",
+          "line": 311
+        }
+      ]
+    }
+  ]
+}
