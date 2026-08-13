@@ -312,3 +312,13 @@ open deductions.
     k8s container_image → v1.0.53-rc.1 → git archive). Standard event!(Level::X)
     now supported. Grand total on the staging sample: 99.95% (Go + Rust deployed-tag
     manifests + dependency scans + 34 mined + curated dicts).
+
+49. **Prod measurement (k8s-logs-prod, cloud-prod, 100k messages, 2026-08-13):
+    99.94% matched**; 129 distinct templates carried all 100k events. Residue (57
+    lines): stdlib-log timestamp prefixes ("2026/08/13 ... Ingested <*> events" —
+    framing the consumer should strip, the template itself exists) and a Ruby
+    service's logger — another language, same seam. Compression on prod:
+    template-encoded (int-dict IDs + params + residual) beats raw zstd at both
+    levels — 1.35x at zstd-3, 1.06x at zstd-19 — and the ID column alone is
+    17–23KB where messages are 2.5MB. Prod's greater diversity favors the
+    encoding vs the staging sample (1.13x/1.00x).
