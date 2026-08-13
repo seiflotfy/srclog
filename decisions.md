@@ -244,3 +244,27 @@ open deductions.
     you need. (c) The stricter zero-literal bar means some manifests older binaries
     emitted now bounce under the same version: 1 — accepted pre-1.0, the catalog is
     the only long-lived artifact and it postdates the change.
+
+## 2026-08-13 — experiments
+
+42. **First-literal-token index: 14.5x matching speedup.** Benchmarked against the
+    real monorepo manifest (3,922 templates, 10k-line corpus rendered from its own
+    templates + 20% noise, M3 Max): linear scan 67µs/line (~15k lines/s/core) →
+    indexed 4.6µs/line (~220k lines/s/core), identical results. A line only scans
+    templates sharing its first token, merged with the unindexed rest in specificity
+    order. The token-trie upgrade may never be needed; revisit only if ingest wants
+    another order of magnitude.
+
+43. **GOROOT errors-scan is not a stdlib dictionary.** `srclog errors` over
+    $GOROOT/src: 3,065 templates in 0.75s — but only 9 of the 28 curated stdlib
+    entries reproduced. The famous log-surfacing strings are invisible to call-site
+    scanning: errno strings live in generated syscall tables, "context deadline
+    exceeded" is a literal inside an `Error() string` method, and composites like
+    "dial tcp <*>: connect: connection refused" are assembled by OpError.Error(),
+    never appearing at any single construction site. Curation encodes composition;
+    the scan can't. Possible future extension: harvest `Error() string` method
+    return literals. The GOROOT dict was not shipped (noise outweighs signal).
+
+44. **`recommended_dicts` shipped**: manifest lists dictionaries implied by the
+    scanned code's import graph (stdlib always; lib/pq and pgx → postgres, grpc →
+    grpc, sarama/kafka-go → kafka, ...). Evidence is imports — no build required.
