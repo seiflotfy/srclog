@@ -341,3 +341,15 @@ open deductions.
     superseded). Suffix patterns capture the prefix as group 1, Node carries
     Prefix/Suffix, the param cascade left-trims reversibly, and suffix table
     entries store a prefix leaf. Codecs make honesty mandatory.
+
+52. **The fourth promotion mechanism: enum detection (`srclog enums`).** A param
+    slot whose values repeat heavily is an enum wearing a variable's clothes.
+    EnumTracker counts distinct values per (template, slot) with bounded memory —
+    saturating above maxDistinct disqualifies, which is the cheap common case.
+    Qualification: >=2 distinct non-empty values, >=minSeen occurrences, values
+    repeating >=4x on average. Empty captures are meaningless; single constants are
+    shape-folding's job. Measured: grpc-status slot 0 = {ResourceExhausted,
+    Unavailable} over 18k incident rows; 13-14 slots per corpus. Completes the
+    promotion ladder: cascade promotes known errors, mining promotes recurring
+    lines, folding promotes block constants, enums promote repeating values —
+    params enter embedding space through promotion, never raw.
