@@ -119,9 +119,13 @@ go run ./contrib/colbench merged.json corpus.txt dicts/*.json   # sizes + round-
 
 ## External artifacts
 
-- Pitch deck (live, private): https://claude.ai/code/artifact/961f0253-0fce-4024-88c8-0762296932a6
-  — numbers synced through the prod measurement; slide 009 carries the
-  compression story, appendix has demo script + murder board.
+- Pitch deck (live, private): https://claude.ai/code/artifact/b50477a0-ea51-46c4-81bb-a5d11e2289c8
+  — rebuilt 2026-08-13, numbers synced through decision #54 (tc02 +
+  block-constant folding, enums, size attribution); slide 009 carries the
+  compression story, appendix has demo script + murder board. Supersedes
+  https://claude.ai/code/artifact/961f0253-0fce-4024-88c8-0762296932a6, which
+  this account can no longer read or update (served as public non-member;
+  not in the account's artifact list) — treat the old link as stale.
 - `axiom-drain3-column` checkout: comparison harness added at
   `pkg/kirby/column/strvec/srclog_compare_test.go` (uncommitted there; the
   branch has unrelated WIP — don't clobber).
