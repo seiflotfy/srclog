@@ -22,6 +22,9 @@ func TestExtractRust(t *testing.T) {
 		"connected to <*>":         "info", // target: "net" skipped
 		"escaped {literal} braces": "trace",
 		"multiline dial <*>: <*>":  "error",
+		// field values (scope = "datapoint") must not be taken as the message
+		"failed to validate, skipping.": "warn",
+		"request took too long":         "warn", // event!(Level::WARN, ...)
 	}
 	for tmpl, level := range want {
 		if got[tmpl] != level {

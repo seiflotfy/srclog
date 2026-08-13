@@ -11,7 +11,10 @@ import (
 // first top-level string literal that isn't a named-argument value
 // (target: "...", name: "..."). Rust {}-format specs normalize to <*>.
 
-var rustMacroRe = regexp.MustCompile(`(?:^|[^A-Za-z0-9_])(trace|debug|info|warn|error)!\s*\(`)
+var rustMacroRe = regexp.MustCompile(`(?:^|[^A-Za-z0-9_])(trace|debug|info|warn|error|event)!\s*\(`)
+
+// eventLevelRe pulls the Level::X argument out of event!(Level::WARN, ...).
+var eventLevelRe = regexp.MustCompile(`^\s*(?:tracing::)?Level::(TRACE|DEBUG|INFO|WARN|ERROR)`)
 
 // scanRust extracts templates from one Rust source file. Macro sites are
 // located on a masked copy (string and comment contents blanked — doc
@@ -25,6 +28,14 @@ func scanRust(src, file string, byKey map[string]*Template, stats *Stats) {
 	for _, m := range rustMacroRe.FindAllStringSubmatchIndex(masked, -1) {
 		level := src[m[2]:m[3]]
 		open := m[1] - 1 // index of '('
+		if level == "event" {
+			// event!(Level::WARN, ...) — dynamic-level form
+			if lm := eventLevelRe.FindStringSubmatch(src[open+1:]); lm != nil {
+				level = strings.ToLower(lm[1])
+			} else {
+				level = "unknown"
+			}
+		}
 		stats.Calls++
 		lit, ok := firstMessageLiteral(src[open+1:])
 		if !ok {
@@ -41,8 +52,9 @@ func scanRust(src, file string, byKey map[string]*Template, stats *Stats) {
 }
 
 // firstMessageLiteral scans macro arguments for the first depth-0 string
-// literal whose preceding token isn't ':' (which would make it a named-arg
-// value like target: "net"). Returns the unescaped literal.
+// literal that isn't a named-argument value: preceded by ':' (target: "net")
+// or '=' (tracing field syntax, scope = "datapoint"). Returns the unescaped
+// literal.
 func firstMessageLiteral(s string) (string, bool) {
 	depth := 0
 	lastNonSpace := byte(',')
@@ -89,7 +101,7 @@ func firstMessageLiteral(s string) (string, bool) {
 		case 'r':
 			// raw string r"..." / r#"..."#
 			if lit, end, ok := rawString(s[i:]); ok {
-				if depth == 0 && lastNonSpace != ':' {
+				if depth == 0 && lastNonSpace != ':' && lastNonSpace != '=' {
 					return lit, true
 				}
 				i += end - 1
@@ -98,7 +110,7 @@ func firstMessageLiteral(s string) (string, bool) {
 			}
 		case '"':
 			lit, end := quotedString(s[i:])
-			if depth == 0 && lastNonSpace != ':' {
+			if depth == 0 && lastNonSpace != ':' && lastNonSpace != '=' {
 				return lit, true
 			}
 			i += end - 1

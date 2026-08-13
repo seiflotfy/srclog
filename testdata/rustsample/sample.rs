@@ -8,9 +8,16 @@ fn demo() {
     tracing::debug!("retrying in {}s", secs);
     info!(target: "net", "connected to {}", host);
     trace!("escaped {{literal}} braces");
+    warn!(
+        scope = "datapoint",
+        err = err.to_string(),
+        "failed to validate, skipping."
+    );
     error!(
         "multiline dial {host}: {err}",
     );
+
+    event!(Level::WARN, latency = ?took, "request took too long");
 
     // dynamic: no constant message
     error!("{}", err);
