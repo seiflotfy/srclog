@@ -52,21 +52,107 @@ type ColumnTemplate struct {
 
 // BuildColumn matches every line via Resolve and encodes the results.
 // dict may be nil (no cascade).
+//
+// Build is two-pass: pass one resolves and profiles every param slot; slots
+// that hold exactly one distinct leaf value across the block fold into a
+// block-specialized template text (the CatalogID stays — the specialization
+// is aliased, never a new identity). Pass two encodes with folded slots
+// erased from every stream.
 func BuildColumn(lines []string, primary, dict *Matcher) *Column {
 	c := &Column{buckets: map[bucketKey][]string{}}
+
+	// pass 1: resolve + profile
+	type slotAgg struct {
+		val    string
+		seen   bool
+		varied bool
+		sub    bool
+	}
+	agg := map[string]map[int]*slotAgg{} // catalog ID → slot → stats
+	nodes := make([]*Node, len(lines))
+	var profile func(n *Node)
+	profile = func(n *Node) {
+		slots := agg[n.ID]
+		if slots == nil {
+			slots = map[int]*slotAgg{}
+			agg[n.ID] = slots
+		}
+		for i, p := range n.Params {
+			a := slots[i]
+			if a == nil {
+				a = &slotAgg{}
+				slots[i] = a
+			}
+			switch v := p.(type) {
+			case *Node:
+				a.sub = true
+				profile(v)
+			case string:
+				if !a.seen {
+					a.val, a.seen = v, true
+				} else if a.val != v {
+					a.varied = true
+				}
+			}
+		}
+	}
+	for i, line := range lines {
+		if n, ok := Resolve(primary, dict, line); ok {
+			nodes[i] = n
+			profile(n)
+		}
+	}
+
+	// fold decisions: leaf-only, single-valued, value can't collide with the
+	// placeholder marker.
+	folded := map[string]map[int]string{}
+	for id, slots := range agg {
+		for i, a := range slots {
+			if a.seen && !a.varied && !a.sub && !strings.Contains(a.val, Placeholder) {
+				m := folded[id]
+				if m == nil {
+					m = map[int]string{}
+					folded[id] = m
+				}
+				m[i] = a.val
+			}
+		}
+	}
+
+	// pass 2: encode against specialized templates
 	codes := map[string]uint32{}
+	compact := map[string][]int{} // catalog ID → orig slot → compact slot (-1 = folded)
 
 	code := func(n *Node) uint32 {
 		if k, ok := codes[n.ID]; ok {
 			c.table[k-1].Count++
 			return k
 		}
+		folds := folded[n.ID]
+		parts := strings.Split(n.Template, Placeholder)
+		var b strings.Builder
+		remap := make([]int, len(parts)-1)
+		next := 0
+		b.WriteString(parts[0])
+		for i := 1; i < len(parts); i++ {
+			if v, ok := folds[i-1]; ok {
+				b.WriteString(v)
+				remap[i-1] = -1
+			} else {
+				b.WriteString(Placeholder)
+				remap[i-1] = next
+				next++
+			}
+			b.WriteString(parts[i])
+		}
+		tmpl := b.String()
+		compact[n.ID] = remap
 		c.table = append(c.table, ColumnTemplate{
 			CatalogID: n.ID,
-			Template:  n.Template,
+			Template:  tmpl,
 			Suffix:    n.Suffix,
 			Count:     1,
-			nParams:   strings.Count(n.Template, Placeholder),
+			nParams:   next,
 		})
 		k := uint32(len(c.table))
 		codes[n.ID] = k
@@ -74,13 +160,14 @@ func BuildColumn(lines []string, primary, dict *Matcher) *Column {
 	}
 
 	// encodeNode writes a node's streams: suffix entries store their lossless
-	// prefix as a leaf first, then params in pre-order.
+	// prefix as a leaf first, then non-folded params in pre-order.
 	var encodeNode func(k uint32, n *Node)
 	encodeNode = func(k uint32, n *Node) {
 		if n.Suffix {
 			pk := bucketKey{k, -1}
 			c.buckets[pk] = append(c.buckets[pk], n.Prefix)
 		}
+		remap := compact[n.ID]
 		for i, p := range n.Params {
 			if sub, ok := p.(*Node); ok {
 				sk := code(sub)
@@ -88,17 +175,20 @@ func BuildColumn(lines []string, primary, dict *Matcher) *Column {
 				encodeNode(sk, sub)
 				continue
 			}
+			if i < len(remap) && remap[i] == -1 {
+				continue // folded into the template text
+			}
 			c.subIDs = append(c.subIDs, 0)
-			bk := bucketKey{k, i}
+			bk := bucketKey{k, remap[i]}
 			c.buckets[bk] = append(c.buckets[bk], p.(string))
 		}
 	}
 
-	for _, line := range lines {
-		n, ok := Resolve(primary, dict, line)
-		if !ok {
+	for i := range lines {
+		n := nodes[i]
+		if n == nil {
 			c.rowIDs = append(c.rowIDs, 0)
-			c.unmatched = append(c.unmatched, line)
+			c.unmatched = append(c.unmatched, lines[i])
 			continue
 		}
 		k := code(n)
