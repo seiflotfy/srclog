@@ -38,12 +38,29 @@ tail -f app.log | srclog match -t srclog-templates.json -d dicts/stdlib.json -d 
 ```
 
 `dicts/` ships curated starters (stdlib, postgres, mysql, redis, grpc, kafka, nats,
-aws). For everything else, your `go.mod` is the service list — harvest a dictionary
-from the dependencies you actually use:
+aws) plus generated ones under `dicts/gen/` (pq, pgx, go-redis, mysql, grpc, sarama,
+nats, mongo — harvested from the libraries' own source, version-stamped). Load the
+services you use, not all of them. For anything else, your `go.mod` is the service
+list:
 
 ```sh
 go mod vendor && srclog errors -o deps-dict.json vendor/
 ```
+
+### Mining the residual (catalog feedback loop)
+
+What neither source scans nor dictionaries explain gets mined — match first, cluster
+only the residual, then gate candidates into an append-only catalog with immutable IDs
+and an alias table (mining proposes, the catalog disposes):
+
+```sh
+srclog mine -t srclog-templates.json -d dicts/stdlib.json -min 3 -o candidates.json app.log
+srclog promote -catalog catalog.json candidates.json
+```
+
+Re-promotion is idempotent; when a later source scan produces the exact template a
+mined entry approximated, the scanned entry is admitted and the mined ID aliased to it
+— old references keep resolving, nothing re-encodes. Design: `docs/superpowers/specs/2026-08-13-srclog-catalog-design.md`.
 
 ### GitHub Action
 

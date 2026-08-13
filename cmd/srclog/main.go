@@ -27,6 +27,10 @@ func main() {
 		err = runExtract(os.Args[2:], srclog.ExtractErrors)
 	case "match":
 		err = runMatch(os.Args[2:])
+	case "mine":
+		err = runMine(os.Args[2:])
+	case "promote":
+		err = runPromote(os.Args[2:])
 	default:
 		usage()
 	}
@@ -41,6 +45,9 @@ func usage() {
   srclog extract [-o manifest.json] [-commit sha] [dir]     log templates from source
   srclog errors  [-o manifest.json] [-commit sha] [dir]     error-string dictionary from source (point at vendor/)
   srclog match -t manifest.json [-d dict.json ...] [file]   reads stdin without a file
+  srclog mine [-t manifest.json] [-d dict.json ...] [-min n] [-o candidates.json] [file]
+                                                            cluster unmatched lines into candidates
+  srclog promote -catalog catalog.json candidates.json      gate candidates into an append-only catalog
 `)
 	os.Exit(2)
 }
@@ -164,6 +171,133 @@ func runMatch(args []string) error {
 	}
 	fmt.Fprintf(os.Stderr, "srclog: matched %d/%d lines\n", matched, total)
 	return nil
+}
+
+// runMine clusters lines the existing manifests don't explain into candidate
+// templates — match first, mine only the residual.
+func runMine(args []string) error {
+	fs := flag.NewFlagSet("mine", flag.ExitOnError)
+	manifestPath := fs.String("t", "", "template manifest to match first (optional)")
+	var dictPaths []string
+	fs.Func("d", "suffix dictionary manifest (repeatable)", func(p string) error {
+		dictPaths = append(dictPaths, p)
+		return nil
+	})
+	minSeen := fs.Int("min", 3, "occurrences before a cluster becomes a candidate")
+	out := fs.String("o", "srclog-candidates.json", `output path ("-" for stdout)`)
+	fs.Parse(args)
+
+	var matcher *srclog.Matcher
+	if *manifestPath != "" {
+		manifest, err := srclog.LoadManifest(*manifestPath)
+		if err != nil {
+			return err
+		}
+		if matcher, err = srclog.NewMatcher(manifest); err != nil {
+			return err
+		}
+	}
+	dict, err := loadDicts(dictPaths)
+	if err != nil {
+		return err
+	}
+
+	in := io.Reader(os.Stdin)
+	if fs.NArg() > 0 {
+		f, err := os.Open(fs.Arg(0))
+		if err != nil {
+			return err
+		}
+		defer f.Close()
+		in = f
+	}
+
+	miner := srclog.NewMiner()
+	r := bufio.NewReaderSize(in, 64*1024)
+	for {
+		line, truncated, rerr := readLine(r, maxLineBytes)
+		if rerr != nil && rerr != io.EOF {
+			return rerr
+		}
+		if line != "" && !truncated {
+			matched := false
+			if matcher != nil {
+				_, matched = srclog.Resolve(matcher, dict, line)
+			} else if dict != nil {
+				_, matched = dict.Match(line)
+			}
+			if !matched {
+				miner.Add(line)
+			}
+		}
+		if rerr == io.EOF {
+			break
+		}
+	}
+
+	candidates := miner.Candidates(*minSeen)
+	if err := writeJSON(*out, candidates); err != nil {
+		return err
+	}
+	fmt.Fprintf(os.Stderr, "srclog: %d candidates from %d unmatched lines (min %d occurrences)\n",
+		len(candidates.Templates), candidates.Stats.Calls, *minSeen)
+	return nil
+}
+
+// runPromote gates candidates into an append-only catalog manifest.
+func runPromote(args []string) error {
+	fs := flag.NewFlagSet("promote", flag.ExitOnError)
+	catalogPath := fs.String("catalog", "", "catalog manifest, created if missing (required)")
+	fs.Parse(args)
+	if *catalogPath == "" || fs.NArg() == 0 {
+		usage()
+	}
+
+	catalog := &srclog.Manifest{Version: 1}
+	if _, err := os.Stat(*catalogPath); err == nil {
+		if catalog, err = srclog.LoadManifest(*catalogPath); err != nil {
+			return err
+		}
+	}
+
+	var total srclog.PromoteResult
+	for _, p := range fs.Args() {
+		candidates, err := srclog.LoadManifest(p)
+		if err != nil {
+			return err
+		}
+		res, err := srclog.Promote(catalog, candidates)
+		if err != nil {
+			return fmt.Errorf("%s: %w", p, err)
+		}
+		total.Admitted += res.Admitted
+		total.Aliased += res.Aliased
+		total.Skipped += res.Skipped
+	}
+	if err := writeJSON(*catalogPath, catalog); err != nil {
+		return err
+	}
+	fmt.Fprintf(os.Stderr, "srclog: %d admitted, %d aliased, %d skipped → %s (%d templates)\n",
+		total.Admitted, total.Aliased, total.Skipped, *catalogPath, len(catalog.Templates))
+	return nil
+}
+
+// writeJSON marshals v and writes it to path ("-" for stdout) via tmp+rename.
+func writeJSON(path string, v any) error {
+	data, err := json.MarshalIndent(v, "", "  ")
+	if err != nil {
+		return err
+	}
+	data = append(data, '\n')
+	if path == "-" {
+		_, err = os.Stdout.Write(data)
+		return err
+	}
+	tmp := path + ".tmp"
+	if err := os.WriteFile(tmp, data, 0o644); err != nil {
+		return err
+	}
+	return os.Rename(tmp, path)
 }
 
 // loadDicts merges suffix-dictionary manifests into one matcher, nil if none.

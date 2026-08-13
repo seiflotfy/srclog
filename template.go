@@ -52,6 +52,10 @@ type Manifest struct {
 	Anchor    string      `json:"anchor,omitempty"`
 	Stats     Stats       `json:"stats"`
 	Templates []*Template `json:"templates"`
+	// Aliases maps superseded template IDs to their canonical ID. Used when a
+	// manifest serves as a catalog: entries are append-only, so supersession
+	// is an alias, never an edit — old references keep resolving.
+	Aliases map[string]string `json:"aliases,omitempty"`
 }
 
 // templateID returns the stable identity of a template: first 12 hex chars of

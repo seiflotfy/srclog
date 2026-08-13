@@ -170,3 +170,36 @@ the consumer still has. Add a prefix field if a consumer materializes that needs
 Final v2 scores: robpike 9.5/10, bradfitz 9/10 — no open deductions. Both flagged the
 same two stale comment fragments (fixed); bradfitz's residual half-point is the
 standing legacy ceilings already on record above.
+
+## 2026-08-13 — v3: pushed, generated dicts, miner, catalog
+
+30. **Pushed to github.com/seiflotfy/srclog (public)** — the Action's
+    `go run …@latest` path and CI now work for real.
+
+31. **Generated dictionaries ship under `dicts/gen/`**: `srclog errors` over pq, pgx,
+    go-redis, mysql, grpc, sarama, nats, mongo module-cache checkouts (~3.1k
+    templates, version-stamped in `commit`). Load only the services a repo uses —
+    merging everything makes the linear param scan pay for entries that can't match.
+
+32. **Zero-literal bar raised to ≥2 alphanumeric literal chars.** Real-world catch:
+    pgx's `Errorf("%s: %w")` → template `<*>: <*>` (literal `":"`) passed the old
+    empty-check and suffix-matched nearly any line at top level. Punctuation-only
+    literals carry no identity.
+
+33. **Generated dictionary entries are labeled with the scanned module** (`pgx`), not
+    the constructing package (`fmt`) — record's lib is overridden in ExtractErrors via
+    shortModule when the scan root has a go.mod.
+
+34. **Miner is drain-style, in Go, in-repo** (mine.go, ~100 lines): token-count +
+    first-constant-token buckets, 0.5 similarity merge, `<*>` at disagreements,
+    candidates gated by minSeen and the zero-literal bar, `lib: "mined"`. No drain3
+    dependency — the algorithm is 100 lines, a Python sidecar isn't.
+
+35. **The catalog is a role, not a type**: a plain Manifest with an `aliases` map.
+    `Promote` implements the four invariants (append-only, gate, match-first-upstream,
+    aliases-not-re-encoding) from the catalog design doc. Subsumption is pragmatic —
+    sentinel-instantiate the candidate, match against the catalog — not regex-language
+    containment. Supersession direction: scanned beats mined, alias chains re-pointed.
+
+36. **`srclog mine` enforces match-first residual mining in the tool itself** — it
+    takes the same -t/-d flags as match and clusters only what they miss.
