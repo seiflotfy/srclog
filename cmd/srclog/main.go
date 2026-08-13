@@ -29,6 +29,8 @@ func main() {
 		err = runMatch(os.Args[2:])
 	case "mine":
 		err = runMine(os.Args[2:])
+	case "enums":
+		err = runEnums(os.Args[2:])
 	case "promote":
 		err = runPromote(os.Args[2:])
 	default:
@@ -48,6 +50,8 @@ func usage() {
   srclog mine [-t manifest.json] [-d dict.json ...] [-min n] [-o candidates.json] [file]
                                                             cluster unmatched lines into candidates
   srclog promote -catalog catalog.json candidates.json      gate candidates into an append-only catalog
+  srclog enums -t manifest.json [-d dict.json ...] [-max 64] [-min 16] [-o enums.json] [file]
+                                                            detect low-cardinality param slots (enums)
 `)
 	os.Exit(2)
 }
@@ -227,6 +231,72 @@ func runMine(args []string) error {
 	}
 	fmt.Fprintf(os.Stderr, "srclog: %d candidates from %d unmatched lines (min %d occurrences)\n",
 		len(candidates.Templates), candidates.Stats.Calls, *minSeen)
+	return nil
+}
+
+// runEnums detects low-cardinality param slots — enums wearing variables'
+// clothes — and emits them as a catalog-enrichment artifact.
+func runEnums(args []string) error {
+	fs := flag.NewFlagSet("enums", flag.ExitOnError)
+	manifestPath := fs.String("t", "", "template manifest (required)")
+	var dictPaths []string
+	fs.Func("d", "suffix dictionary manifest (repeatable)", func(p string) error {
+		dictPaths = append(dictPaths, p)
+		return nil
+	})
+	maxDistinct := fs.Int("max", 64, "distinct values above which a slot is not an enum")
+	minSeen := fs.Int("min", 16, "occurrences before a slot is judged")
+	out := fs.String("o", "srclog-enums.json", `output path ("-" for stdout)`)
+	fs.Parse(args)
+	if *manifestPath == "" {
+		usage()
+	}
+
+	manifest, err := srclog.LoadManifest(*manifestPath)
+	if err != nil {
+		return err
+	}
+	matcher, err := srclog.NewMatcher(manifest)
+	if err != nil {
+		return err
+	}
+	dict, err := loadDicts(dictPaths)
+	if err != nil {
+		return err
+	}
+
+	in := io.Reader(os.Stdin)
+	if fs.NArg() > 0 {
+		f, err := os.Open(fs.Arg(0))
+		if err != nil {
+			return err
+		}
+		defer f.Close()
+		in = f
+	}
+
+	tracker := srclog.NewEnumTracker(*maxDistinct)
+	r := bufio.NewReaderSize(in, 64*1024)
+	for {
+		line, truncated, rerr := readLine(r, maxLineBytes)
+		if rerr != nil && rerr != io.EOF {
+			return rerr
+		}
+		if line != "" && !truncated {
+			if n, ok := srclog.Resolve(matcher, dict, line); ok {
+				tracker.Observe(n)
+			}
+		}
+		if rerr == io.EOF {
+			break
+		}
+	}
+
+	set := tracker.Enums(*minSeen)
+	if err := writeJSON(*out, set); err != nil {
+		return err
+	}
+	fmt.Fprintf(os.Stderr, "srclog: %d enum slots detected\n", len(set.Enums))
 	return nil
 }
 
