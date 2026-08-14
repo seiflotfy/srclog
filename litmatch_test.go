@@ -21,7 +21,7 @@ func TestLitMatchDifferential(t *testing.T) {
 		"a <*> b <*> c",
 		"a<*>b<*>c",
 		"x<*><*>y",
-		"<*><*>",             // rejected by NewMatcher, still lit-vs-regex comparable? no literal — skip
+		"<*><*>", // rejected by NewMatcher, still lit-vs-regex comparable? no literal — skip
 		"end with <*>",
 		"<*> starts it",
 		"pq: <*>",

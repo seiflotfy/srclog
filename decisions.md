@@ -404,3 +404,20 @@ open deductions.
     (500 templates sharing a first token: 2.35µs vs 438ns). Real manifests
     look like the first regime (prod: 129 templates). Kept as a measured
     escape hatch, not wired in.
+
+57. **The manifest is the precompiled matcher; ship no second artifact.**
+    Asked whether extract should emit templates *plus* a prebuilt matcher for
+    consumers to reuse. Measured answer: with the literal-segment path,
+    the regex is only needed by templates whose literals contain a newline, so
+    NewMatcher now compiles regexes only for those (approximately none) —
+    construction dropped 9x (5k templates: 50.3ms → 5.6ms, 46MB → 3.2MB
+    allocated), leaving string-splitting and a sort. A serialized matcher
+    artifact would save ~5ms once per epoch and cost the manifest's
+    language-neutrality (storing derived patterns was already tried and
+    rejected — see the Template doc comment). Reuse instead happens at two
+    levels, both now documented API: Matcher is immutable and concurrent-safe
+    — build once per catalog epoch, share everywhere; and BuildColumnWith
+    takes a caller-owned Resolver so successive blocks of one stream keep
+    their memoized lines/params — warm blocks encode at 138ns/row
+    (2.77ms/20k, 4.7x over a per-block Resolver, 12x fewer allocations),
+    which is past drain3's ~200ns/row column build.

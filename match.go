@@ -22,6 +22,11 @@ type Match struct {
 }
 
 // Matcher matches log lines against a manifest's templates.
+//
+// A Matcher is immutable after NewMatcher and safe for concurrent use: build
+// it once per manifest (or catalog epoch) and share it across goroutines and
+// blocks. Construction is cheap — string splitting and sorting, no regex
+// compilation on the common path — so rebuilding on catalog updates is fine.
 type Matcher struct {
 	exact map[string]*Template
 	// Fuzzy templates are indexed by a boundary token. Line-anchored: the
@@ -120,14 +125,24 @@ func NewMatcher(m *Manifest) (*Matcher, error) {
 			mt.exactByID[t.ID] = t
 			continue
 		}
-		// regexFor output is always syntactically valid, but regexp still
-		// rejects oversized programs — a pathological manifest must be a
-		// bounded error, not a panic.
-		re, err := regexp.Compile(pattern)
-		if err != nil {
-			return nil, fmt.Errorf("template %s: %w", t.ID, err)
+		// The literal-segment matcher serves every template whose literals are
+		// newline-free — the overwhelming case — so the regex is only compiled
+		// for the rare multiline template that actually needs the fallback.
+		// This is what makes matcher construction cheap enough to rebuild
+		// freely: the manifest itself is the precompiled artifact.
+		lp := litFor(t.Template)
+		var re *regexp.Regexp
+		if !lp.ok {
+			// regexFor output is always syntactically valid, but regexp still
+			// rejects oversized programs — a pathological manifest must be a
+			// bounded error, not a panic.
+			var err error
+			re, err = regexp.Compile(pattern)
+			if err != nil {
+				return nil, fmt.Errorf("template %s: %w", t.ID, err)
+			}
 		}
-		fuzzy = append(fuzzy, fuzzyTemplate{re: re, lp: litFor(t.Template), t: t, lit: literalLen(t.Template)})
+		fuzzy = append(fuzzy, fuzzyTemplate{re: re, lp: lp, t: t, lit: literalLen(t.Template)})
 	}
 	// Most literal text first, so "dial <*>: timeout" beats "dial <*>: <*>".
 	sort.SliceStable(fuzzy, func(i, j int) bool { return fuzzy[i].lit > fuzzy[j].lit })

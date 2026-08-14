@@ -59,6 +59,14 @@ type ColumnTemplate struct {
 // is aliased, never a new identity). Pass two encodes with folded slots
 // erased from every stream.
 func BuildColumn(lines []string, primary, dict *Matcher) *Column {
+	return BuildColumnWith(NewResolver(primary, dict), lines)
+}
+
+// BuildColumnWith is BuildColumn resolving through res. Reusing one Resolver
+// across successive blocks of the same stream carries its memoized lines and
+// params over — repeated traffic resolves as map hits from the second block
+// on. The Resolver's matchers must be the ones the stream is encoded against.
+func BuildColumnWith(res *Resolver, lines []string) *Column {
 	c := &Column{buckets: map[bucketKey][]string{}}
 
 	// pass 1: resolve + profile
@@ -96,7 +104,6 @@ func BuildColumn(lines []string, primary, dict *Matcher) *Column {
 			}
 		}
 	}
-	res := NewResolver(primary, dict)
 	for i, line := range lines {
 		if n, ok := res.Resolve(line); ok {
 			nodes[i] = n

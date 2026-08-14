@@ -221,3 +221,54 @@ func BenchmarkBuildColumn(b *testing.B) {
 	}
 	b.ReportMetric(float64(len(c.lines)), "lines/op")
 }
+
+// benchManifest builds an n-template whole-line manifest shaped like a large
+// merged catalog.
+func benchManifest(n int) *Manifest {
+	man := &Manifest{Version: 1}
+	for i := 0; i < n; i++ {
+		var tpl string
+		switch i % 4 {
+		case 0:
+			tpl = fmt.Sprintf("svc%04d: connected to <*> in <*>ms", i)
+		case 1:
+			tpl = fmt.Sprintf("processed batch <*> rows=<*> shard%04d", i)
+		case 2:
+			tpl = fmt.Sprintf("service %04d ready, accepting connections", i)
+		case 3:
+			tpl = fmt.Sprintf("worker%04d failed: <*>", i)
+		}
+		man.Templates = append(man.Templates, &Template{ID: templateID("info", tpl), Template: tpl, Level: "info"})
+	}
+	return man
+}
+
+func BenchmarkNewMatcher(b *testing.B) {
+	for _, n := range []int{500, 5000} {
+		b.Run(fmt.Sprintf("templates=%d", n), func(b *testing.B) {
+			man := benchManifest(n)
+			b.ReportAllocs()
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				if _, err := NewMatcher(man); err != nil {
+					b.Fatal(err)
+				}
+			}
+		})
+	}
+}
+
+// BenchmarkBuildColumnReusedResolver measures cross-block Resolver reuse:
+// the same stream encoded block after block, with memoized lines and params
+// carried over instead of rebuilt per block.
+func BenchmarkBuildColumnReusedResolver(b *testing.B) {
+	c := buildBenchCorpus(b, 20000)
+	res := NewResolver(c.primary, c.dict)
+	BuildColumnWith(res, c.lines) // warm: block 1 of the stream
+	b.ReportAllocs()
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		BuildColumnWith(res, c.lines)
+	}
+	b.ReportMetric(float64(len(c.lines)), "lines/op")
+}

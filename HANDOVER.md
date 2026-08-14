@@ -31,7 +31,7 @@ log line ──match/Resolve──▶ nested Node (IDs+params) ──BuildColumn
 | `rust.go` | Rust tracing/log macro scanner (masking pass, field syntax, `event!(Level::X)`) |
 | `errors.go` | `srclog errors`: harvest error-construction sites → suffix dictionaries |
 | `template.go` | manifest model, placeholder normalization, line/suffix regex derivation |
-| `match.go` | Matcher: exact map + first-token-indexed regex scan (4.6µs/line); lossless suffix prefixes |
+| `match.go` + `litmatch.go` | Matcher: exact map + boundary-token-indexed literal-segment scan (regex only for the newline corner); lossless suffix prefixes; `MatchByID` for routers |
 | `cascade.go` | `Resolve`: nested decomposition through dictionaries, depth-capped |
 | `mine.go` | drain-style miner, bounded (64/bucket, 4096 total) |
 | `catalog.go` | `Promote`: append-only catalog, subsumption gate, scanned-beats-mined aliases |
@@ -66,7 +66,7 @@ replaced regexp on the hot path, suffix dicts got a trailing-token index, and
 BuildColumn resolves through a memoizing `Resolver`. Same-box benchmarks
 (synthetic zipf corpus, `bench_test.go`): Match 16x faster, Resolve 11x,
 worst-case miss 170x, dict param hit 41x, BuildColumn 17.6x (~1.3M rows/s/core
-— the old "100x off drain3" build gap is now ~2-8x). All pinned to the old
+— and with a Resolver reused across blocks (BuildColumnWith, decision #57), warm blocks encode at ~138ns/row, faster than drain3's column build). All pinned to the old
 regex semantics by differential tests (`litmatch_test.go`). A drain3-routed
 matcher was built and measured (`contrib/fastmatch`, separate module, root
 stays zero-dep): coverage-identical, but it loses to the new core on
